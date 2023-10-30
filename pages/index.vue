@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col justify-center items-center w-screen min-h-screen">
-    <section class="flex flex-col justify-center items-center w-screen h-screen custom-bg-green">
+    <section
+      class="flex flex-col justify-center items-center w-screen h-screen custom-bg-green"
+    >
       <p class="text-2xl font-bold">Welcome to the Green School!</p>
       <div class="flex flex-wrap mt-12 w-[41rem] gap-4">
         <div class="custom-sector">Sector 1</div>
@@ -12,6 +14,8 @@
 
     <p>Hello World!</p>
   </div>
+
+  <Sidebar />
 </template>
 
 <style lang="scss" scoped>

@@ -13,6 +13,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "nuxt": "^3.8.0",
+    "prettier": "^3.0.3",
     "sass": "^1.69.5",
     "vue": "^3.3.6",
     "vue-router": "^4.2.5"
