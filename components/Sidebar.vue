@@ -19,7 +19,7 @@
 
 <style lang="scss" scoped>
 .custom-bg {
-  background-color: rgba(148, 201, 59, 0.75);
+  background-color: rgb(148, 201, 59, 0.75);
 }
 
 .custom-sidebar {
