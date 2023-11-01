@@ -7,6 +7,9 @@ export default {
       light: "#efefef",
       gray: "#555555",
     },
+    fontFamily: {
+      source: ["'Source Sans 3'", "'sans-serif'"],
+    },
     extend: {},
   },
   plugins: [],

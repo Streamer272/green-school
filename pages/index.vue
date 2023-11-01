@@ -6,7 +6,7 @@
       <section
         class="flex flex-col justify-start items-center w-screen h-screen"
       >
-        <p class="text-2xl font-bold mt-9 text-white">
+        <p class="text-2xl font-bold mt-9 text-white font-source">
           Welcome to the Green School!
         </p>
         <div class="w-full h-72" />
@@ -60,7 +60,7 @@
       border-radius: 100%;
 
       .year {
-        @apply font-semibold text-light absolute top-9 left-0;
+        @apply font-source font-semibold text-light absolute top-9 left-0 text-xl;
         transform: translateX(-20%);
       }
     }
