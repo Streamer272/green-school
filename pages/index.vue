@@ -9,15 +9,24 @@
         <p class="text-2xl font-bold mt-9 text-white">
           Welcome to the Green School!
         </p>
-        <div class="w-full h-60" />
+        <div class="w-full h-72" />
 
-        <div class="w-full h-1 ml-72 bg-gray rounded-full relative">
-          <div class="ball ball-big" />
-          <div class="ball ball-small" />
-          <div class="ball ball-big" />
-          <div class="ball ball-small" />
-          <div class="ball ball-big" />
-          <div class="ball ball-small" />
+        <div class="w-full h-1 ml-72 bg-gray rounded-full relative timeline">
+          <div class="ball big">
+            <p class="year">2017</p>
+          </div>
+          <div class="ball small" />
+          <div class="ball big">
+            <p class="year">2019</p>
+          </div>
+          <div class="ball small" />
+          <div class="ball big">
+            <p class="year">2021</p>
+          </div>
+          <div class="ball small" />
+          <div class="ball big">
+            <p class="year">2023</p>
+          </div>
         </div>
       </section>
     </div>
@@ -42,26 +51,33 @@
     top: 0;
     transform: translateY(-50%);
     left: 0;
+    margin-top: 0.15rem;
 
-    &.ball-big {
+    &.big {
       width: 1.375rem;
       height: 1.375rem;
       background-color: #b3b3b3;
       border-radius: 100%;
+
+      .year {
+        @apply font-semibold text-light absolute top-9 left-0;
+        transform: translateX(-20%);
+      }
     }
 
-    &.ball-small {
+    &.small {
       width: 1rem;
       height: 1rem;
       background-color: #909090;
       border-radius: 100%;
     }
 
-    @for $i from 0 through 10 {
+    @for $i from 1 through 10 {
       &:nth-of-type(#{$i}) {
-        left: calc(37.5rem * $i);
+        left: calc(9.375rem * ($i - 1));
       }
     }
   }
 }
 </style>
+<script setup lang="ts"></script>
