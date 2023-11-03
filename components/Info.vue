@@ -8,7 +8,7 @@
 
   <div
     :data-open="open"
-    class="flex items-start justify-start flex-col absolute top-[6.25rem] right-[1.5625rem] bg-dark w-[25rem] p-6 rounded-[1.875rem] data-[open=false]:opacity-0 transition-all"
+    class="flex items-start justify-start flex-col absolute top-[6.25rem] right-[1.5625rem] bg-dark w-[25rem] p-6 rounded-[1.875rem] data-[open=false]:-translate-y-8 data-[open=false]:translate-x-4 data-[open=false]:opacity-0 transition-all"
   >
     <p class="font-source font-semibold text-xl text-light">Created by</p>
     <div class="flex items-center justify-center ml-4">
@@ -47,8 +47,6 @@
     </a>
   </div>
 </template>
-
-<style scoped lang="scss"></style>
 
 <script lang="ts" setup>
 const open = useState("info", () => false);

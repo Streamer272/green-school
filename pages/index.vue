@@ -11,7 +11,37 @@
         </p>
         <div class="w-full h-72" />
 
-        <div class="w-full h-1 ml-72 bg-gray rounded-full relative timeline">
+        <!-- theme row -->
+        <div
+          class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]"
+        >
+          <div class="flex items-center justify-center w-[18.75rem]">
+            <div class="bg-ghetto px-6 py-4 w-[17.5rem] rounded-[1.25rem]">
+              <p class="font-source font-bold text-[1.375rem] text-light">
+                Energy
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center w-[18.75rem]">
+            <div class="bg-ghetto px-6 py-4 w-[17.5rem] rounded-[1.25rem]">
+              <p class="font-source font-bold text-[1.375rem] text-light">
+                Waste
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center justify-center w-[18.75rem]">
+            <div class="bg-ghetto px-6 py-4 w-[17.5rem] rounded-[1.25rem]">
+              <p class="font-source font-bold text-[1.375rem] text-light">
+                Commute
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- timeline -->
+        <div
+          class="w-full h-1 ml-72 mt-8 bg-gray rounded-full relative timeline"
+        >
           <div class="ball big">
             <p class="year">2017</p>
           </div>
@@ -81,4 +111,3 @@
   }
 }
 </style>
-<script setup lang="ts"></script>
