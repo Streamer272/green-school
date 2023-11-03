@@ -15,7 +15,7 @@
 
   <div
     :data-open="open"
-    class="flex flex-col justify-start items-center absolute top-0 left-0 w-[28.125rem] h-full pt-[6.5rem] pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-10 transition gap-y-4"
+    class="flex flex-col justify-start items-center absolute top-0 left-0 w-[28.125rem] h-full pt-[6.5625rem] pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-10 transition gap-y-4"
   >
     <div
       v-for="(project, index) in projects"
@@ -42,10 +42,9 @@
         </button>
       </div>
 
-      <!-- TODO: animate me -->
       <p
         :data-open="currentProject === index"
-        class="font-source font-semibold m-4 text-unim data-[open=false]:hidden"
+        class="font-source font-semibold m-4 text-unim data-[open=false]:opacity-0 data-[open=false]:m-0 data-[open=false]:max-h-0 max-h-screen transition-all"
       >
         {{ project.description }}
       </p>
