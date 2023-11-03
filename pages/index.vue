@@ -32,6 +32,7 @@
     </div>
 
     <Sidebar />
+    <Info />
   </Background>
 </template>
 
