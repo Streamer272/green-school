@@ -5,9 +5,11 @@ export default {
     colors: {
       white: "#e0e0e0",
       light: "#efefef",
+      cece: "#cccccc",
       unim: "#b3b3b3",
       disc: "#969696",
       gray: "#555555",
+      ghetto: "#292929",
       dark: "#222222",
       despair: "#1b1b1b",
       black: "#161616",
