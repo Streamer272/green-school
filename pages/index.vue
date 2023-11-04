@@ -22,9 +22,11 @@
             <button
               :data-current="index === currentTheme"
               @click="changeTheme(index)"
-              class="px-6 py-4 w-[17.5rem] rounded-[1.25rem] font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+              class="flex items-center justify-center px-6 py-4 w-[17.5rem] rounded-[1.25rem] font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
             >
               {{ theme.name }}
+              <div class="flex-grow" />
+              <img :src="theme.icon" alt="Theme icon" />
             </button>
           </div>
         </div>
@@ -158,16 +160,19 @@ const themes = [
     name: "Energy",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
+    icon: "/icons/zap.png",
   },
   {
     name: "Waste",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
+    icon: "/icons/trash.png",
   },
   {
     name: "Commute",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
+    icon: "/icons/bike.png",
   },
 ];
 
