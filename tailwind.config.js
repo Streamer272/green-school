@@ -9,6 +9,7 @@ export default {
       unim: "#b3b3b3",
       disc: "#969696",
       gray: "#555555",
+      hood: "#393939",
       ghetto: "#292929",
       dark: "#222222",
       despair: "#1b1b1b",

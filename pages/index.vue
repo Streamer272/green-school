@@ -15,26 +15,17 @@
         <div
           class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]"
         >
-          <div class="flex items-center justify-center w-[18.75rem]">
-            <div class="bg-ghetto px-6 py-4 w-[17.5rem] rounded-[1.25rem]">
-              <p class="font-source font-bold text-[1.375rem] text-light">
-                Energy
-              </p>
-            </div>
-          </div>
-          <div class="flex items-center justify-center w-[18.75rem]">
-            <div class="bg-ghetto px-6 py-4 w-[17.5rem] rounded-[1.25rem]">
-              <p class="font-source font-bold text-[1.375rem] text-light">
-                Waste
-              </p>
-            </div>
-          </div>
-          <div class="flex items-center justify-center w-[18.75rem]">
-            <div class="bg-ghetto px-6 py-4 w-[17.5rem] rounded-[1.25rem]">
-              <p class="font-source font-bold text-[1.375rem] text-light">
-                Commute
-              </p>
-            </div>
+          <div
+            v-for="(theme, index) in themes"
+            class="flex items-center justify-center w-[18.75rem]"
+          >
+            <button
+              :data-current="index === currentTheme"
+              @click="changeTheme(index)"
+              class="px-6 py-4 w-[17.5rem] rounded-[1.25rem] font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+            >
+              {{ theme.name }}
+            </button>
           </div>
         </div>
 
@@ -57,6 +48,16 @@
           <div class="ball big">
             <p class="year">2023</p>
           </div>
+        </div>
+
+        <!-- theme description -->
+        <div
+          :data-selected="currentTheme !== -1 && !due"
+          class="ml-48 mt-32 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
+        >
+          <p class="font-source font-semibold text-lg text-unim">
+            {{ getDescription() }}
+          </p>
         </div>
       </section>
     </div>
@@ -111,3 +112,48 @@
   }
 }
 </style>
+
+<script lang="ts" setup>
+const currentTheme = ref(-1);
+const due = ref(false);
+const themes = [
+  {
+    name: "Energy",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
+  },
+  {
+    name: "Waste",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
+  },
+  {
+    name: "Commute",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
+  },
+];
+
+function changeTheme(index: number) {
+  if (
+    currentTheme.value === -1 || // at the beginning we don't want to wait 250ms before animation
+    (currentTheme.value !== -1 && index !== -1 && currentTheme.value !== index) // when changing from a to b we don't want to wait 250ms before animation
+  ) {
+    currentTheme.value = index;
+    return;
+  }
+
+  due.value = true;
+  setTimeout(() => {
+    if (currentTheme.value === index) currentTheme.value = -1;
+    else currentTheme.value = index;
+
+    due.value = false;
+  }, 250);
+}
+
+function getDescription(): string {
+  if (currentTheme.value === -1) return "";
+  return themes[currentTheme.value].description;
+}
+</script>
