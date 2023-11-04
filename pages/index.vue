@@ -53,11 +53,48 @@
         <!-- theme description -->
         <div
           :data-selected="currentTheme !== -1 && !due"
-          class="ml-48 mt-32 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
+          class="flex ml-48 mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
         >
-          <p class="font-source font-semibold text-lg text-unim">
-            {{ getDescription() }}
-          </p>
+          <div class="basis-[50%]">
+            <p class="font-source font-semibold text-3xl text-caucasian">
+              {{ getValue("name") }}
+            </p>
+            <p class="font-source font-semibold text-lg text-disc">
+              Current goal
+            </p>
+
+            <p class="font-source font-semibold text-lg text-unim mt-6">
+              {{ getValue("description") }}
+            </p>
+          </div>
+
+          <!-- files -->
+          <div
+            class="flex items-center justify-center flex-col gap-y-1 basis-[50%]"
+          >
+            <div class="flex items-center justify-center w-56">
+              <p class="font-source font-bold text-lg text-light">EAP &nbsp;</p>
+              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
+              <div class="flex-grow" />
+              <img src="/icons/download.png" alt="Download" />
+            </div>
+            <div class="flex items-center justify-center w-56">
+              <p class="font-source font-bold text-lg text-light">
+                Report &nbsp;
+              </p>
+              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
+              <div class="flex-grow" />
+              <img src="/icons/download.png" alt="Download" />
+            </div>
+            <div class="flex items-center justify-center w-56">
+              <p class="font-source font-bold text-lg text-light">
+                Members &nbsp;
+              </p>
+              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
+              <div class="flex-grow" />
+              <img src="/icons/download.png" alt="Download" />
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -152,8 +189,8 @@ function changeTheme(index: number) {
   }, 250);
 }
 
-function getDescription(): string {
+function getValue(value: "name" | "description"): string {
   if (currentTheme.value === -1) return "";
-  return themes[currentTheme.value].description;
+  return themes[currentTheme.value][value];
 }
 </script>

@@ -3,6 +3,7 @@ export default {
   content: [],
   theme: {
     colors: {
+      caucasian: "#ffffff",
       white: "#e0e0e0",
       light: "#efefef",
       cece: "#cccccc",
