@@ -12,92 +12,96 @@
         <div class="w-full h-72" />
 
         <!-- theme row -->
-        <div
-          class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]"
-        >
+        <Loading :property="themes">
           <div
-            v-for="(theme, index) in themes"
-            class="flex items-center justify-center w-[18.75rem]"
+            class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]"
           >
-            <button
-              :data-current="index === currentTheme"
-              @click="changeTheme(index)"
-              class="flex items-center justify-center px-6 py-4 w-[17.5rem] rounded-[1.25rem] font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+            <div
+              v-for="(theme, index) in themes"
+              class="flex items-center justify-center w-[18.75rem]"
             >
-              {{ theme.name }}
-              <div class="flex-grow" />
-              <img :src="theme.icon" alt="Theme icon" />
-            </button>
-          </div>
-        </div>
-
-        <!-- timeline -->
-        <div
-          class="w-full h-1 ml-72 mt-8 bg-gray rounded-full relative timeline"
-        >
-          <div class="ball big">
-            <p class="year">2017</p>
-          </div>
-          <div class="ball small" />
-          <div class="ball big">
-            <p class="year">2019</p>
-          </div>
-          <div class="ball small" />
-          <div class="ball big">
-            <p class="year">2021</p>
-          </div>
-          <div class="ball small" />
-          <div class="ball big">
-            <p class="year">2023</p>
-          </div>
-        </div>
-
-        <!-- theme description -->
-        <div
-          :data-selected="currentTheme !== -1 && !due"
-          class="flex ml-48 mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
-        >
-          <div class="basis-[50%]">
-            <p class="font-source font-semibold text-3xl text-caucasian">
-              {{ getValue("name") }}
-            </p>
-            <p class="font-source font-semibold text-lg text-disc">
-              Current goal
-            </p>
-
-            <p class="font-source font-semibold text-lg text-unim mt-6">
-              {{ getValue("description") }}
-            </p>
+              <button
+                :data-current="index === currentTheme"
+                @click="changeTheme(index)"
+                class="flex items-center justify-center px-6 py-4 w-[17.5rem] rounded-[1.25rem] font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+              >
+                {{ theme.name }}
+                <div class="flex-grow" />
+                <img :src="theme.icon" alt="Theme icon" />
+              </button>
+            </div>
           </div>
 
-          <!-- files -->
+          <!-- timeline -->
           <div
-            class="flex items-center justify-center flex-col gap-y-1 basis-[50%]"
+            class="w-full h-1 ml-72 mt-8 bg-gray rounded-full relative timeline"
           >
-            <div class="flex items-center justify-center w-56">
-              <p class="font-source font-bold text-lg text-light">EAP &nbsp;</p>
-              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
-              <div class="flex-grow" />
-              <img src="/icons/download.png" alt="Download" />
+            <div class="ball big">
+              <p class="year">2017</p>
             </div>
-            <div class="flex items-center justify-center w-56">
-              <p class="font-source font-bold text-lg text-light">
-                Report &nbsp;
-              </p>
-              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
-              <div class="flex-grow" />
-              <img src="/icons/download.png" alt="Download" />
+            <div class="ball small" />
+            <div class="ball big">
+              <p class="year">2019</p>
             </div>
-            <div class="flex items-center justify-center w-56">
-              <p class="font-source font-bold text-lg text-light">
-                Members &nbsp;
-              </p>
-              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
-              <div class="flex-grow" />
-              <img src="/icons/download.png" alt="Download" />
+            <div class="ball small" />
+            <div class="ball big">
+              <p class="year">2021</p>
+            </div>
+            <div class="ball small" />
+            <div class="ball big">
+              <p class="year">2023</p>
             </div>
           </div>
-        </div>
+
+          <!-- theme description -->
+          <div
+            :data-selected="currentTheme !== -1 && !due"
+            class="flex ml-48 mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
+          >
+            <div class="basis-[50%]">
+              <p class="font-source font-semibold text-3xl text-caucasian">
+                {{ getValue("name") }}
+              </p>
+              <p class="font-source font-semibold text-lg text-disc">
+                Current goal
+              </p>
+
+              <p class="font-source font-semibold text-lg text-unim mt-6">
+                {{ getValue("description") }}
+              </p>
+            </div>
+
+            <!-- files -->
+            <div
+              class="flex items-center justify-center flex-col gap-y-1 basis-[50%]"
+            >
+              <div class="flex items-center justify-center w-56">
+                <p class="font-source font-bold text-lg text-light">
+                  EAP &nbsp;
+                </p>
+                <p class="font-source font-bold text-lg text-disc">(PDF)</p>
+                <div class="flex-grow" />
+                <img src="/icons/download.png" alt="Download" />
+              </div>
+              <div class="flex items-center justify-center w-56">
+                <p class="font-source font-bold text-lg text-light">
+                  Report &nbsp;
+                </p>
+                <p class="font-source font-bold text-lg text-disc">(PDF)</p>
+                <div class="flex-grow" />
+                <img src="/icons/download.png" alt="Download" />
+              </div>
+              <div class="flex items-center justify-center w-56">
+                <p class="font-source font-bold text-lg text-light">
+                  Members &nbsp;
+                </p>
+                <p class="font-source font-bold text-lg text-disc">(PDF)</p>
+                <div class="flex-grow" />
+                <img src="/icons/download.png" alt="Download" />
+              </div>
+            </div>
+          </div>
+        </Loading>
       </section>
     </div>
 
@@ -153,28 +157,27 @@
 </style>
 
 <script lang="ts" setup>
+import { collection, getDocs } from "@firebase/firestore";
+import { useFirestore } from "~/composables/useFirebase";
+
 const currentTheme = ref(-1);
 const due = ref(false);
-const themes = [
-  {
-    name: "Energy",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
-    icon: "/icons/zap.png",
-  },
-  {
-    name: "Waste",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
-    icon: "/icons/trash.png",
-  },
-  {
-    name: "Commute",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus id tellus nec condimentum. Ut sed dolor vitae lorem tempor viverra. Mauris lobortis tempus risus ac tincidunt. Nam lacinia aliquet purus dictum condimentum. Phasellus velit enim, facilisis at sagittis quis, tincidunt eu nibh.",
-    icon: "/icons/bike.png",
-  },
-];
+const themes = useState<Theme[] | undefined>("themes", () => undefined);
+
+interface ThemeFile {
+  name: string;
+  type: string;
+  link: string;
+}
+
+interface Theme {
+  name: string;
+  description: string;
+  icon: string;
+  start: number;
+  end: number;
+  files: ThemeFile[];
+}
 
 function changeTheme(index: number) {
   if (
@@ -195,7 +198,18 @@ function changeTheme(index: number) {
 }
 
 function getValue(value: "name" | "description"): string {
-  if (currentTheme.value === -1) return "";
-  return themes[currentTheme.value][value];
+  if (currentTheme.value === -1 || themes.value === undefined) return "";
+  return themes.value[currentTheme.value][value];
 }
+
+onMounted(() => {
+  getDocs(collection(useFirestore(), "themes")).then((snapshot) => {
+    const array: Theme[] = [];
+    snapshot.forEach((item) => {
+      array.push(item.data() as Theme);
+    });
+    array.sort((a, b) => a.start - b.start);
+    themes.value = array;
+  });
+});
 </script>

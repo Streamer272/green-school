@@ -5,5 +5,9 @@ service cloud.firestore {
     match /{document=**} {
       allow read, write: if false;
     }
+
+    match /themes/{docId} {
+      allow read: if true;
+    }
   }
 }
