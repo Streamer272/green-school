@@ -4,7 +4,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": ".output",
+    "site": "green-school-f3e14",
+    "public": ".output/public",
     "ignore": [
       "firebase.json",
       "**/.*",
