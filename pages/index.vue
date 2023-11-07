@@ -158,7 +158,9 @@
 
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
+import { useFireAuth, useFirestore } from "~/composables/useFirebase";
+import hotkeys from "hotkeys-js";
+import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
 
 const animationDueChange = ref(false);
 const currentTheme = ref(-1);
@@ -203,6 +205,17 @@ function getValue(value: "name" | "description"): string {
 }
 
 onMounted(() => {
+  hotkeys("ctrl+e", (event) => {
+    event.preventDefault();
+
+    const provider = new GoogleAuthProvider();
+    const auth = useFireAuth();
+    auth.useDeviceLanguage();
+
+    // TODO: finish login (+ redirect them now and on another ctrl+e press)
+    signInWithPopup(auth, provider);
+  });
+
   getDocs(collection(useFirestore(), "themes")).then((snapshot) => {
     const array: Theme[] = [];
     snapshot.forEach((item) => {
