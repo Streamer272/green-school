@@ -8,6 +8,7 @@
 
 <script lang="ts" setup>
 initFirebase();
+initFireAuth();
 
 useHead({
   title: "Green School",

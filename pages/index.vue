@@ -163,6 +163,7 @@ import hotkeys from "hotkeys-js";
 import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
 
 const animationDueChange = ref(false);
+const user = useUser();
 const currentTheme = ref(-1);
 const themes = useState<Theme[] | undefined>("themes", () => undefined);
 
@@ -205,15 +206,21 @@ function getValue(value: "name" | "description"): string {
 }
 
 onMounted(() => {
+  const auth = useFireAuth();
+
   hotkeys("ctrl+e", (event) => {
     event.preventDefault();
 
-    const provider = new GoogleAuthProvider();
-    const auth = useFireAuth();
-    auth.useDeviceLanguage();
+    if (!user.value) {
+      const provider = new GoogleAuthProvider();
+      auth.useDeviceLanguage();
 
-    // TODO: finish login (+ redirect them now and on another ctrl+e press)
-    signInWithPopup(auth, provider);
+      signInWithPopup(auth, provider).then(() => {
+        navigateTo("/admin");
+      });
+    } else {
+      navigateTo("/admin");
+    }
   });
 
   getDocs(collection(useFirestore(), "themes")).then((snapshot) => {

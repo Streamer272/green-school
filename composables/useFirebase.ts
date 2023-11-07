@@ -1,6 +1,6 @@
 import { getApp, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "@firebase/auth";
+import { getAuth, type User } from "@firebase/auth";
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBwokOILzago40HKeM7KOCuTjzdgAQpz2U",
@@ -25,4 +25,24 @@ export function useFirestore() {
 
 export function useFireAuth() {
   return getAuth();
+}
+
+export function useUser() {
+  return useState<User | undefined>("user", () => undefined);
+}
+
+export function initFireAuth() {
+  const auth = useFireAuth();
+  const user = useUser();
+
+  auth.onAuthStateChanged((data) => {
+    user.value = data ?? undefined;
+  });
+}
+
+export function useAuthGuard(path: string = "/") {
+  const user = useUser();
+  if (!user) {
+    navigateTo(path);
+  }
 }
