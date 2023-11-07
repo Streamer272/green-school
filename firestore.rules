@@ -9,5 +9,9 @@ service cloud.firestore {
     match /themes/{docId} {
       allow read: if true;
     }
+
+    match /projects/{docId} {
+      allow read: if true;
+    }
   }
 }

@@ -23,6 +23,9 @@
       </p>
       <p class="text-disc">(design)</p>
     </div>
+    <p class="font-source font-semibold text-lg text-disc ml-4">
+      for the green school
+    </p>
 
     <p class="font-source font-semibold text-xl text-light mt-4">
       Last updated

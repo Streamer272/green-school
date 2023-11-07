@@ -55,7 +55,7 @@
 
           <!-- theme description -->
           <div
-            :data-selected="currentTheme !== -1 && !due"
+            :data-selected="currentTheme !== -1 && !animationDueChange"
             class="flex ml-48 mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
           >
             <div class="basis-[50%]">
@@ -160,8 +160,8 @@
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 
+const animationDueChange = ref(false);
 const currentTheme = ref(-1);
-const due = ref(false);
 const themes = useState<Theme[] | undefined>("themes", () => undefined);
 
 interface ThemeFile {
@@ -188,12 +188,12 @@ function changeTheme(index: number) {
     return;
   }
 
-  due.value = true;
+  animationDueChange.value = true;
   setTimeout(() => {
     if (currentTheme.value === index) currentTheme.value = -1;
     else currentTheme.value = index;
 
-    due.value = false;
+    animationDueChange.value = false;
   }, 250);
 }
 
