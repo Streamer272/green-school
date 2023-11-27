@@ -1,5 +1,5 @@
 import { getApp, initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, type User } from "@firebase/auth";
 
 const FIREBASE_CONFIG = {
@@ -27,8 +27,13 @@ export function useFireAuth() {
   return getAuth();
 }
 
+interface Account {
+  user: User | undefined;
+  admin: boolean;
+}
+
 export function useUser() {
-  return useState<User | undefined>("user", () => undefined);
+  return useState<Account | undefined>("user", () => undefined);
 }
 
 export function initFireAuth() {
@@ -36,14 +41,33 @@ export function initFireAuth() {
   const user = useUser();
 
   auth.onAuthStateChanged((data) => {
-    user.value = data ?? undefined;
+    if (data === null) {
+      user.value = {
+        user: undefined,
+        admin: false,
+      };
+    } else {
+      getDoc(doc(useFirestore(), "accounts", data.uid))
+        .then((snapshot) => {
+          const admin = snapshot.data()?.admin ?? false;
+          user.value = {
+            user: data,
+            admin: admin,
+          };
+        })
+        .catch(() => {
+          user.value = {
+            user: data,
+            admin: false,
+          };
+        });
+    }
   });
 }
 
-// TODO: add admin flag
 export function useAuthGuard(path: string = "/") {
   const user = useUser();
-  if (!user) {
+  if (!user || !user.value?.admin) {
     navigateTo(path);
   }
 }
