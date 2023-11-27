@@ -46,28 +46,29 @@ export function initFireAuth() {
         user: undefined,
         admin: false,
       };
-    } else {
-      getDoc(doc(useFirestore(), "accounts", data.uid))
-        .then((snapshot) => {
-          const admin = snapshot.data()?.admin ?? false;
-          user.value = {
-            user: data,
-            admin: admin,
-          };
-        })
-        .catch(() => {
-          user.value = {
-            user: data,
-            admin: false,
-          };
-        });
+      return;
     }
+
+    getDoc(doc(useFirestore(), "accounts", data.uid))
+      .then((snapshot) => {
+        const admin = snapshot.data()?.admin ?? false;
+        user.value = {
+          user: data,
+          admin: admin,
+        };
+      })
+      .catch(() => {
+        user.value = {
+          user: data,
+          admin: false,
+        };
+      });
   });
 }
 
 export function useAuthGuard(path: string = "/") {
   const user = useUser();
-  if (!user || !user.value?.admin) {
+  if (!user.value || !user.value?.admin) {
     navigateTo(path);
   }
 }

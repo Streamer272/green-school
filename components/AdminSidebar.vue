@@ -27,11 +27,19 @@
     >
       Projects
     </a>
+
+    <a
+      href="/admin/attendance"
+      :data-current="current === 'attendance'"
+      class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
+    >
+      Attendance
+    </a>
   </div>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
-  current: "blog" | "timeline" | "projects";
+  current: "index" | "blog" | "timeline" | "projects" | "attendance";
 }>();
 </script>
