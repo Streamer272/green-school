@@ -16,11 +16,9 @@
               Date: {{ record.date }}
             </p>
             <p class="font-source font-semibold text-lg text-light">
-              Present: {{ record.present.map((it) => it.name).join(", ") }}
+              Present: {{ record.present }}
             </p>
-            <p class="font-source text-lg text-light">
-              {{ record.notes }}
-            </p>
+            <p v-html="record.notes" class="font-source text-lg text-light" />
 
             <div
               v-if="index !== attendance?.length - 1"
@@ -52,11 +50,8 @@ const attendance = ref<AttendanceRecord[] | undefined>(undefined);
 
 interface AttendanceRecord {
   date: string;
+  present: string;
   notes: string;
-  present: {
-    class: string;
-    name: string;
-  }[];
 }
 
 onMounted(() => {
