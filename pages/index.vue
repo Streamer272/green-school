@@ -56,7 +56,7 @@
           <!-- theme description -->
           <div
             :data-selected="currentTheme !== -1 && !animationDueChange"
-            class="flex ml-48 mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
+            class="flex w-[80vw] mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
           >
             <div class="basis-[50%]">
               <p class="font-source font-semibold text-3xl text-caucasian">
