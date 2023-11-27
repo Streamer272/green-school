@@ -9,8 +9,8 @@
       >
         <Loading :property="attendance">
           <div
-            v-for="record in attendance"
-            class="flex items-start justify-start flex-col"
+            v-for="(record, index) in attendance"
+            class="flex items-start justify-start flex-col w-[40vw]"
           >
             <p class="font-source font-semibold text-lg text-light">
               Date: {{ record.date }}
@@ -18,6 +18,14 @@
             <p class="font-source font-semibold text-lg text-light">
               Present: {{ record.present.map((it) => it.name).join(", ") }}
             </p>
+            <p class="font-source text-lg text-light">
+              {{ record.notes }}
+            </p>
+
+            <div
+              v-if="index !== attendance?.length - 1"
+              class="bg-unim h-px w-full my-2"
+            />
           </div>
         </Loading>
       </div>
@@ -60,7 +68,7 @@ onMounted(() => {
     array.sort((a, b) => {
       const dateA = new Date(a.date);
       const dateB = new Date(b.date);
-      return dateA.getTime() - dateB.getTime();
+      return dateB.getTime() - dateA.getTime();
     });
     attendance.value = array;
   });

@@ -20,6 +20,9 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@tiptap/pm": "^2.1.12",
+    "@tiptap/starter-kit": "^2.1.12",
+    "@tiptap/vue-3": "^2.1.12",
     "firebase": "10.5.2",
     "hotkeys-js": "^3.12.0"
   }
