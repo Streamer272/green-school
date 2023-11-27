@@ -40,6 +40,7 @@ export function initFireAuth() {
   });
 }
 
+// TODO: add admin flag
 export function useAuthGuard(path: string = "/") {
   const user = useUser();
   if (!user) {

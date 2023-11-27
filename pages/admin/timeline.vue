@@ -1,11 +1,12 @@
 <template>
   <Background>
     <div class="w-full h-full flex items-start justify-start">
-      <!-- sidebar -->
-      <AdminSidebar />
+      <AdminSidebar current="timeline" />
 
       <!-- content -->
-      <div class="w-full h-full"></div>
+      <div class="w-full h-full flex items-center justify-center flex-col">
+        Hello World!
+      </div>
     </div>
   </Background>
 </template>
