@@ -12,7 +12,5 @@
 </template>
 
 <script lang="ts" setup>
-import { useAuthGuard } from "~/composables/useFirebase";
-
-useAuthGuard();
+useAuthGuard(true);
 </script>

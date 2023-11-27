@@ -211,7 +211,7 @@ onMounted(() => {
   hotkeys("ctrl+e", (event) => {
     event.preventDefault();
 
-    if (!user.value) {
+    if (!user.value?.user) {
       const provider = new GoogleAuthProvider();
       auth.useDeviceLanguage();
 
