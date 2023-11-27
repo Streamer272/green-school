@@ -23,7 +23,8 @@
         v-for="(project, index) in projects"
         class="bg-despair rounded-[1.25rem] w-[23.125rem]"
       >
-        <div
+        <button
+          @click="changeCurrentProject(index)"
           class="flex items-center justify-start gap-x-4 py-4 px-6 bg-dark rounded-[1.25rem] w-full"
         >
           <p class="font-source font-bold text-xl text-white">
@@ -34,15 +35,13 @@
           </p>
           <div class="flex-grow" />
 
-          <button @click="changeCurrentProject(index)">
-            <img
-              :data-open="currentProject === index"
-              src="/icons/arrow-right.png"
-              alt="Arrow right"
-              class="data-[open=true]:rotate-90 transition"
-            />
-          </button>
-        </div>
+          <img
+            :data-open="currentProject === index"
+            src="/icons/arrow-right.png"
+            alt="Arrow right"
+            class="data-[open=true]:rotate-90 transition"
+          />
+        </button>
 
         <p
           :data-open="currentProject === index"
