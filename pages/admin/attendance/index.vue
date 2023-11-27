@@ -1,0 +1,70 @@
+<template>
+  <Background>
+    <div class="w-full h-full flex items-start justify-start">
+      <AdminSidebar current="attendance" />
+
+      <!-- content -->
+      <div
+        class="w-full h-full flex items-center justify-center flex-col overflow-auto"
+      >
+        <Loading :property="attendance">
+          <div
+            v-for="record in attendance"
+            class="flex items-start justify-start flex-col"
+          >
+            <p class="font-source font-semibold text-lg text-light">
+              Date: {{ record.date }}
+            </p>
+            <p class="font-source font-semibold text-lg text-light">
+              Present: {{ record.present.map((it) => it.name).join(", ") }}
+            </p>
+          </div>
+        </Loading>
+      </div>
+
+      <a
+        href="/admin/attendance/new"
+        class="font-source font-semibold text-xl text-light"
+      >
+        <img
+          src="/icons/plus.svg"
+          alt="Add"
+          class="w-12 h-12 fixed bottom-4 right-4"
+        />
+      </a>
+    </div>
+  </Background>
+</template>
+
+<script lang="ts" setup>
+import { collection, getDocs } from "@firebase/firestore";
+import { useFirestore } from "~/composables/useFirebase";
+
+const attendance = ref<AttendanceRecord[] | undefined>(undefined);
+
+interface AttendanceRecord {
+  date: string;
+  notes: string;
+  present: {
+    class: string;
+    name: string;
+  }[];
+}
+
+onMounted(() => {
+  getDocs(collection(useFirestore(), "attendance")).then((snapshot) => {
+    const array: AttendanceRecord[] = [];
+    snapshot.forEach((item) => {
+      array.push(item.data() as AttendanceRecord);
+    });
+    array.sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA.getTime() - dateB.getTime();
+    });
+    attendance.value = array;
+  });
+});
+
+useAuthGuard(true);
+</script>
