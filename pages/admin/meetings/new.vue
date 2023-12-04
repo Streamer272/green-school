@@ -1,7 +1,7 @@
 <template>
   <Background>
     <div class="w-full h-full flex items-start justify-start">
-      <AdminSidebar current="attendance" />
+      <AdminSidebar current="meetings" />
 
       <!-- content -->
       <div
@@ -41,13 +41,13 @@ const present = ref("");
 const notes = useEditorText();
 
 function submit() {
-  addDoc(collection(useFirestore(), "attendance"), {
+  addDoc(collection(useFirestore(), "meetings"), {
     date: date.value,
     present: present.value,
     notes: notes.value,
   })
     .then(() => {
-      navigateTo("/admin/attendance");
+      navigateTo("/admin/meetings");
     })
     .catch((err) => {
       alert(err);

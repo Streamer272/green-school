@@ -4,6 +4,8 @@
       Go back home
     </a>
 
+    <div class="h-px w-[80%] bg-light" />
+
     <a
       href="/admin/blog"
       :data-current="current === 'blog'"
@@ -29,17 +31,17 @@
     </a>
 
     <a
-      href="/admin/attendance"
-      :data-current="current === 'attendance'"
+      href="/admin/meetings"
+      :data-current="current === 'meetings'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
-      Attendance
+      Meetings
     </a>
   </div>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
-  current: "index" | "blog" | "timeline" | "projects" | "attendance";
+  current: "index" | "blog" | "timeline" | "projects" | "meetings";
 }>();
 </script>
