@@ -4,7 +4,7 @@
       Go back home
     </a>
 
-    <div class="h-px w-[80%] bg-light" />
+    <div class="h-px w-[60%] bg-light" />
 
     <a
       href="/admin/blog"

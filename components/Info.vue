@@ -31,23 +31,8 @@
       Last updated
     </p>
     <div class="flex items-center justify-center ml-4">
-      <p class="font-source font-semibold text-lg text-cece">3.11.2023 9:11</p>
+      <p class="font-source font-semibold text-lg text-cece">4.12.2023 9:11</p>
     </div>
-
-    <a
-      href="https://zelenagercenka.blogspot.com/"
-      class="flex items-center justify-center p-4 rounded-[1.25rem] bg-ghetto mt-6"
-    >
-      <p class="font-source font-semibold text-xl text-light">
-        Green School Blog
-      </p>
-      <div class="w-10" />
-      <img
-        src="/icons/circle-arrow-right.png"
-        alt="Arrow right"
-        class="w-6 h-6"
-      />
-    </a>
   </div>
 </template>
 

@@ -18,6 +18,7 @@
             <p class="font-source font-semibold text-lg text-light">
               Present: {{ meeting.present }}
             </p>
+
             <p v-html="meeting.notes" class="font-source text-lg text-light" />
 
             <div

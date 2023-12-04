@@ -62,6 +62,8 @@
 </template>
 
 <script lang="ts" setup>
+import { processText } from "~/composables/useEditorText";
+
 type Article = {
   date: string;
   title: string;
@@ -69,7 +71,6 @@ type Article = {
   author: string;
 };
 
-const textCutoff = 128;
 const articles: Article[] = [
   {
     date: "2021-10-30",
@@ -128,10 +129,5 @@ function getArticles(offset: number, divisor: number = 3): Article[] {
     array.push(articles[i]);
   }
   return array;
-}
-
-function processText(content: string): string {
-  if (content.length < textCutoff) return content;
-  else return content.substring(0, textCutoff - 3) + "...";
 }
 </script>
