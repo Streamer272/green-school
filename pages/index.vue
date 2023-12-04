@@ -103,7 +103,7 @@
       </section>
     </div>
 
-    <Sidebar />
+    <Projects />
     <Info />
   </Background>
 </template>

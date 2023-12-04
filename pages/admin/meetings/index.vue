@@ -10,7 +10,7 @@
         <Loading :property="meetings">
           <div
             v-for="(meeting, index) in meetings"
-            class="flex items-start justify-start flex-col w-[40vw]"
+            class="flex items-start justify-start flex-col w-[40vw] relative"
           >
             <p class="font-source font-semibold text-lg text-light">
               Date: {{ meeting.date }}
@@ -19,12 +19,21 @@
               Present: {{ meeting.present }}
             </p>
 
-            <p v-html="meeting.notes" class="font-source text-lg text-light" />
+            <p
+              v-html="processText(meeting.notes)"
+              class="font-source text-lg text-light"
+            />
 
             <div
               v-if="index !== meetings?.length - 1"
               class="bg-unim h-px w-full my-2"
             />
+
+            <div class="absolute top-2 right-2">
+              <a :href="`/admin/meetings/edit/${meeting.id}`">
+                <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
+              </a>
+            </div>
           </div>
         </Loading>
       </div>
@@ -49,17 +58,14 @@ import { useFirestore } from "~/composables/useFirebase";
 
 const meetings = ref<Meeting[] | undefined>(undefined);
 
-interface Meeting {
-  date: string;
-  present: string;
-  notes: string;
-}
-
 onMounted(() => {
   getDocs(collection(useFirestore(), "meetings")).then((snapshot) => {
     const array: Meeting[] = [];
     snapshot.forEach((item) => {
-      array.push(item.data() as Meeting);
+      array.push({
+        id: item.id,
+        ...item.data(),
+      } as Meeting);
     });
     array.sort((a, b) => {
       const dateA = new Date(a.date);
