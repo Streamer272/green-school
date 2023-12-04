@@ -6,9 +6,7 @@
       <section
         class="flex flex-col justify-start items-center w-screen h-screen"
       >
-        <p class="text-2xl font-bold mt-9 text-white font-source">
-          Welcome to the Green School!
-        </p>
+        <TitleRouter route="home" />
         <div class="w-full h-72" />
 
         <!-- theme row -->
