@@ -59,8 +59,8 @@ onMounted(() => {
     const array: Meeting[] = [];
     snapshot.forEach((item) => {
       array.push({
-        id: item.id,
         ...item.data(),
+        id: item.id,
       } as Meeting);
     });
     array.sort((a, b) => {

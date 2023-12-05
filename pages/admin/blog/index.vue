@@ -58,7 +58,10 @@ onMounted(() => {
   getDocs(collection(useFirestore(), "posts")).then((snapshot) => {
     const array: Post[] = [];
     snapshot.forEach((item) => {
-      array.push(item.data() as Post);
+      array.push({
+        ...item.data(),
+        id: item.id,
+      } as Post);
     });
     array.sort((a, b) => {
       const dateA = new Date(a.date);
