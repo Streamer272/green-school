@@ -55,7 +55,10 @@ function fetch() {
       navigateTo("/admin/meetings");
       return;
     }
-    meeting.value = data;
+    meeting.value = {
+      ...data,
+      id: snapshot.id,
+    };
 
     date.value = data.date;
     present.value = data.present;

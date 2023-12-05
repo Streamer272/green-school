@@ -23,25 +23,21 @@
               v-html="processText(meeting.notes)"
               class="font-source text-lg text-light"
             />
-
-            <div
-              v-if="index !== meetings?.length - 1"
-              class="bg-unim h-px w-full my-2"
-            />
-
             <div class="absolute top-2 right-2">
               <a :href="`/admin/meetings/edit/${meeting.id}`">
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </a>
             </div>
+
+            <div
+              v-if="index !== meetings?.length - 1"
+              class="bg-unim h-px w-full my-2"
+            />
           </div>
         </Loading>
       </div>
 
-      <a
-        href="/admin/meetings/new"
-        class="font-source font-semibold text-xl text-light"
-      >
+      <a href="/admin/meetings/new">
         <img
           src="/icons/plus.svg"
           alt="Add"

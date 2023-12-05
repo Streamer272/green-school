@@ -10,7 +10,7 @@
         <Loading :property="posts">
           <div
             v-for="(post, index) in posts"
-            class="flex items-start justify-start flex-col w-[40vw]"
+            class="flex items-start justify-start flex-col w-[40vw] relative"
           >
             <p class="font-source font-bold text-lg text-light">
               {{ post.title }} ({{ post.author }})
@@ -23,6 +23,11 @@
               v-html="processText(post.content)"
               class="font-source text-lg text-light"
             />
+            <div class="absolute top-2 right-2">
+              <a :href="`/admin/blog/edit/${post.id}`">
+                <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
+              </a>
+            </div>
 
             <div
               v-if="index !== posts?.length - 1"
@@ -31,6 +36,14 @@
           </div>
         </Loading>
       </div>
+
+      <a href="/admin/blog/new">
+        <img
+          src="/icons/plus.svg"
+          alt="Add"
+          class="w-12 h-12 fixed bottom-4 right-4"
+        />
+      </a>
     </div>
   </Background>
 </template>
@@ -40,14 +53,6 @@ import { collection, getDocs } from "@firebase/firestore";
 import { processText } from "~/composables/useEditorText";
 
 const posts = ref<Post[] | undefined>(undefined);
-
-interface Post {
-  title: string;
-  content: string;
-  date: string;
-  author: string;
-  status: "private" | "public";
-}
 
 onMounted(() => {
   getDocs(collection(useFirestore(), "posts")).then((snapshot) => {
