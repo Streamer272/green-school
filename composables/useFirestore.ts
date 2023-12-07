@@ -21,9 +21,11 @@ interface Theme {
   icon: string;
   start: number;
   end: number;
-  files: {
-    name: string;
-    type: string;
-    link: string;
-  }[];
+  files: ThemeFile[];
+}
+
+interface ThemeFile {
+  name: string;
+  type: string;
+  link: string;
 }
