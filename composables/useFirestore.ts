@@ -29,3 +29,10 @@ interface ThemeFile {
   type: string;
   link: string;
 }
+
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+  start: string;
+}
