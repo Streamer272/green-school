@@ -12,7 +12,7 @@
             v-for="(post, index) in posts"
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >
-            <p class="font-source font-bold text-lg text-light">
+            <p class="font-source font-bold text-xl text-light">
               {{ post.title }} ({{ post.author }})
             </p>
             <p class="font-source font-semibold text-lg text-light">

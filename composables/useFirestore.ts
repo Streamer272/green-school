@@ -13,3 +13,17 @@ interface Post {
   author: string;
   status: "private" | "public";
 }
+
+interface Theme {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  start: number;
+  end: number;
+  files: {
+    name: string;
+    type: string;
+    link: string;
+  }[];
+}
