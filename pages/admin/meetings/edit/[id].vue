@@ -42,7 +42,6 @@ import { useId } from "~/composables/useURL";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
-import { getTinymce } from "@tinymce/tinymce-vue/lib/es2015/main/ts/TinyMCE";
 
 const id = useId();
 const meeting = ref<Meeting | undefined>(undefined);
