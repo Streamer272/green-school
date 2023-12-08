@@ -8,11 +8,13 @@
 
       <Loading :property="posts" :fill="true">
         <div class="flex justify-center items-start gap-x-4">
-          <!-- column 1 -->
-          <div class="flex items-center justify-start flex-col gap-y-2">
+          <div
+            v-for="index in 3"
+            class="flex items-center justify-start flex-col gap-y-2"
+          >
             <div
-              v-for="article in getArticles(posts!!, 0)"
-              class="rounded-3xl bg-hood text-light w-60 px-6 py-4"
+              v-for="article in getArticles(posts!!, index - 1)"
+              class="rounded-3xl bg-hood text-light w-60 px-6 py-4 relative"
             >
               <p class="text-lg text-white font-source font-semibold">
                 {{ processText(article.title) }}
@@ -21,37 +23,10 @@
                 v-html="processText(article.content)"
                 class="text-light font-source"
               />
-            </div>
-          </div>
 
-          <!-- column 2 -->
-          <div class="flex items-center justify-start flex-col gap-y-2">
-            <div
-              v-for="article in getArticles(posts!!, 1)"
-              class="rounded-3xl bg-hood text-light w-60 px-6 py-4"
-            >
-              <p class="text-lg text-white font-source font-semibold">
-                {{ processText(article.title) }}
-              </p>
-              <p
-                v-html="processText(article.content)"
-                class="text-light font-source"
-              />
-            </div>
-          </div>
-
-          <!-- column 3 -->
-          <div class="flex items-center justify-start flex-col gap-y-2">
-            <div
-              v-for="article in getArticles(posts!!, 2)"
-              class="rounded-3xl bg-hood text-light w-60 px-6 py-4"
-            >
-              <p class="text-lg text-white font-source font-semibold">
-                {{ processText(article.title) }}
-              </p>
-              <p
-                v-html="processText(article.content)"
-                class="text-light font-source"
+              <a
+                :href="`/blog/${article.id}`"
+                class="absolute top-0 left-0 w-full h-full"
               />
             </div>
           </div>

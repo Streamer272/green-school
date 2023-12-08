@@ -1,5 +1,53 @@
-<script setup lang="ts"></script>
+<template>
+  <Background>
+    <div
+      class="flex flex-col justify-start items-center w-screen min-h-screen overflow-auto"
+    >
+      <TitleRouter route="blog" />
+      <div class="w-full h-16" />
 
-<template></template>
+      <Loading :property="post" :fill="true">
+        <div class="flex justify-center items-start flex-col w-[60vw] gap-x-4">
+          <p class="font-source font-bold text-2xl text-light">
+            {{ post?.title }}
+          </p>
+          <p class="font-source font-semibold text-xl text-light">
+            {{ post?.author }} · {{ post?.date }}
+          </p>
 
-<style scoped lang="scss"></style>
+          <p
+            v-html="post?.content"
+            class="font-source text-lg text-light mt-2"
+          />
+        </div>
+      </Loading>
+    </div>
+
+    <Info />
+  </Background>
+</template>
+
+<script lang="ts" setup>
+import { doc, getDoc } from "firebase/firestore";
+import { collection } from "@firebase/firestore";
+
+const id = useId();
+const post = ref<Post | undefined>(undefined);
+
+onMounted(() => {
+  getDoc(doc(collection(useFirestore(), "posts"), id))
+    .then((snapshot) => {
+      const data = snapshot.data() as Post | undefined;
+
+      if (!data) {
+        navigateTo("/blog");
+        return;
+      }
+      post.value = {
+        ...data,
+        id: snapshot.id,
+      };
+    })
+    .catch(alert);
+});
+</script>
