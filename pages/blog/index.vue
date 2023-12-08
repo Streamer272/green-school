@@ -62,7 +62,7 @@
 </template>
 
 <script lang="ts" setup>
-import { processText } from "~/composables/useEditorText";
+import { processText } from "~/composables/useText";
 
 type Article = {
   date: string;

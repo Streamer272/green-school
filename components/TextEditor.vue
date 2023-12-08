@@ -9,13 +9,9 @@
         'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
     }"
     initial-value="Hello World!"
-    v-model="text"
   />
 </template>
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
-import { useEditorText } from "~/composables/useEditorText";
-
-const text = useEditorText();
 </script>

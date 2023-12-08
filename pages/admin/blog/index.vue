@@ -50,7 +50,7 @@
 
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
-import { processText } from "~/composables/useEditorText";
+import { processText } from "~/composables/useText";
 
 const posts = ref<Post[] | undefined>(undefined);
 

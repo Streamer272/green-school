@@ -1,7 +1,7 @@
 <template>
   <Background>
     <div class="w-full h-full flex items-start justify-start">
-      <AdminSidebar current="meetings" />
+      <AdminSidebar current="projects" />
 
       <!-- content -->
       <Loading :property="loading" :is-boolean="true" :fill="true">
@@ -11,14 +11,14 @@
         >
           <div class="w-full flex items-center justify-center gap-x-4">
             <input
-              v-model="date"
-              placeholder="Date..."
+              v-model="name"
+              placeholder="Name..."
               required
               class="rounded-full py-2 px-4 bg-light text-dark"
             />
             <input
-              v-model="present"
-              placeholder="Present..."
+              v-model="start"
+              placeholder="Start..."
               required
               class="rounded-full py-2 px-4 bg-light text-dark"
             />
@@ -32,7 +32,7 @@
           </div>
 
           <div class="w-[60%]">
-            <TextEditor v-model="notes" />
+            <TextEditor v-model="description" />
           </div>
         </form>
       </Loading>
@@ -42,23 +42,24 @@
 
 <script lang="ts" setup>
 import { addDoc, collection } from "@firebase/firestore";
+import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
 
-const date = ref("");
-const present = ref("");
-const notes = ref("");
+const name = ref("");
+const description = ref("");
+const start = ref("");
 const loading = ref(false);
 
 function submit(event: Event) {
   event.preventDefault();
   loading.value = true;
 
-  addDoc(collection(useFirestore(), "meetings"), {
-    date: date.value,
-    present: present.value,
-    notes: notes.value,
+  addDoc(collection(useFirestore(), "projects"), {
+    name: name.value,
+    description: description.value,
+    start: start.value,
   })
     .then(() => {
-      navigateTo("/admin/meetings");
+      navigateTo("/admin/projects");
     })
     .catch((err) => {
       loading.value = false;

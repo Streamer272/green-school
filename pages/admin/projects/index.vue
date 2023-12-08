@@ -33,6 +33,14 @@
           </div>
         </Loading>
       </div>
+
+      <a href="/admin/projects/new">
+        <img
+          src="/icons/plus.svg"
+          alt="Add"
+          class="w-12 h-12 fixed bottom-4 right-4"
+        />
+      </a>
     </div>
   </Background>
 </template>
