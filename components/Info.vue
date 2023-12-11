@@ -3,7 +3,7 @@
     @click="() => (open = !open)"
     class="flex items-center justify-center absolute top-6 right-6 bg-dark rounded-full w-[3.125rem] h-[3.125rem]"
   >
-    <img src="/icons/info.png" alt="Info" />
+    <img src="/icons/info.svg" alt="Info" class="w-8 h-8" />
   </button>
 
   <div
@@ -31,7 +31,9 @@
       Last updated
     </p>
     <div class="flex items-center justify-center ml-4">
-      <p class="font-source font-semibold text-lg text-cece">4.12.2023 9:11</p>
+      <p class="font-source font-semibold text-lg text-cece">
+        11.12.2023 15:55
+      </p>
     </div>
   </div>
 </template>

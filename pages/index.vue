@@ -72,7 +72,7 @@
                 </p>
                 <p class="font-source font-bold text-lg text-disc">(PDF)</p>
                 <div class="flex-grow" />
-                <img src="/icons/download.png" alt="Download" />
+                <img src="/icons/download.svg" alt="Download" />
               </div>
               <div class="flex items-center justify-center w-56">
                 <p class="font-source font-bold text-lg text-light">
@@ -80,7 +80,7 @@
                 </p>
                 <p class="font-source font-bold text-lg text-disc">(PDF)</p>
                 <div class="flex-grow" />
-                <img src="/icons/download.png" alt="Download" />
+                <img src="/icons/download.svg" alt="Download" />
               </div>
               <div class="flex items-center justify-center w-56">
                 <p class="font-source font-bold text-lg text-light">
@@ -88,7 +88,7 @@
                 </p>
                 <p class="font-source font-bold text-lg text-disc">(PDF)</p>
                 <div class="flex-grow" />
-                <img src="/icons/download.png" alt="Download" />
+                <img src="/icons/download.svg" alt="Download" />
               </div>
             </div>
           </div>

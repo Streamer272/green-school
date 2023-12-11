@@ -5,9 +5,9 @@
   >
     <img
       :data-open="open"
-      src="/icons/menu.png"
+      src="/icons/menu.svg"
       alt="Menu"
-      class="data-[open=true]:rotate-90 transition"
+      class="data-[open=true]:rotate-90 transition w-8 h-8"
     />
 
     Projects
@@ -37,9 +37,9 @@
 
           <img
             :data-open="currentProject === index"
-            src="/icons/arrow-right.png"
+            src="/icons/arrow-right.svg"
             alt="Arrow right"
-            class="data-[open=true]:rotate-90 transition"
+            class="data-[open=true]:rotate-90 transition w-10 h-10"
           />
         </button>
 
