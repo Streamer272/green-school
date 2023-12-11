@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => (open = !open)"
-    class="flex items-center justify-center gap-x-6 absolute top-6 left-6 z-20 font-source font-semibold text-white text-xl"
+    class="flex items-center justify-center gap-x-6 absolute top-9 left-9 z-20 font-source font-semibold text-white text-xl"
   >
     <img
       :data-open="open"

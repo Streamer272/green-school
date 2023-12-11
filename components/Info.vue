@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => (open = !open)"
-    class="flex items-center justify-center absolute top-6 right-6 bg-dark rounded-full w-[3.125rem] h-[3.125rem]"
+    class="flex items-center justify-center absolute top-7 right-7 bg-dark rounded-full w-[3.125rem] h-[3.125rem]"
   >
     <img src="/icons/info.svg" alt="Info" class="w-8 h-8" />
   </button>
