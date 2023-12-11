@@ -1,12 +1,15 @@
 import hotkeys from "hotkeys-js";
-import { type Auth, GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
-import type { Account } from "~/composables/useFirebase";
+import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
 
-export function useHotkeys(user: Account | undefined, auth: Auth) {
+export function useHotkeys() {
+  const user = useUser();
+  const auth = useFireAuth();
+  const info = useInfo();
+
   hotkeys("ctrl+e", (event) => {
     event.preventDefault();
 
-    if (!user?.user) {
+    if (!user.value?.user) {
       const provider = new GoogleAuthProvider();
       auth.useDeviceLanguage();
 
@@ -16,5 +19,10 @@ export function useHotkeys(user: Account | undefined, auth: Auth) {
     } else {
       navigateTo("/admin");
     }
+  });
+
+  hotkeys("ctrl+i", (event) => {
+    event.preventDefault();
+    info.value = !info.value;
   });
 }

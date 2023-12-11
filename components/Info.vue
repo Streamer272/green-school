@@ -37,5 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-const open = useState("info", () => false);
+import { useInfo } from "~/composables/useStates";
+
+const open = useInfo();
 </script>
