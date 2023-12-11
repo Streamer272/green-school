@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  app: {
+    pageTransition: {
+      name: "page",
+      mode: "in-out",
+    },
+  },
   modules: ["@nuxtjs/tailwindcss"],
   link: [
     {
@@ -9,4 +14,7 @@ export default defineNuxtConfig({
       href: "/favicon.ico",
     },
   ],
+  devtools: {
+    enabled: true,
+  },
 });

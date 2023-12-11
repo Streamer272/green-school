@@ -27,7 +27,7 @@ export function useFireAuth() {
   return getAuth();
 }
 
-interface Account {
+export interface Account {
   user: User | undefined;
   admin: boolean;
 }

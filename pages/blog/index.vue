@@ -24,8 +24,8 @@
                 class="text-light font-source"
               />
 
-              <a
-                :href="`/blog/${article.id}`"
+              <NuxtLink
+                :to="`/blog/${article.id}`"
                 class="absolute top-0 left-0 w-full h-full"
               />
             </div>
@@ -43,7 +43,7 @@ import { processText } from "~/composables/useText";
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 
-const posts = ref<Post[] | undefined>(undefined);
+const posts = useState<Post[] | undefined>("posts", () => undefined);
 
 function getArticles(posts: Post[], index: number): Post[] {
   const array: Post[] = [];

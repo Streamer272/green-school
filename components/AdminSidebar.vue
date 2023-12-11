@@ -1,42 +1,42 @@
 <template>
   <div class="w-80 h-full flex items-center justify-center flex-col gap-y-2">
-    <a href="/" class="font-source font-semibold text-2xl text-light">
+    <NuxtLink href="/" class="font-source font-semibold text-2xl text-light">
       Go back home
-    </a>
+    </NuxtLink>
 
     <div class="h-px w-[60%] bg-light" />
 
-    <a
+    <NuxtLink
       href="/admin/blog"
       :data-current="current === 'blog'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
       Blogs
-    </a>
+    </NuxtLink>
 
-    <a
+    <NuxtLink
       href="/admin/timeline"
       :data-current="current === 'timeline'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
       Timeline
-    </a>
+    </NuxtLink>
 
-    <a
+    <NuxtLink
       href="/admin/projects"
       :data-current="current === 'projects'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
       Projects
-    </a>
+    </NuxtLink>
 
-    <a
+    <NuxtLink
       href="/admin/meetings"
       :data-current="current === 'meetings'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
       Meetings
-    </a>
+    </NuxtLink>
   </div>
 </template>
 

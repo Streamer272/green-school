@@ -24,9 +24,9 @@
               class="font-source text-lg text-light"
             />
             <div class="absolute top-2 right-2">
-              <a :href="`/admin/blog/edit/${post.id}`">
+              <NuxtLink :to="`/admin/blog/edit/${post.id}`">
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
-              </a>
+              </NuxtLink>
             </div>
 
             <div
@@ -37,13 +37,13 @@
         </Loading>
       </div>
 
-      <a href="/admin/blog/new">
+      <NuxtLink to="/admin/blog/new">
         <img
           src="/icons/plus.svg"
           alt="Add"
           class="w-12 h-12 fixed bottom-4 right-4"
         />
-      </a>
+      </NuxtLink>
     </div>
   </Background>
 </template>

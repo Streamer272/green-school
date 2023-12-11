@@ -159,6 +159,7 @@ import { collection, getDocs } from "@firebase/firestore";
 import { useFireAuth, useFirestore } from "~/composables/useFirebase";
 import hotkeys from "hotkeys-js";
 import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
+import { useHotkeys } from "~/composables/useHotkeys";
 
 const animationDueChange = ref(false);
 const user = useUser();
@@ -205,21 +206,7 @@ function getValue(value: "name" | "description"): string {
 
 onMounted(() => {
   const auth = useFireAuth();
-
-  hotkeys("ctrl+e", (event) => {
-    event.preventDefault();
-
-    if (!user.value?.user) {
-      const provider = new GoogleAuthProvider();
-      auth.useDeviceLanguage();
-
-      signInWithPopup(auth, provider).then(() => {
-        navigateTo("/admin");
-      });
-    } else {
-      navigateTo("/admin");
-    }
-  });
+  useHotkeys(user.value, auth);
 
   getDocs(collection(useFirestore(), "themes")).then((snapshot) => {
     const array: Theme[] = [];

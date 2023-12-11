@@ -29,9 +29,9 @@
                   {{ file.name }} ({{ file.type }})
                 </p>
 
-                <a :href="file.link" class="ml-2">
+                <NuxtLink :to="file.link" class="ml-2">
                   <img src="/icons/open.svg" alt="Open" />
-                </a>
+                </NuxtLink>
 
                 <div
                   v-if="index !== theme.files.length - 1"
@@ -45,9 +45,9 @@
               class="font-source text-lg text-light"
             />
             <div class="absolute top-2 right-2">
-              <a :href="`/admin/timeline/edit/${theme.id}`">
+              <NuxtLink :to="`/admin/timeline/edit/${theme.id}`">
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
-              </a>
+              </NuxtLink>
             </div>
 
             <div
@@ -58,13 +58,13 @@
         </Loading>
       </div>
 
-      <a href="/admin/timeline/new">
+      <NuxtLink to="/admin/timeline/new">
         <img
           src="/icons/plus.svg"
           alt="Add"
           class="w-12 h-12 fixed bottom-4 right-4"
         />
-      </a>
+      </NuxtLink>
     </div>
   </Background>
 </template>

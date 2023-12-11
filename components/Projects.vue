@@ -54,14 +54,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-.custom-sidebar {
-  a {
-    font-size: 1.15rem;
-  }
-}
-</style>
-
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";

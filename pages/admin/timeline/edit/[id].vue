@@ -62,9 +62,9 @@
                 {{ file.name }} ({{ file.type }})
               </p>
 
-              <a :href="file.link" class="ml-2">
+              <NuxtLink :to="file.link" class="ml-2">
                 <img src="/icons/open.svg" alt="Open" />
-              </a>
+              </NuxtLink>
 
               <div
                 v-if="index !== files.length - 1"
