@@ -16,12 +16,14 @@
           >
             <div
               v-for="(theme, index) in themes"
-              class="flex items-center justify-center w-[18.75rem]"
+              :class="`flex items-center justify-center ${getThemeWidthClass(
+                theme,
+              )}`"
             >
               <button
                 :data-current="index === currentTheme"
                 @click="changeTheme(index)"
-                class="flex items-center justify-center px-6 py-4 w-[17.5rem] rounded-[1.25rem] font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+                class="flex items-center justify-center mx-2 px-6 py-4 w-full rounded-2xl font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
               >
                 {{ theme.name }}
                 <div class="flex-grow" />
@@ -109,6 +111,12 @@
   }
 }
 
+@for $i from 1 through 3 {
+  .length-#{$i} {
+    width: calc(#{$i} * 10rem);
+  }
+}
+
 .timeline {
   .ball {
     position: absolute;
@@ -138,7 +146,7 @@
 
     @for $i from 1 through 10 {
       &:nth-of-type(#{$i}) {
-        left: calc(9.375rem * ($i - 1));
+        left: calc(10rem * ($i - 1));
       }
     }
   }
@@ -206,6 +214,10 @@ function getYears(): Year[] {
   }
 
   return array;
+}
+
+function getThemeWidthClass(theme: Theme): string {
+  return `length-${theme.end - theme.start}`;
 }
 
 onMounted(() => {
