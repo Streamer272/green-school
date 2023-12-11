@@ -3,5 +3,5 @@ export function useInfo() {
 }
 
 export function useProjects() {
-  return useState("projects", () => false);
+  return useState("projectsOpen", () => false);
 }
