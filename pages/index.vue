@@ -34,20 +34,11 @@
           <div
             class="w-full h-1 ml-72 mt-8 bg-gray rounded-full relative timeline"
           >
-            <div class="ball big">
-              <p class="year">2017</p>
-            </div>
-            <div class="ball small" />
-            <div class="ball big">
-              <p class="year">2019</p>
-            </div>
-            <div class="ball small" />
-            <div class="ball big">
-              <p class="year">2021</p>
-            </div>
-            <div class="ball small" />
-            <div class="ball big">
-              <p class="year">2023</p>
+            <div
+              v-for="year in getYears()"
+              :class="`ball ${year.big ? 'big' : 'small'}`"
+            >
+              <p v-if="year.big" class="year">{{ year.year }}</p>
             </div>
           </div>
 
@@ -162,19 +153,9 @@ const animationDueChange = ref(false);
 const currentTheme = ref(-1);
 const themes = useState<Theme[] | undefined>("themes", () => undefined);
 
-interface ThemeFile {
-  name: string;
-  type: string;
-  link: string;
-}
-
-interface Theme {
-  name: string;
-  description: string;
-  icon: string;
-  start: number;
-  end: number;
-  files: ThemeFile[];
+interface Year {
+  year: number;
+  big: boolean;
 }
 
 function changeTheme(index: number) {
@@ -198,6 +179,33 @@ function changeTheme(index: number) {
 function getValue(value: "name" | "description"): string {
   if (currentTheme.value === -1 || themes.value === undefined) return "";
   return themes.value[currentTheme.value][value];
+}
+
+function getYears(): Year[] {
+  if (!themes.value) return [];
+
+  let start = 9999;
+  let end = 0;
+  for (const theme of themes.value) {
+    if (theme.start < start) start = theme.start;
+    if (theme.end > end) end = theme.end;
+  }
+
+  const array: Year[] = [];
+  for (let i = start; i <= end; i++) {
+    let big = false;
+    for (const theme of themes.value) {
+      if (theme.start === i) big = true;
+      else if (theme.end === i) big = true;
+    }
+
+    array.push({
+      year: i,
+      big: big,
+    });
+  }
+
+  return array;
 }
 
 onMounted(() => {
