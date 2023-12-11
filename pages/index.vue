@@ -156,13 +156,9 @@
 
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
-import { useFireAuth, useFirestore } from "~/composables/useFirebase";
-import hotkeys from "hotkeys-js";
-import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
-import { useHotkeys } from "~/composables/useHotkeys";
+import { useFirestore } from "~/composables/useFirebase";
 
 const animationDueChange = ref(false);
-const user = useUser();
 const currentTheme = ref(-1);
 const themes = useState<Theme[] | undefined>("themes", () => undefined);
 
@@ -205,9 +201,6 @@ function getValue(value: "name" | "description"): string {
 }
 
 onMounted(() => {
-  const auth = useFireAuth();
-  useHotkeys(user.value, auth);
-
   getDocs(collection(useFirestore(), "themes")).then((snapshot) => {
     const array: Theme[] = [];
     snapshot.forEach((item) => {
