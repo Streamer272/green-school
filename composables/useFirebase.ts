@@ -60,7 +60,6 @@ export function initFireAuth() {
     getDoc(doc(useFirestore(), "accounts", data.uid))
       .then((snapshot) => {
         const admin = snapshot.data()?.admin ?? false;
-        console.log("checking");
         if (authGuard.value && !admin) {
           navigateTo("/");
         }

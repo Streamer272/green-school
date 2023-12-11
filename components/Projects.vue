@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => (open = !open)"
-    class="flex items-center justify-center gap-x-6 absolute top-10 left-10 z-20 font-source font-semibold text-white text-xl"
+    class="flex items-center justify-center gap-x-6 absolute top-6 left-6 z-20 font-source font-semibold text-white text-xl"
   >
     <img
       :data-open="open"
@@ -57,8 +57,9 @@
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import { useProjects } from "~/composables/useStates";
 
-const open = useState("sidebar", () => false);
+const open = useProjects();
 const currentProject = ref(-1);
 const projects = useState<Project[] | undefined>("projects", () => undefined);
 

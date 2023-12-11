@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center w-screen">
-    <div class="flex bg-despair rounded-[1.25rem] gap-x-2 p-2 my-4">
+    <div class="flex bg-despair rounded-[1.25rem] gap-x-2 p-2 my-6">
       <NuxtLink
         href="/"
         :data-current="route === 'home'"

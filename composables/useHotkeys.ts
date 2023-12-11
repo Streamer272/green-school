@@ -1,10 +1,12 @@
 import hotkeys from "hotkeys-js";
 import { GoogleAuthProvider, signInWithPopup } from "@firebase/auth";
+import { useProjects } from "~/composables/useStates";
 
 export function useHotkeys() {
   const user = useUser();
   const auth = useFireAuth();
   const info = useInfo();
+  const projects = useProjects();
 
   hotkeys("ctrl+e", (event) => {
     event.preventDefault();
@@ -24,5 +26,10 @@ export function useHotkeys() {
   hotkeys("ctrl+i", (event) => {
     event.preventDefault();
     info.value = !info.value;
+  });
+
+  hotkeys("ctrl+p", (event) => {
+    event.preventDefault();
+    projects.value = !projects.value;
   });
 }
