@@ -3,11 +3,9 @@
     <div
       class="flex flex-col justify-center items-center w-screen min-h-screen overflow-hidden"
     >
-      <section
-        class="flex flex-col justify-start items-center w-screen h-screen"
-      >
+      <div class="flex flex-col justify-start items-center w-screen h-screen">
         <TitleRouter route="home" />
-        <div class="w-full h-72" />
+        <div class="w-full h-48" />
 
         <!-- theme row -->
         <Loading :property="themes">
@@ -33,15 +31,27 @@
           </div>
 
           <!-- timeline -->
-          <div
-            class="w-full h-1 ml-72 mt-8 bg-gray rounded-full relative timeline"
-          >
+          <div class="ml-72 mt-8 w-full relative">
             <div
-              v-for="year in getYears()"
-              :class="`ball ${year.big ? 'big' : 'small'}`"
+              class="h-1 bg-gray rounded-full relative timeline"
+              :style="`width: ${
+                (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
+              }rem`"
             >
-              <p v-if="year.big" class="year">{{ year.year }}</p>
+              <div
+                v-for="year in getYears()"
+                :class="`ball ${year.big ? 'big' : 'small'}`"
+              >
+                <p v-if="year.big" class="year">{{ year.year }}</p>
+              </div>
             </div>
+
+            <div
+              class="w-full border-gray border-t-4 border-dashed rounded-full h-0 ml-[1.3rem] absolute top-0 future-timeline"
+              :style="`left: ${
+                (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
+              }rem`"
+            />
           </div>
 
           <!-- theme description -->
@@ -53,13 +63,17 @@
               <p class="font-source font-semibold text-3xl text-caucasian">
                 {{ getValue("name") }}
               </p>
-              <p class="font-source font-semibold text-lg text-disc">
+              <p
+                v-if="isCurrentlyHappening()"
+                class="font-source font-semibold text-lg text-disc"
+              >
                 Current goal
               </p>
 
-              <p class="font-source font-semibold text-lg text-unim mt-6">
-                {{ getValue("description") }}
-              </p>
+              <p
+                v-html="getValue('description')"
+                class="font-source font-semibold text-lg text-unim mt-6"
+              />
             </div>
 
             <!-- files -->
@@ -93,7 +107,7 @@
             </div>
           </div>
         </Loading>
-      </section>
+      </div>
     </div>
 
     <Projects />
@@ -150,6 +164,9 @@
       }
     }
   }
+
+  .future-timeline {
+  }
 }
 </style>
 
@@ -160,6 +177,7 @@ import { useFirestore } from "~/composables/useFirebase";
 const animationDueChange = ref(false);
 const currentTheme = ref(-1);
 const themes = useState<Theme[] | undefined>("themes", () => undefined);
+const currentYear = new Date().getFullYear();
 
 interface Year {
   year: number;
@@ -189,8 +207,15 @@ function getValue(value: "name" | "description"): string {
   return themes.value[currentTheme.value][value];
 }
 
-function getYears(): Year[] {
-  if (!themes.value) return [];
+function isCurrentlyHappening(): boolean {
+  if (currentTheme.value === -1 || themes.value === undefined) return false;
+  const start = themes.value[currentTheme.value].start;
+  const end = themes.value[currentTheme.value].end;
+  return start <= currentYear && currentYear <= end;
+}
+
+function getStartAndEndYears(): [number, number] {
+  if (!themes.value) return [0, 0];
 
   let start = 9999;
   let end = 0;
@@ -198,6 +223,14 @@ function getYears(): Year[] {
     if (theme.start < start) start = theme.start;
     if (theme.end > end) end = theme.end;
   }
+
+  return [start, end];
+}
+
+function getYears(): Year[] {
+  if (!themes.value) return [];
+
+  const [start, end] = getStartAndEndYears();
 
   const array: Year[] = [];
   for (let i = start; i <= end; i++) {
