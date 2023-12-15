@@ -59,10 +59,17 @@
             :data-selected="currentTheme !== -1 && !animationDueChange"
             class="flex w-[80vw] mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
           >
-            <div class="basis-[50%]">
-              <p class="font-source font-semibold text-3xl text-caucasian">
-                {{ getValue("name") }}
-              </p>
+            <div class="flex flex-col justify-start items-start basis-[50%]">
+              <div class="flex items-center justify-start gap-x-3">
+                <p class="font-source font-semibold text-3xl text-caucasian">
+                  {{ getValue("name") }}
+                </p>
+
+                <NuxtLink :to="`/themes/${getValue('id')}`">
+                  <img src="/icons/open.svg" alt="Open" />
+                </NuxtLink>
+              </div>
+
               <p
                 v-if="isCurrentlyHappening()"
                 class="font-source font-semibold text-lg text-disc"
@@ -202,7 +209,7 @@ function changeTheme(index: number) {
   }, 250);
 }
 
-function getValue(value: "name" | "description"): string {
+function getValue(value: "name" | "description" | "id"): string {
   if (currentTheme.value === -1 || themes.value === undefined) return "";
   return themes.value[currentTheme.value][value];
 }
@@ -257,7 +264,10 @@ onMounted(() => {
   getDocs(collection(useFirestore(), "themes")).then((snapshot) => {
     const array: Theme[] = [];
     snapshot.forEach((item) => {
-      array.push(item.data() as Theme);
+      array.push({
+        ...item.data(),
+        id: item.id,
+      } as Theme);
     });
     array.sort((a, b) => a.start - b.start);
     themes.value = array;
