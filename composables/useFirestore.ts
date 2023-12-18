@@ -1,3 +1,5 @@
+import { serverTimestamp, Timestamp } from "@firebase/firestore";
+
 interface Meeting {
   id: string;
   date: string;
@@ -21,14 +23,16 @@ interface Theme {
   icon: string;
   start: number;
   end: number;
-  files: ThemeFile[];
+  files: GSFile[];
   members: string[];
 }
 
-interface ThemeFile {
+interface GSFile {
   name: string;
   type: string;
   link: string;
+  priority?: number;
+  date?: string;
 }
 
 interface Project {
@@ -36,4 +40,15 @@ interface Project {
   name: string;
   description: string;
   start: string;
+  files: GSFile[];
+}
+
+function now(date?: Date) {
+  if (date) return Timestamp.fromDate(date);
+  return serverTimestamp();
+}
+
+function ddmmyy(date: string) {
+  const dateParts = date.split(".");
+  return new Date(+dateParts[2], +dateParts[1] - 1, +dateParts[0]);
 }
