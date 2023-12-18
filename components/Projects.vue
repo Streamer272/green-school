@@ -45,10 +45,9 @@
 
         <p
           :data-open="currentProject === index"
+          v-html="project.description"
           class="font-source font-semibold m-4 text-unim data-[open=false]:opacity-0 data-[open=false]:my-0 overflow-hidden data-[open=false]:max-h-px max-h-screen transition-all"
-        >
-          {{ project.description }}
-        </p>
+        />
       </div>
     </Loading>
   </div>

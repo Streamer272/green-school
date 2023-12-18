@@ -22,6 +22,7 @@ interface Theme {
   start: number;
   end: number;
   files: ThemeFile[];
+  members: string[];
 }
 
 interface ThemeFile {
