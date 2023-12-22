@@ -14,7 +14,7 @@
 // TODO: add deleting to things
 // TODO: add "problems? call your maintainer"
 // TODO: refactor timestamps
-// TODO: add files to meetings and projects
+// TODO: add files to meetings
 
 useAuthGuard(true);
 </script>

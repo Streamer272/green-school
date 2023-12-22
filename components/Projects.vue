@@ -23,7 +23,8 @@
         v-for="(project, index) in projects"
         class="bg-despair rounded-[1.25rem] w-[23.125rem]"
       >
-        <button
+        <div
+          type="button"
           @click="changeCurrentProject(index)"
           class="flex items-center justify-start gap-x-4 py-4 px-6 bg-dark rounded-[1.25rem] w-full"
         >
@@ -41,13 +42,34 @@
             alt="Arrow right"
             class="data-[open=true]:rotate-90 transition w-10 h-10"
           />
-        </button>
+        </div>
 
-        <p
+        <div
           :data-open="currentProject === index"
-          v-html="project.description"
-          class="font-source font-semibold m-4 text-unim data-[open=false]:opacity-0 data-[open=false]:my-0 overflow-hidden data-[open=false]:max-h-px max-h-screen transition-all"
-        />
+          class="flex flex-col m-4 data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen overflow-hidden transition-all"
+        >
+          <p
+            v-html="project.description"
+            class="font-source font-semibold text-unim"
+          />
+          <div
+            v-if="project.files.length > 0"
+            class="w-full flex items-center flex-col gap-x-1 mt-2"
+          >
+            <div
+              v-for="file in project.files"
+              class="flex items-center justify-center"
+            >
+              <p class="font-source font-semibold text-lg text-light">
+                {{ file.name }} ({{ file.type }})
+              </p>
+
+              <NuxtLink :to="file.link" class="ml-2">
+                <img src="/icons/open.svg" alt="Open" />
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
       </div>
     </Loading>
   </div>
@@ -57,16 +79,11 @@
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import { useProjects } from "~/composables/useStates";
+import type { Project } from "~/composables/useFirestore";
 
 const open = useProjects();
 const currentProject = ref(-1);
 const projects = useState<Project[] | undefined>("projects", () => undefined);
-
-interface Project {
-  name: string;
-  start: string;
-  description: string;
-}
 
 function changeCurrentProject(index: number) {
   if (currentProject.value === index) currentProject.value = -1;
