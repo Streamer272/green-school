@@ -1,13 +1,13 @@
 import { serverTimestamp, Timestamp } from "@firebase/firestore";
 
-interface Meeting {
+export interface Meeting {
   id: string;
   date: string;
   present: string;
   notes: string;
 }
 
-interface Post {
+export interface Post {
   id: string;
   title: string;
   content: string;
@@ -16,7 +16,7 @@ interface Post {
   status: "private" | "public";
 }
 
-interface Theme {
+export interface Theme {
   id: string;
   name: string;
   description: string;
@@ -27,7 +27,7 @@ interface Theme {
   members: string[];
 }
 
-interface GSFile {
+export interface GSFile {
   name: string;
   type: string;
   link: string;
@@ -35,7 +35,7 @@ interface GSFile {
   date?: string;
 }
 
-interface Project {
+export interface Project {
   id: string;
   name: string;
   description: string;
@@ -43,12 +43,12 @@ interface Project {
   files: GSFile[];
 }
 
-function now(date?: Date) {
+export function now(date?: Date) {
   if (date) return Timestamp.fromDate(date);
   return serverTimestamp();
 }
 
-function ddmmyy(date: string) {
+export function ddmmyy(date: string) {
   const dateParts = date.split(".");
   return new Date(+dateParts[2], +dateParts[1] - 1, +dateParts[0]);
 }
