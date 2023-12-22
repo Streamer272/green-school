@@ -87,11 +87,11 @@ export function initFireAuth() {
   });
 }
 
-export function useAuthGuard(apply: boolean | undefined = undefined) {
+export function useAuthGuard(enforce?: boolean) {
   const authGuard = useState("authGuard", () => false);
 
-  if (apply !== undefined) {
-    authGuard.value = apply;
+  if (enforce !== undefined) {
+    authGuard.value = enforce;
   }
   return authGuard;
 }
