@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="files.length > 0"
-    class="w-full flex items-center justify-center gap-x-4"
+    class="w-full flex items-center justify-center gap-x-1"
   >
     <div
       v-for="(file, index) in files"

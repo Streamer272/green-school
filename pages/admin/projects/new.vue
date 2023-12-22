@@ -31,6 +31,8 @@
             </button>
           </div>
 
+          <FileListEditor />
+
           <div class="w-[60%]">
             <TextEditor v-model="description" />
           </div>
@@ -47,6 +49,7 @@ import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
 const name = ref("");
 const description = ref("");
 const start = ref("");
+const files = useFileList();
 const loading = ref(false);
 
 function submit(event: Event) {
@@ -57,6 +60,7 @@ function submit(event: Event) {
     name: name.value,
     description: description.value,
     start: start.value,
+    files: files.value,
   })
     .then(() => {
       navigateTo("/admin/projects");

@@ -31,6 +31,8 @@
             </button>
           </div>
 
+          <FileListEditor />
+
           <div class="w-[60%]">
             <TextEditor v-model="description" />
           </div>
@@ -44,12 +46,14 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import type { Project } from "~/composables/useFirestore";
 
 const id = useId();
 const project = ref<Project | undefined>(undefined);
 const name = ref("");
 const description = ref("");
 const start = ref("");
+const files = useFileList();
 
 function fetch() {
   getDoc(doc(collection(useFirestore(), "projects"), id))
@@ -68,6 +72,7 @@ function fetch() {
       name.value = data.name;
       description.value = data.description;
       start.value = data.start;
+      files.value = data.files;
     })
     .catch(alert);
 }
@@ -80,6 +85,7 @@ function submit(event: Event) {
     name: name.value,
     description: description.value,
     start: start.value,
+    files: files.value,
   })
     .then(fetch)
     .catch(alert);
