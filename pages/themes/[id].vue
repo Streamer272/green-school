@@ -1,12 +1,12 @@
 <template>
   <Background>
-    <div
-      class="flex flex-col items-center justify-center w-screen min-h-screen overflow-hidden"
-    >
+    <div class="flex flex-col items-center justify-center w-screen h-screen">
       <TitleRouter route="home" />
       <div class="w-full h-16" />
 
-      <div class="flex flex-col justify-start items-center w-[60vw] h-screen">
+      <div
+        class="flex flex-col justify-start items-center w-[60vw] h-full overflow-auto"
+      >
         <!-- content -->
         <Loading :property="theme" :fill="true">
           <p class="font-source font-semibold text-light text-3xl">
@@ -35,7 +35,7 @@
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import { doc, getDoc } from "firebase/firestore";
-import Projects from "~/components/Projects.vue";
+import type { Theme } from "~/composables/useFirestore";
 
 const id = useId();
 const theme = ref<Theme | undefined>(undefined);
