@@ -1,6 +1,7 @@
 import { getApp, initializeApp } from "firebase/app";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, type User } from "@firebase/auth";
+import { getStorage } from "@firebase/storage";
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyBwokOILzago40HKeM7KOCuTjzdgAQpz2U",
@@ -25,6 +26,10 @@ export function useFirestore() {
 
 export function useFireAuth() {
   return getAuth();
+}
+
+export function useFireStorage() {
+  return getStorage();
 }
 
 export interface Account {

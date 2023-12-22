@@ -1,13 +1,13 @@
 <template>
   <div class="w-80 h-full flex items-center justify-center flex-col gap-y-2">
-    <NuxtLink href="/" class="font-source font-semibold text-2xl text-light">
+    <NuxtLink to="/" class="font-source font-semibold text-2xl text-light">
       Go back home
     </NuxtLink>
 
     <div class="h-px w-[60%] bg-light" />
 
     <NuxtLink
-      href="/admin/blog"
+      to="/admin/blog"
       :data-current="current === 'blog'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
@@ -15,7 +15,7 @@
     </NuxtLink>
 
     <NuxtLink
-      href="/admin/timeline"
+      to="/admin/timeline"
       :data-current="current === 'timeline'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
@@ -23,7 +23,7 @@
     </NuxtLink>
 
     <NuxtLink
-      href="/admin/projects"
+      to="/admin/projects"
       :data-current="current === 'projects'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
@@ -31,17 +31,25 @@
     </NuxtLink>
 
     <NuxtLink
-      href="/admin/meetings"
+      to="/admin/meetings"
       :data-current="current === 'meetings'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
       Meetings
+    </NuxtLink>
+
+    <NuxtLink
+      to="/admin/files"
+      :data-current="current === 'files'"
+      class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
+    >
+      Files
     </NuxtLink>
   </div>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
-  current: "index" | "blog" | "timeline" | "projects" | "meetings";
+  current: "index" | "blog" | "timeline" | "projects" | "meetings" | "files";
 }>();
 </script>
