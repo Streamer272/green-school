@@ -46,21 +46,29 @@
 
         <div
           :data-open="currentProject === index"
-          class="flex flex-col m-4 data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen overflow-hidden transition-all"
+          class="flex flex-col m-4 gap-y-2 data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen overflow-hidden transition-all"
         >
           <p
             v-html="project.description"
             class="font-source font-semibold text-unim"
           />
           <div
+            v-if="project.files.length > 0 || project.members.length > 0"
+            class="w-full bg-gray h-[0.125rem]"
+          />
+
+          <p class="font-source font-semibold text-unim">
+            By {{ project.members.join(", ") }}
+          </p>
+          <div
             v-if="project.files.length > 0"
-            class="w-full flex items-center flex-col gap-x-1 mt-2"
+            class="w-full flex items-start flex-col gap-x-1"
           >
             <div
               v-for="file in project.files"
               class="flex items-center justify-center"
             >
-              <p class="font-source font-semibold text-lg text-light">
+              <p class="font-source font-semibold text-unim">
                 {{ file.name }} ({{ file.type }})
               </p>
 

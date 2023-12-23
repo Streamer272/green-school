@@ -33,6 +33,7 @@ export interface Project {
   description: string;
   start: GSDate;
   files: GSFile[];
+  members: string[];
 }
 
 export interface GSFile {
