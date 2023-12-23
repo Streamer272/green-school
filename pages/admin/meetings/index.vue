@@ -46,10 +46,19 @@
               </div>
             </div>
 
-            <div class="absolute top-2 right-2">
-              <NuxtLink :to="`/admin/meetings/edit/${meeting.id}`">
+            <div
+              class="absolute top-2 right-2 flex items-center justify-center gap-x-2"
+            >
+              <NuxtLink
+                :to="`/admin/meetings/edit/${meeting.id}`"
+                class="flex-shrink-0"
+              >
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </NuxtLink>
+
+              <button @click="() => deleteMeeting(index)" class="flex-shrink-0">
+                <img src="/icons/delete.svg" alt="Delete" class="w-8 h-8" />
+              </button>
             </div>
 
             <div
@@ -72,13 +81,24 @@
 </template>
 
 <script lang="ts" setup>
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import type { Meeting } from "~/composables/useFirestore";
+import { doc } from "firebase/firestore";
 
 const meetings = ref<Meeting[] | undefined>(undefined);
 
-onMounted(() => {
+function deleteMeeting(index: number) {
+  const meeting = meetings.value![index];
+  if (!confirm("Are you sure you want to delete this meeting?")) return;
+
+  meetings.value = undefined;
+  deleteDoc(doc(collection(useFirestore(), "meetings"), meeting.id))
+    .then(fetch)
+    .catch(alert);
+}
+
+function fetch() {
   getDocs(collection(useFirestore(), "meetings")).then((snapshot) => {
     const array: Meeting[] = [];
     snapshot.forEach((item) => {
@@ -94,6 +114,10 @@ onMounted(() => {
     });
     meetings.value = array;
   });
+}
+
+onMounted(() => {
+  fetch();
 });
 
 useAuthGuard(true);

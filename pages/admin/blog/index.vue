@@ -78,6 +78,7 @@ function copyUrl(index: number) {
 function deletePost(index: number) {
   const post = posts.value![index];
   if (!confirm("Are you sure you want to delete this post?")) return;
+
   posts.value = undefined;
   deleteDoc(doc(collection(useFirestore(), "posts"), post.id))
     .then(fetch)

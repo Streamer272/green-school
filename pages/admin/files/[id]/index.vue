@@ -67,6 +67,7 @@ function fetch() {
 function deleteFile(index: number) {
   const file = files.value![index];
   if (!confirm("Are you sure you want to delete this file?")) return;
+
   files.value = undefined;
   deleteObject(file).then(fetch).catch(alert);
 }
