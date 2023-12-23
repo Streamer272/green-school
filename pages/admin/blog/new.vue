@@ -37,6 +37,7 @@
           <div class="w-full flex items-center justify-center gap-x-4">
             <input
               v-model="date"
+              type="date"
               placeholder="Date..."
               required
               class="rounded-full py-2 px-4 bg-light text-dark"
@@ -94,7 +95,7 @@ function submit(event: Event) {
   addDoc(collection(useFirestore(), "posts"), {
     title: title.value,
     content: content.value,
-    date: date.value,
+    date: GSDate.to(date.value),
     author: author.value,
     status: status.value,
     hidden: hidden.value,

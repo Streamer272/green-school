@@ -37,6 +37,7 @@
           <div class="w-full flex items-center justify-center gap-x-4">
             <input
               v-model="date"
+              type="date"
               placeholder="Date..."
               required
               class="rounded-full py-2 px-4 bg-light text-dark"
@@ -79,6 +80,7 @@
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import type { Post } from "~/composables/useFirestore";
 
 const id = useId();
 const post = ref<Post | undefined>(undefined);
@@ -105,7 +107,7 @@ function fetch() {
 
       title.value = data.title;
       content.value = data.content;
-      date.value = data.date;
+      date.value = GSDate.ugly(data.date);
       author.value = data.author;
       status.value = data.status;
       hidden.value = data.hidden;

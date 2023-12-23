@@ -60,16 +60,26 @@ export class GSDate extends String {
     return GSDate.from(new Date());
   }
 
-  static as(it: string): Date {
+  static to(it: string | GSDate) {
+    const date = GSDate.as(it);
+    return date.toISOString();
+  }
+
+  static as(it: string | GSDate): Date {
     return new Date(it.toString());
   }
 
-  static pretty(it: string) {
+  static pretty(it: string | GSDate) {
     const date = GSDate.as(it);
     return date.toLocaleDateString("sk-SK", {
       year: "numeric",
       month: "short",
       day: "numeric",
     });
+  }
+
+  static ugly(it: string | GSDate) {
+    const date = GSDate.as(it);
+    return date.toISOString().split("T")[0];
   }
 }

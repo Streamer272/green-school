@@ -17,7 +17,7 @@
               {{ post.title }} ({{ post.author }})
             </p>
             <p class="font-source font-semibold text-lg text-light">
-              {{ post.date }} ({{ post.status }})
+              {{ GSDate.pretty(post.date) }} ({{ post.status }})
             </p>
 
             <p
@@ -65,7 +65,7 @@
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { processText } from "~/composables/useText";
-import type { Post } from "~/composables/useFirestore";
+import { GSDate, type Post } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
 const posts = ref<Post[] | undefined>(undefined);
@@ -94,8 +94,8 @@ function fetch() {
       } as Post);
     });
     array.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+      const dateA = GSDate.as(a.date);
+      const dateB = GSDate.as(b.date);
       return dateB.getTime() - dateA.getTime();
     });
     posts.value = array;
