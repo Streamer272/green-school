@@ -56,7 +56,10 @@
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </NuxtLink>
 
-              <button @click="() => deleteMeeting(index)" class="flex-shrink-0">
+              <button
+                @click="() => deleteMeeting(meeting.id)"
+                class="flex-shrink-0"
+              >
                 <img src="/icons/delete.svg" alt="Delete" class="w-8 h-8" />
               </button>
             </div>
@@ -88,12 +91,11 @@ import { doc } from "firebase/firestore";
 
 const meetings = ref<Meeting[] | undefined>(undefined);
 
-function deleteMeeting(index: number) {
-  const meeting = meetings.value![index];
+function deleteMeeting(meetingId: string) {
   if (!confirm("Are you sure you want to delete this meeting?")) return;
 
   meetings.value = undefined;
-  deleteDoc(doc(collection(useFirestore(), "meetings"), meeting.id))
+  deleteDoc(doc(collection(useFirestore(), "meetings"), meetingId))
     .then(fetch)
     .catch(alert);
 }

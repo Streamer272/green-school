@@ -38,7 +38,7 @@
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </NuxtLink>
 
-              <button @click="() => deletePost(index)" class="flex-shrink-0">
+              <button @click="() => deletePost(post.id)" class="flex-shrink-0">
                 <img src="/icons/delete.svg" alt="Delete" class="w-8 h-8" />
               </button>
             </div>
@@ -75,12 +75,11 @@ function copyUrl(index: number) {
   navigator.clipboard.writeText(`${window.location.origin}/blog/${post.id}`);
 }
 
-function deletePost(index: number) {
-  const post = posts.value![index];
+function deletePost(postId: string) {
   if (!confirm("Are you sure you want to delete this post?")) return;
 
   posts.value = undefined;
-  deleteDoc(doc(collection(useFirestore(), "posts"), post.id))
+  deleteDoc(doc(collection(useFirestore(), "posts"), postId))
     .then(fetch)
     .catch(alert);
 }

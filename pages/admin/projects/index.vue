@@ -43,10 +43,16 @@
               </div>
             </div>
 
-            <div class="absolute top-2 right-2">
+            <div
+              class="absolute top-2 right-2 flex items-center justify-center gap-x-2"
+            >
               <NuxtLink :to="`/admin/projects/edit/${project.id}`">
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </NuxtLink>
+
+              <button @click="deleteProject(project.id)">
+                <img src="/icons/delete.svg" alt="Delete" class="w-8 h-8" />
+              </button>
             </div>
 
             <div
@@ -69,12 +75,23 @@
 </template>
 
 <script lang="ts" setup>
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import type { Project } from "~/composables/useFirestore";
+import { doc } from "firebase/firestore";
 
 const projects = ref<Project[] | undefined>(undefined);
 
-onMounted(() => {
+function deleteProject(projectId: string) {
+  if (!confirm("Are you sure you want to delete this project?")) return;
+
+  projects.value = undefined;
+  deleteDoc(doc(collection(useFirestore(), "projects"), projectId))
+    .then(fetch)
+    .catch(alert);
+}
+
+function fetch() {
   getDocs(collection(useFirestore(), "projects")).then((snapshot) => {
     const array: Project[] = [];
     snapshot.forEach((item) => {
@@ -92,6 +109,10 @@ onMounted(() => {
     });
     projects.value = array;
   });
+}
+
+onMounted(() => {
+  fetch();
 });
 
 useAuthGuard(true);
