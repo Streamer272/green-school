@@ -20,9 +20,13 @@
               v-html="processText(project.description)"
               class="font-source text-lg text-light"
             />
+
+            <p class="font-source text-lg text-light mt-2">
+              By {{ project.members.join(", ") }}
+            </p>
             <div
               v-if="project.files.length > 0"
-              class="w-full flex items-center justify-start gap-x-1 mt-2"
+              class="w-full flex items-center justify-start gap-x-1"
             >
               <div
                 v-for="(file, index) in project.files"

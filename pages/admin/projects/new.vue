@@ -32,6 +32,7 @@
             </button>
           </div>
 
+          <MemberListEditor />
           <FileListEditor />
 
           <div class="w-[60%]">
@@ -46,11 +47,13 @@
 <script lang="ts" setup>
 import { addDoc, collection } from "@firebase/firestore";
 import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
+import { useMemberList } from "~/composables/useStates";
 
 const name = ref("");
 const description = ref("");
 const start = ref("");
 const files = useFileList();
+const members = useMemberList();
 const loading = ref(false);
 
 function submit(event: Event) {
@@ -62,6 +65,7 @@ function submit(event: Event) {
     description: description.value,
     start: GSDate.to(start.value),
     files: files.value,
+    members: members.value,
   })
     .then(() => {
       navigateTo("/admin/projects");

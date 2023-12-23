@@ -32,6 +32,7 @@
             </button>
           </div>
 
+          <MemberListEditor />
           <FileListEditor />
 
           <div class="w-[60%]">
@@ -48,6 +49,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import type { Project } from "~/composables/useFirestore";
+import { useMemberList } from "~/composables/useStates";
 
 const id = useId();
 const project = ref<Project | undefined>(undefined);
@@ -55,6 +57,7 @@ const name = ref("");
 const description = ref("");
 const start = ref("");
 const files = useFileList();
+const members = useMemberList();
 
 function fetch() {
   getDoc(doc(collection(useFirestore(), "projects"), id))
@@ -74,6 +77,7 @@ function fetch() {
       description.value = data.description;
       start.value = GSDate.ugly(data.start);
       files.value = data.files;
+      members.value = data.members;
     })
     .catch(alert);
 }
@@ -87,6 +91,7 @@ function submit(event: Event) {
     description: description.value,
     start: GSDate.to(start.value),
     files: files.value,
+    members: members.value,
   })
     .then(fetch)
     .catch(alert);

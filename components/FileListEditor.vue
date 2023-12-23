@@ -12,10 +12,10 @@
       </p>
 
       <NuxtLink :to="file.link" class="ml-2">
-        <img src="/icons/open.svg" alt="Open" />
+        <img src="/icons/open.svg" alt="Open" class="w-6 h-6" />
       </NuxtLink>
       <button @click="() => removeFile(index)" class="ml-2">
-        <img src="/icons/delete.svg" alt="Remove" />
+        <img src="/icons/delete.svg" alt="Delete" class="w-6 h-6" />
       </button>
 
       <div v-if="index !== files.length - 1" class="bg-unim h-6 w-px mx-2" />

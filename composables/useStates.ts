@@ -11,3 +11,7 @@ export function useProjects() {
 export function useFileList() {
   return useState<GSFile[]>("fileList", () => []);
 }
+
+export function useMemberList() {
+  return useState<string[]>("memberList", () => []);
+}
