@@ -18,6 +18,7 @@
             />
             <input
               v-model="start"
+              type="date"
               placeholder="Start..."
               required
               class="rounded-full py-2 px-4 bg-light text-dark"
@@ -59,7 +60,7 @@ function submit(event: Event) {
   addDoc(collection(useFirestore(), "projects"), {
     name: name.value,
     description: description.value,
-    start: start.value,
+    start: GSDate.to(start.value),
     files: files.value,
   })
     .then(() => {

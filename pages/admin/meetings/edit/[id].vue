@@ -12,6 +12,7 @@
           <div class="w-full flex items-center justify-center gap-x-4">
             <input
               v-model="date"
+              type="date"
               placeholder="Date..."
               class="rounded-full py-2 px-4 bg-light text-dark"
             />
@@ -67,7 +68,7 @@ function fetch() {
         id: snapshot.id,
       };
 
-      date.value = data.date;
+      date.value = GSDate.ugly(data.date);
       present.value = data.present;
       notes.value = data.notes;
       files.value = data.files;
@@ -80,7 +81,7 @@ function submit(event: Event) {
   meeting.value = undefined;
 
   setDoc(doc(collection(useFirestore(), "meetings"), id), {
-    date: date.value,
+    date: GSDate.to(date.value),
     present: present.value,
     notes: notes.value,
     files: files.value,

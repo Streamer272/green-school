@@ -79,7 +79,7 @@ function addFile() {
     name: name.value,
     type: type.value,
     link: link.value,
-    date: GSDate.fromString(date.value),
+    date: GSDate.to(date.value),
     priority: priority.value,
   });
 

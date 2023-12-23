@@ -18,6 +18,7 @@
             />
             <input
               v-model="start"
+              type="date"
               placeholder="Start..."
               required
               class="rounded-full py-2 px-4 bg-light text-dark"
@@ -71,7 +72,7 @@ function fetch() {
 
       name.value = data.name;
       description.value = data.description;
-      start.value = data.start;
+      start.value = GSDate.ugly(data.start);
       files.value = data.files;
     })
     .catch(alert);
@@ -84,7 +85,7 @@ function submit(event: Event) {
   setDoc(doc(collection(useFirestore(), "projects"), id), {
     name: name.value,
     description: description.value,
-    start: start.value,
+    start: GSDate.to(start.value),
     files: files.value,
   })
     .then(fetch)

@@ -13,7 +13,7 @@
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >
             <p class="font-source font-semibold text-lg text-light">
-              Date: {{ meeting.date }}
+              Date: {{ GSDate.pretty(meeting.date) }}
             </p>
             <p class="font-source font-semibold text-lg text-light">
               Present: {{ meeting.present }}
@@ -86,7 +86,7 @@
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
-import type { Meeting } from "~/composables/useFirestore";
+import { GSDate, type Meeting } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
 const meetings = ref<Meeting[] | undefined>(undefined);
@@ -110,8 +110,8 @@ function fetch() {
       } as Meeting);
     });
     array.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+      const dateA = GSDate.as(a.date);
+      const dateB = GSDate.as(b.date);
       return dateB.getTime() - dateA.getTime();
     });
     meetings.value = array;

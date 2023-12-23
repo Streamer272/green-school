@@ -48,27 +48,18 @@ export class GSDate extends String {
     super(date);
   }
 
-  static from(it: Date) {
-    return new GSDate(it.toISOString());
-  }
-
-  static fromString(it: string) {
-    return new GSDate(new Date(it).toISOString());
-  }
-
-  static now() {
-    return GSDate.from(new Date());
-  }
-
+  /* converts string to iso string */
   static to(it: string | GSDate) {
     const date = GSDate.as(it);
     return date.toISOString();
   }
 
+  /* converts string to date */
   static as(it: string | GSDate): Date {
     return new Date(it.toString());
   }
 
+  /* converts string to pretty string */
   static pretty(it: string | GSDate) {
     const date = GSDate.as(it);
     return date.toLocaleDateString("sk-SK", {
@@ -78,6 +69,7 @@ export class GSDate extends String {
     });
   }
 
+  /* converts string to ugly string (for date inputs) */
   static ugly(it: string | GSDate) {
     const date = GSDate.as(it);
     return date.toISOString().split("T")[0];

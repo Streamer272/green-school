@@ -13,7 +13,7 @@
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >
             <p class="font-source font-bold text-xl text-light">
-              {{ project.name }} ({{ project.start }})
+              {{ project.name }} ({{ GSDate.pretty(project.start) }})
             </p>
 
             <p
@@ -77,7 +77,7 @@
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
-import type { Project } from "~/composables/useFirestore";
+import { GSDate, type Project } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
 const projects = ref<Project[] | undefined>(undefined);
@@ -101,10 +101,8 @@ function fetch() {
       } as Project);
     });
     array.sort((a, b) => {
-      const splitA = a.start.split(".");
-      const splitB = b.start.split(".");
-      const dateA = new Date(+splitA[2], +splitA[1] - 1, +splitA[0]);
-      const dateB = new Date(+splitB[2], +splitB[1] - 1, +splitB[0]);
+      const dateA = GSDate.as(a.start);
+      const dateB = GSDate.as(b.start);
       return dateB.getTime() - dateA.getTime();
     });
     projects.value = array;
