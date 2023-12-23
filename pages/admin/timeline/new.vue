@@ -50,54 +50,8 @@
             />
           </div>
 
-          <div
-            v-if="files.length > 0"
-            class="w-full flex items-center justify-center gap-x-4"
-          >
-            <div
-              v-for="(file, index) in files"
-              class="flex items-center justify-center"
-            >
-              <p class="font-source font-semibold text-lg text-light">
-                {{ file.name }} ({{ file.type }})
-              </p>
-
-              <NuxtLink :to="file.link" class="ml-2">
-                <img src="/icons/open.svg" alt="Open" />
-              </NuxtLink>
-
-              <div
-                v-if="index !== files.length - 1"
-                class="bg-unim h-6 w-px mx-2"
-              />
-            </div>
-          </div>
-
-          <div class="w-full flex items-center justify-center gap-x-4">
-            <input
-              v-model="fileName"
-              placeholder="File name..."
-              class="rounded-full py-2 px-4 bg-light text-dark w-80"
-            />
-
-            <input
-              v-model="fileType"
-              placeholder="File type..."
-              class="rounded-full py-2 px-4 bg-light text-dark w-80"
-            />
-          </div>
-
-          <div class="w-full flex items-center justify-center gap-x-4">
-            <input
-              v-model="fileLink"
-              placeholder="File link..."
-              class="rounded-full py-2 px-4 bg-light text-dark w-80"
-            />
-
-            <button @click="addFile()" type="button" class="px-4 rounded-full">
-              <img src="/icons/plus.svg" alt="Add" class="w-10 h-10" />
-            </button>
-          </div>
+          <MemberListEditor />
+          <FileListEditor />
 
           <div class="w-[60%]">
             <TextEditor v-model="description" />
@@ -111,16 +65,15 @@
 <script lang="ts" setup>
 import { addDoc, collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import { useFileList, useMemberList } from "~/composables/useStates";
 
 const name = ref("");
 const description = ref("");
 const icon = ref("");
 const start = ref(0);
 const end = ref(0);
-const files: Ref<GSFile[]> = ref([]);
-const fileName = ref("");
-const fileType = ref("");
-const fileLink = ref("");
+const files = useFileList();
+const members = useMemberList();
 const loading = ref(false);
 
 function submit(event: Event) {

@@ -52,6 +52,7 @@
             />
           </div>
 
+          <MemberListEditor />
           <FileListEditor />
 
           <div class="w-[60%]">
@@ -67,7 +68,7 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
-import { useFileList } from "~/composables/useStates";
+import { useFileList, useMemberList } from "~/composables/useStates";
 import type { Theme } from "~/composables/useFirestore";
 
 const id = useId();
@@ -78,6 +79,7 @@ const icon = ref("");
 const start = ref(0);
 const end = ref(0);
 const files = useFileList();
+const members = useMemberList();
 
 function fetch() {
   getDoc(doc(collection(useFirestore(), "themes"), id))
@@ -99,6 +101,7 @@ function fetch() {
       start.value = data.start;
       end.value = data.end;
       files.value = data.files;
+      members.value = data.members;
     })
     .catch(alert);
 }
@@ -114,6 +117,7 @@ function submit(event: Event) {
     start: start.value,
     end: end.value,
     files: files.value,
+    members: members.value,
   })
     .then(fetch)
     .catch(alert);

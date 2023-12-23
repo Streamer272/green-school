@@ -40,6 +40,10 @@
               </div>
             </div>
 
+            <p class="font-source font-semibold text-lg text-light">
+              By {{ theme.members.join(", ") }}
+            </p>
+
             <p
               v-html="theme.description"
               class="font-source text-lg text-light"
