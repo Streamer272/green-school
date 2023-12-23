@@ -10,7 +10,8 @@
         <Loading :property="posts">
           <div
             v-for="(post, index) in posts"
-            class="flex items-start justify-start flex-col w-[40vw] relative"
+            :data-hidden="post.hidden"
+            class="flex items-start justify-start flex-col w-[40vw] relative data-[hidden=true]:opacity-75"
           >
             <p class="font-source font-bold text-xl text-light">
               {{ post.title }} ({{ post.author }})
@@ -23,8 +24,17 @@
               v-html="processText(post.content)"
               class="font-source text-lg text-light"
             />
-            <div class="absolute top-2 right-2">
-              <NuxtLink :to="`/admin/blog/edit/${post.id}`">
+            <div
+              class="absolute top-2 right-2 flex items-center justify-center gap-x-2"
+            >
+              <button @click="() => copyUrl(index)" class="flex-shrink-0">
+                <img src="/icons/copy.svg" alt="Copy" class="w-8 h-8" />
+              </button>
+
+              <NuxtLink
+                :to="`/admin/blog/edit/${post.id}`"
+                class="flex-shrink-0"
+              >
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </NuxtLink>
             </div>
@@ -51,8 +61,14 @@
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
 import { processText } from "~/composables/useText";
+import type { Post } from "~/composables/useFirestore";
 
 const posts = ref<Post[] | undefined>(undefined);
+
+function copyUrl(index: number) {
+  const post = posts.value![index];
+  navigator.clipboard.writeText(`${window.location.origin}/blog/${post.id}`);
+}
 
 onMounted(() => {
   getDocs(collection(useFirestore(), "posts")).then((snapshot) => {

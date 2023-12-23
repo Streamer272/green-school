@@ -14,6 +14,7 @@ export interface Post {
   date: string;
   author: string;
   status: "private" | "public";
+  hidden: boolean;
 }
 
 export interface Theme {

@@ -40,8 +40,9 @@
 
 <script lang="ts" setup>
 import { processText } from "~/composables/useText";
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import type { Post } from "~/composables/useFirestore";
 
 const posts = useState<Post[] | undefined>("posts", () => undefined);
 
@@ -55,7 +56,9 @@ function getArticles(posts: Post[], index: number): Post[] {
 }
 
 onMounted(() => {
-  getDocs(collection(useFirestore(), "posts")).then((snapshot) => {
+  getDocs(
+    query(collection(useFirestore(), "posts"), where("hidden", "==", false)),
+  ).then((snapshot) => {
     const array: Post[] = [];
     snapshot.forEach((item) => {
       array.push({
