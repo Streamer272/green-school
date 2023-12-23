@@ -31,6 +31,8 @@
             </button>
           </div>
 
+          <FileListEditor />
+
           <div class="w-[60%]">
             <TextEditor v-model="notes" />
           </div>
@@ -46,6 +48,7 @@ import { addDoc, collection } from "@firebase/firestore";
 const date = ref("");
 const present = ref("");
 const notes = ref("");
+const files = useFileList();
 const loading = ref(false);
 
 function submit(event: Event) {
@@ -56,6 +59,7 @@ function submit(event: Event) {
     date: date.value,
     present: present.value,
     notes: notes.value,
+    files: files.value,
   })
     .then(() => {
       navigateTo("/admin/meetings");

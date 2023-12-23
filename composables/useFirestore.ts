@@ -5,6 +5,7 @@ export interface Meeting {
   date: string;
   present: string;
   notes: string;
+  files: GSFile[];
 }
 
 export interface Post {

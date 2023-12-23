@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 // TODO: add deleting to things
 // TODO: refactor timestamps
-// TODO: add files to meetings
+// TODO: make meetings public
 
 useAuthGuard(true);
 </script>

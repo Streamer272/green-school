@@ -28,6 +28,8 @@
             </button>
           </div>
 
+          <FileListEditor />
+
           <div class="w-[60%]">
             <TextEditor v-model="notes" />
           </div>
@@ -42,12 +44,14 @@ import { useId } from "~/composables/useURL";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import type { Meeting } from "~/composables/useFirestore";
 
 const id = useId();
 const meeting = ref<Meeting | undefined>(undefined);
 const date = ref("");
 const present = ref("");
 const notes = ref("");
+const files = useFileList();
 
 function fetch() {
   getDoc(doc(collection(useFirestore(), "meetings"), id))
@@ -66,6 +70,7 @@ function fetch() {
       date.value = data.date;
       present.value = data.present;
       notes.value = data.notes;
+      files.value = data.files;
     })
     .catch(alert);
 }
@@ -78,6 +83,7 @@ function submit(event: Event) {
     date: date.value,
     present: present.value,
     notes: notes.value,
+    files: files.value,
   })
     .then(fetch)
     .catch(alert);
