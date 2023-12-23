@@ -7,13 +7,7 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@nuxtjs/tailwindcss"],
-  link: [
-    {
-      rel: "icon",
-      type: "image/x-icon",
-      href: "/favicon.ico",
-    },
-  ],
+
   devtools: {
     enabled: true,
   },

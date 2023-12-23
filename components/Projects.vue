@@ -32,7 +32,7 @@
             {{ project.name }}
           </p>
           <p class="font-source font-semibold text-lg text-disc">
-            {{ project.start }}
+            {{ GSDate.pretty(project.start) }}
           </p>
           <div class="flex-grow" />
 

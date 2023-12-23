@@ -53,6 +53,7 @@
 
     <input
       v-model="date"
+      type="date"
       placeholder="File date..."
       class="rounded-full py-2 px-4 bg-light text-dark w-40"
     />
@@ -78,7 +79,7 @@ function addFile() {
     name: name.value,
     type: type.value,
     link: link.value,
-    date: date.value,
+    date: GSDate.fromString(date.value),
     priority: priority.value,
   });
 
