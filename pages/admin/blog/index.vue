@@ -37,6 +37,10 @@
               >
                 <img src="/icons/open.svg" alt="Open" class="w-8 h-8" />
               </NuxtLink>
+
+              <button @click="() => deletePost(index)" class="flex-shrink-0">
+                <img src="/icons/delete.svg" alt="Delete" class="w-8 h-8" />
+              </button>
             </div>
 
             <div
@@ -59,9 +63,10 @@
 </template>
 
 <script lang="ts" setup>
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { processText } from "~/composables/useText";
 import type { Post } from "~/composables/useFirestore";
+import { doc } from "firebase/firestore";
 
 const posts = ref<Post[] | undefined>(undefined);
 
@@ -70,7 +75,16 @@ function copyUrl(index: number) {
   navigator.clipboard.writeText(`${window.location.origin}/blog/${post.id}`);
 }
 
-onMounted(() => {
+function deletePost(index: number) {
+  const post = posts.value![index];
+  if (!confirm("Are you sure you want to delete this post?")) return;
+  posts.value = undefined;
+  deleteDoc(doc(collection(useFirestore(), "posts"), post.id))
+    .then(fetch)
+    .catch(alert);
+}
+
+function fetch() {
   getDocs(collection(useFirestore(), "posts")).then((snapshot) => {
     const array: Post[] = [];
     snapshot.forEach((item) => {
@@ -86,6 +100,10 @@ onMounted(() => {
     });
     posts.value = array;
   });
+}
+
+onMounted(() => {
+  fetch();
 });
 
 useAuthGuard(true);
