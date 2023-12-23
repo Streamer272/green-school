@@ -11,9 +11,11 @@
 </template>
 
 <script lang="ts" setup>
-// TODO: add deleting to things
 // TODO: refactor timestamps
 // TODO: make meetings public
+// TODO: add members to projects
+// TODO: refactor blog index
+// TODO: add contact info for the green school lead team
 
 useAuthGuard(true);
 </script>
