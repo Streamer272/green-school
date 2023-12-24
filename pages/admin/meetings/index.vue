@@ -15,9 +15,7 @@
             <p class="font-source font-semibold text-lg text-light">
               Date: {{ GSDate.pretty(meeting.date) }}
             </p>
-            <p class="font-source font-semibold text-lg text-light">
-              Present: {{ meeting.present }}
-            </p>
+            <MemberList prefix="Present: " :members="meeting.present" />
 
             <p
               v-html="processText(meeting.notes)"
@@ -65,7 +63,7 @@
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
-import { GSDate, type Meeting } from "~/composables/useFirestore";
+import { type Meeting } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
 const meetings = ref<Meeting[] | undefined>(undefined);

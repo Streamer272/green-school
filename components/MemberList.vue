@@ -4,7 +4,7 @@
     :data-color="getColor()"
     class="font-source font-semibold data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
   >
-    By {{ membersString }}
+    {{ prefix ?? "By" }} {{ membersString }}
   </p>
 </template>
 
@@ -15,6 +15,7 @@ import type { GSMember } from "~/composables/useGSTypes";
 const props = defineProps<{
   size?: "sm" | "md" | "lg";
   color?: "strong" | "weak";
+  prefix?: string;
   members: GSMember[];
 }>();
 

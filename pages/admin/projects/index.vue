@@ -21,9 +21,7 @@
               class="font-source text-lg text-light"
             />
 
-            <p class="font-source text-lg text-light mt-2">
-              By {{ project.members.join(", ") }}
-            </p>
+            <MemberList :members="project.members" />
             <FileList :files="project.files" />
 
             <div
@@ -60,7 +58,7 @@
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
-import { GSDate, type Project } from "~/composables/useFirestore";
+import { type Project } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
 const projects = ref<Project[] | undefined>(undefined);

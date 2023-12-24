@@ -87,6 +87,7 @@ function submit(event: Event) {
     start: start.value,
     end: end.value,
     files: files.value,
+    members: members.value,
   })
     .then(() => {
       navigateTo("/admin/timeline");
@@ -95,19 +96,6 @@ function submit(event: Event) {
       loading.value = false;
       alert(err);
     });
-}
-
-function addFile() {
-  const array = files.value;
-  array.push({
-    name: fileName.value,
-    type: fileType.value,
-    link: fileLink.value,
-  });
-
-  fileName.value = "";
-  fileType.value = "";
-  fileLink.value = "";
 }
 
 useAuthGuard(true);
