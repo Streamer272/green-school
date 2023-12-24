@@ -60,23 +60,12 @@
           <p class="font-source font-semibold text-unim">
             By {{ project.members.join(", ") }}
           </p>
-          <div
-            v-if="project.files.length > 0"
-            class="w-full flex items-start flex-col gap-x-1"
-          >
-            <div
-              v-for="file in project.files"
-              class="flex items-center justify-center"
-            >
-              <p class="font-source font-semibold text-unim">
-                {{ file.name }} ({{ file.type }})
-              </p>
-
-              <NuxtLink :to="file.link" class="ml-2">
-                <img src="/icons/open.svg" alt="Open" />
-              </NuxtLink>
-            </div>
-          </div>
+          <FileList
+            dir="vertical"
+            size="sm"
+            color="weak"
+            :files="project.files"
+          />
         </div>
       </div>
     </Loading>

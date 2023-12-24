@@ -37,6 +37,7 @@ import { useFirestore } from "~/composables/useFirebase";
 import { doc, getDoc } from "firebase/firestore";
 import type { Theme } from "~/composables/useFirestore";
 
+// TODO: finish
 const id = useId();
 const theme = ref<Theme | undefined>(undefined);
 

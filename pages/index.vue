@@ -82,32 +82,7 @@
           </div>
 
           <!-- files -->
-          <div
-            class="flex items-center justify-center flex-col gap-y-1 basis-[50%]"
-          >
-            <div class="flex items-center justify-center w-56">
-              <p class="font-source font-bold text-lg text-light">EAP &nbsp;</p>
-              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
-              <div class="flex-grow" />
-              <img src="/icons/download.svg" alt="Download" />
-            </div>
-            <div class="flex items-center justify-center w-56">
-              <p class="font-source font-bold text-lg text-light">
-                Report &nbsp;
-              </p>
-              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
-              <div class="flex-grow" />
-              <img src="/icons/download.svg" alt="Download" />
-            </div>
-            <div class="flex items-center justify-center w-56">
-              <p class="font-source font-bold text-lg text-light">
-                Members &nbsp;
-              </p>
-              <p class="font-source font-bold text-lg text-disc">(PDF)</p>
-              <div class="flex-grow" />
-              <img src="/icons/download.svg" alt="Download" />
-            </div>
-          </div>
+          <FileList dir="vertical" :files="getFiles()" class="basis-[50%]" />
         </div>
       </Loading>
     </main>
@@ -166,6 +141,7 @@
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import type { GSFile } from "~/composables/useFirestore";
 
 const animationDueChange = ref(false);
 const currentTheme = ref(-1);
@@ -198,6 +174,11 @@ function changeTheme(index: number) {
 function getValue(value: "name" | "description" | "id"): string {
   if (currentTheme.value === -1 || themes.value === undefined) return "";
   return themes.value[currentTheme.value][value];
+}
+
+function getFiles(): GSFile[] {
+  if (!themes.value || currentTheme.value === -1) return [];
+  return themes.value[currentTheme.value].files;
 }
 
 function isCurrentlyHappening(): boolean {
