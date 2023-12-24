@@ -12,11 +12,12 @@ export function useId(id?: string | string[]): string {
   return typeof id === "object" ? id[0] : id;
 }
 
+// the more, the merrier
 export function usePrioritySort() {
   return (a: { priority?: number }, b: { priority?: number }) => {
     if (a.priority && !b.priority) return -1;
     else if (!a.priority && b.priority) return 1;
-    else return (a.priority ?? 0) - (b.priority ?? 0);
+    else return (b.priority ?? 0) - (a.priority ?? 0);
   };
 }
 

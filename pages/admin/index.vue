@@ -13,10 +13,10 @@
 <script lang="ts" setup>
 // TODO: make meetings public
 // TODO: refactor blog index
-// TODO: add contact info for the green school lead team
 // TODO: figure out how to end projects
 // TODO: fix overflows
 // TODO: fix client firebase errors
+// TODO: add keys to v-for's
 
 useAuthGuard(true);
 </script>

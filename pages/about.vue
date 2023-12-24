@@ -25,17 +25,32 @@
           >
             <div
               :data-odd="index % 2 === 1"
-              class="flex items-start justify-center w-[25vw] gap-x-4 data-[odd=true]:flex-row-reverse"
+              class="flex items-start justify-center w-[30vw] h-80 gap-x-4 data-[odd=true]:flex-row-reverse"
             >
-              <img :src="fella.picture" alt="Picture" class="h-80" />
+              <img
+                :src="fella.picture"
+                alt="Picture"
+                class="h-full basis-[40%] rounded-2xl"
+              />
 
-              <div class="flex items-start justify-start flex-col">
+              <div
+                class="flex items-start justify-start flex-col basis-[60%] h-full py-2"
+              >
                 <p class="font-source font-bold text-xl text-light">
-                  {{ fella.name }}
+                  {{ fella.name }}{{ fella.role ? ` - ${fella.role}` : "" }}
                 </p>
 
                 <p class="font-source font-semibold text-unim">
                   {{ fella.lore }}
+                </p>
+
+                <div class="flex-grow" />
+
+                <p
+                  v-if="fella.contact"
+                  class="font-source font-semibold text-unim"
+                >
+                  {{ fella.contact }}
                 </p>
               </div>
             </div>
@@ -58,6 +73,7 @@ import { useMemberSort } from "~/composables/useHelp";
 const fellas = ref<Fella[] | undefined>(undefined);
 const sortedFellas = computed(() => {
   if (!fellas.value) return undefined;
+  console.log(fellas.value);
   return fellas.value.sort(useMemberSort());
 });
 
@@ -70,7 +86,7 @@ onMounted(() => {
         name: data.name,
         picture: data.picture,
         lore: data.lore,
-        role: data.lore,
+        role: data.role,
         contact: data.contact,
         priority: data.priority,
       };
