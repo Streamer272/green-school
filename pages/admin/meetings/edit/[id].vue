@@ -45,11 +45,12 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import type { Meeting } from "~/composables/useFirestore";
+import { useMemberList } from "~/composables/useStates";
 
 const id = useId();
 const meeting = ref<Meeting | undefined>(undefined);
 const date = ref("");
-const present = ref("");
+const present = useMemberList();
 const notes = ref("");
 const files = useFileList();
 

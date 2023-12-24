@@ -41,6 +41,14 @@
     </NuxtLink>
 
     <NuxtLink
+      to="/admin/fellas"
+      :data-current="current === 'fellas'"
+      class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
+    >
+      Fellas
+    </NuxtLink>
+
+    <NuxtLink
       to="/admin/files"
       :data-current="current === 'files'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
@@ -70,7 +78,14 @@
 
 <script lang="ts" setup>
 defineProps<{
-  current: "index" | "blog" | "timeline" | "projects" | "meetings" | "files";
+  current:
+    | "index"
+    | "blog"
+    | "timeline"
+    | "projects"
+    | "meetings"
+    | "fellas"
+    | "files";
 }>();
 
 const open = useInfo();

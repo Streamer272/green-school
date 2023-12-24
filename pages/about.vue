@@ -27,11 +27,7 @@
               :data-odd="index % 2 === 1"
               class="flex items-start justify-center w-[25vw] gap-x-4 data-[odd=true]:flex-row-reverse"
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Outdoors-man-portrait_%28cropped%29.jpg/1200px-Outdoors-man-portrait_%28cropped%29.jpg"
-                alt="Man"
-                class="h-80"
-              />
+              <img :src="fella.picture" alt="Picture" class="h-80" />
 
               <div class="flex items-start justify-start flex-col">
                 <p class="font-source font-bold text-xl text-light">

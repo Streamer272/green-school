@@ -7,7 +7,9 @@
     </div>
   </div>
 
-  <slot />
+  <div class="w-screen h-screen">
+    <slot />
+  </div>
 </template>
 
 <style lang="scss" scoped>

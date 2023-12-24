@@ -1,5 +1,10 @@
 import { getApp, initializeApp } from "firebase/app";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  initializeFirestore,
+} from "firebase/firestore";
 import { getAuth, type User } from "@firebase/auth";
 import { getStorage } from "@firebase/storage";
 
@@ -13,7 +18,10 @@ const FIREBASE_CONFIG = {
 };
 
 export function initFirebase() {
-  initializeApp(FIREBASE_CONFIG);
+  const app = initializeApp(FIREBASE_CONFIG);
+  initializeFirestore(app, {
+    ignoreUndefinedProperties: true,
+  });
 }
 
 export function useFirebase() {
