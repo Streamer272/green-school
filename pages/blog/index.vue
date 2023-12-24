@@ -67,8 +67,8 @@ onMounted(() => {
       } as Post);
     });
     array.sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+      const dateA = GSDate.as(a.date);
+      const dateB = GSDate.as(b.date);
       return dateB.getTime() - dateA.getTime();
     });
     posts.value = array;

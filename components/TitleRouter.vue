@@ -16,12 +16,20 @@
       >
         Blog
       </NuxtLink>
+
+      <NuxtLink
+        href="/about"
+        :data-current="route === 'about'"
+        class="text-unim font-bold font-source text-xl px-4 py-2 data-[current=true]:bg-ghetto rounded-2xl"
+      >
+        About us
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 defineProps<{
-  route: "home" | "blog";
+  route: "home" | "blog" | "about";
 }>();
 </script>

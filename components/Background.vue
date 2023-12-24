@@ -2,18 +2,22 @@
   <div class="custom-background-layer custom-layer-image">
     <div class="custom-background-layer custom-layer-one">
       <div class="custom-background-layer custom-layer-two">
-        <div class="custom-background-layer custom-layer-three">
-          <slot />
-        </div>
+        <div class="custom-background-layer custom-layer-three" />
       </div>
     </div>
   </div>
+
+  <slot />
 </template>
 
 <style lang="scss" scoped>
 .custom-background-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: -10;
 }
 
 .custom-layer-image {
@@ -34,3 +38,4 @@
   background: linear-gradient(rgb(16, 16, 16, 0.6), rgb(16, 16, 16, 0.25));
 }
 </style>
+<script setup lang="ts"></script>

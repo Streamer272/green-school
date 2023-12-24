@@ -26,7 +26,7 @@
         <div
           type="button"
           @click="changeCurrentProject(index)"
-          class="flex items-center justify-start gap-x-4 py-4 px-6 bg-dark rounded-[1.25rem] w-full"
+          class="flex items-center justify-start gap-x-4 py-4 px-6 bg-dark rounded-[1.25rem] w-full cursor-pointer"
         >
           <p class="font-source font-bold text-xl text-white">
             {{ project.name }}
