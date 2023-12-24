@@ -1,4 +1,4 @@
-import type { GSFile } from "~/composables/useFirestore";
+import type { GSFile, GSMember } from "~/composables/useGSTypes";
 
 export function useInfo() {
   return useState("info", () => false);
@@ -13,5 +13,5 @@ export function useFileList() {
 }
 
 export function useMemberList() {
-  return useState<string[]>("memberList", () => []);
+  return useState<GSMember[]>("memberList", () => []);
 }

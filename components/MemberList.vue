@@ -1,14 +1,20 @@
 <template>
-  <p class="font-source font-semibold text-unim">
-    By {{ sortedMembers.join(", ") }}
+  <p
+    :data-size="getSize()"
+    :data-color="getColor()"
+    class="font-source font-semibold data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+  >
+    By {{ membersString }}
   </p>
 </template>
 
 <script lang="ts" setup>
 import type { GSMember } from "~/composables/useGSTypes";
-// TODO: where show role
+// TODO: where contact
 
 const props = defineProps<{
+  size?: "sm" | "md" | "lg";
+  color?: "strong" | "weak";
   members: GSMember[];
 }>();
 
@@ -27,4 +33,18 @@ const sortedMembers = computed(() => {
     else return a.name.localeCompare(b.name);
   });
 });
+
+const membersString = computed(() => {
+  return sortedMembers.value
+    .map((member) => member.name + (member.role ? ` (${member.role})` : ""))
+    .join(", ");
+});
+
+function getSize() {
+  return props.size ?? "md";
+}
+
+function getColor() {
+  return props.color ?? "strong";
+}
 </script>

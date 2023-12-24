@@ -21,10 +21,7 @@
             </div>
 
             <FileList :files="theme.files" />
-
-            <p class="font-source font-semibold text-lg text-light">
-              By {{ theme.members.join(", ") }}
-            </p>
+            <MemberList :members="theme.members" />
 
             <p
               v-html="theme.description"

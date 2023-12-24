@@ -18,6 +18,8 @@
 // TODO: figure out how to structure members
 // TODO: refactor meeting.present to be a member list
 // TODO: make a member list component
+// TODO: show members in themes
+// TODO: fix private blogs
 
 useAuthGuard(true);
 </script>

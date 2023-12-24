@@ -8,7 +8,9 @@
       class="flex items-center justify-center"
     >
       <p class="font-source font-semibold text-lg text-light">
-        {{ member }}
+        {{ member.name }} ({{ member.role || "[role]" }},
+        {{ member.priority || "[priority]" }},
+        {{ member.contact || "[contact]" }})
       </p>
 
       <button @click="() => removeMember(index)" class="ml-2">
@@ -21,14 +23,35 @@
 
   <div class="w-full flex items-center justify-center gap-x-4">
     <input
-      v-model="member"
-      placeholder="Member..."
-      class="rounded-full p-2 px-4 bg-light text-dark w-80"
+      v-model="name"
+      placeholder="Member name..."
+      class="rounded-full py-2 px-4 bg-light text-dark w-80"
+    />
+
+    <input
+      v-model="priority"
+      type="number"
+      placeholder="Member priority..."
+      class="rounded-full py-2 px-4 bg-light text-dark w-40"
     />
 
     <button @click="addMember()" type="button">
       <img src="/icons/plus.svg" alt="Add" class="w-10 h-10" />
     </button>
+  </div>
+
+  <div class="w-full flex items-center justify-center gap-x-4">
+    <input
+      v-model="role"
+      placeholder="Member role..."
+      class="rounded-full py-2 px-4 bg-light text-dark w-80"
+    />
+
+    <input
+      v-model="contact"
+      placeholder="Member contact..."
+      class="rounded-full py-2 px-4 bg-light text-dark w-80"
+    />
   </div>
 </template>
 
@@ -36,11 +59,22 @@
 import { useMemberList } from "~/composables/useStates";
 
 const members = useMemberList();
-const member = ref("");
+const name = ref("");
+const role = ref("");
+const contact = ref("");
+const priority = ref(0);
 
 function addMember() {
-  members.value.push(member.value);
-  member.value = "";
+  members.value.push({
+    name: name.value,
+    role: role.value || undefined,
+    contact: contact.value || undefined,
+    priority: priority.value || undefined,
+  });
+  name.value = "";
+  role.value = "";
+  contact.value = "";
+  priority.value = 0;
 }
 
 function removeMember(index: number) {

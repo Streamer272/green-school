@@ -57,7 +57,7 @@
             class="w-full bg-gray h-[0.125rem] my-1"
           />
 
-          <MemberList :members="project.members" />
+          <MemberList size="sm" color="weak" :members="project.members" />
           <FileList
             dir="vertical"
             size="sm"

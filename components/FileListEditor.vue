@@ -8,7 +8,8 @@
       class="flex items-center justify-center"
     >
       <p class="font-source font-semibold text-lg text-light">
-        {{ file.name }} ({{ file.type }})
+        {{ file.name }} ({{ file.type }}, {{ file.priority || "[priority]" }},
+        {{ file.date || "[date]" }})
       </p>
 
       <NuxtLink :to="file.link" class="ml-2">
@@ -79,8 +80,8 @@ function addFile() {
     name: name.value,
     type: type.value,
     link: link.value,
-    date: GSDate.to(date.value),
-    priority: priority.value,
+    date: date.value ? GSDate.to(date.value) : undefined,
+    priority: priority.value || undefined,
   });
 
   name.value = "";
