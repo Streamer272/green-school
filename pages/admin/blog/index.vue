@@ -64,7 +64,6 @@
 
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
-import { processText } from "~/composables/useText";
 import { type Post } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 

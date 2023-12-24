@@ -34,5 +34,9 @@ service cloud.firestore {
     match /accounts/{docId} {
       allow read: if request.auth != null && request.auth.uid == docId;
     }
+
+    match /fellas/{docId} {
+      allow read: if true;
+    }
   }
 }

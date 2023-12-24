@@ -35,6 +35,7 @@
 
 <script lang="ts" setup>
 import type { GSFile } from "~/composables/useGSTypes";
+import { usePrioritySort } from "~/composables/useHelp";
 
 const props = defineProps<{
   dir?: "horizontal" | "vertical";
@@ -44,11 +45,7 @@ const props = defineProps<{
 }>();
 
 const sortedFiles = computed(() => {
-  return props.files.sort((a, b) => {
-    if (a.priority && !b.priority) return -1;
-    else if (!a.priority && b.priority) return 1;
-    else return (a.priority ?? 0) - (b.priority ?? 0);
-  });
+  return props.files.sort(usePrioritySort());
 });
 
 function getDir() {

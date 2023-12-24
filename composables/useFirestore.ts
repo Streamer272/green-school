@@ -37,3 +37,9 @@ export interface Project {
   files: GSFile[];
   members: GSMember[];
 }
+
+export interface Fella extends GSMember {
+  id: string;
+  picture: string;
+  lore: string;
+}

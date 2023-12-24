@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useId } from "~/composables/useURL";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";

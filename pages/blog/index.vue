@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts" setup>
-import { processText } from "~/composables/useText";
 import { collection, getDocs, query, where } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import type { Post } from "~/composables/useFirestore";

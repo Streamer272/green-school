@@ -17,34 +17,36 @@
         </p>
 
         <!-- row wrapper -->
-        <div
-          v-for="(member, index) in members"
-          :data-odd="index % 2 === 1"
-          class="flex items-center justify-start w-full data-[odd=true]:flex-row-reverse"
-        >
+        <Loading :property="sortedFellas" :fill="true">
           <div
+            v-for="(fella, index) in sortedFellas"
             :data-odd="index % 2 === 1"
-            class="flex items-start justify-center w-[25vw] gap-x-4 data-[odd=true]:flex-row-reverse"
+            class="flex items-center justify-start w-full data-[odd=true]:flex-row-reverse"
           >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Outdoors-man-portrait_%28cropped%29.jpg/1200px-Outdoors-man-portrait_%28cropped%29.jpg"
-              alt="Man"
-              class="h-80"
-            />
+            <div
+              :data-odd="index % 2 === 1"
+              class="flex items-start justify-center w-[25vw] gap-x-4 data-[odd=true]:flex-row-reverse"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Outdoors-man-portrait_%28cropped%29.jpg/1200px-Outdoors-man-portrait_%28cropped%29.jpg"
+                alt="Man"
+                class="h-80"
+              />
 
-            <div class="flex items-start justify-start flex-col">
-              <p class="font-source font-bold text-xl text-light">
-                {{ member.name }}
-              </p>
+              <div class="flex items-start justify-start flex-col">
+                <p class="font-source font-bold text-xl text-light">
+                  {{ fella.name }}
+                </p>
 
-              <p class="font-source font-semibold text-unim">
-                {{ member.lore }}
-              </p>
+                <p class="font-source font-semibold text-unim">
+                  {{ fella.lore }}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="h-36" />
+          <div class="h-36" />
+        </Loading>
       </div>
     </main>
 
@@ -53,26 +55,30 @@
 </template>
 
 <script lang="ts" setup>
-const members = [
-  {
-    name: "Daniel Svitan",
-    lore: "Daniel is a software engineer with a passion for education. He is co-founder of the Green School and is responsible for the technical development of the project.",
-  },
-  {
-    name: "Janko Ivicic",
-    lore: "Janko is a computer scientist with a focus on artificial intelligence. He is co-founder of the Green School and is responsible for the research and development of the project.",
-  },
-  {
-    name: "Veronika Onderikova",
-    lore: "Veronika is a product designer with a passion for sustainability. She is co-founder of the Green School and is responsible for the user experience and design of the project.",
-  },
-  {
-    name: "Richard Sepsi",
-    lore: "Richard is a business developer with a passion for education. He is co-founder of the Green School and is responsible for the business development and marketing of the project.",
-  },
-  {
-    name: "John Doe",
-    lore: "John is a student with a passion for learning. He is a member of the Green School and is helping to develop the project.",
-  },
-];
+import type { Fella } from "~/composables/useFirestore";
+import { collection, getDocs } from "@firebase/firestore";
+import { useMemberSort } from "~/composables/useHelp";
+
+const fellas = ref<Fella[] | undefined>(undefined);
+const sortedFellas = computed(() => {
+  if (!fellas.value) return undefined;
+  return fellas.value.sort(useMemberSort());
+});
+
+onMounted(() => {
+  getDocs(collection(useFirestore(), "fellas")).then((snapshot) => {
+    fellas.value = snapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        name: data.name,
+        picture: data.picture,
+        lore: data.lore,
+        role: data.lore,
+        contact: data.contact,
+        priority: data.priority,
+      };
+    });
+  });
+});
 </script>
