@@ -1,17 +1,60 @@
 <template>
-  <p
-    :data-size="getSize()"
-    :data-color="getColor()"
-    class="font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
-  >
-    {{ prefix ?? "By" }} {{ membersString }}
-  </p>
+  <div>
+    <p
+        :data-size="getSize()"
+        :data-color="getColor()"
+        class="relative inline font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+    >
+      {{ prefix ?? "By" }}&nbsp;
+    </p>
+
+    <p
+        v-for="(member, index) in sortedMembers"
+        :data-size="getSize()"
+        :data-color="getColor()"
+        class="tool overflow-visible inline font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+    >
+      {{ member.name }}{{
+        member.role ? ` (${member.role})` : ""
+      }}{{ index !== members.length - 1 ? "," : "" }}&nbsp;
+
+      <p
+          v-if="member.contact"
+          :data-size="getSize()"
+          :data-color="getColor()"
+          class="tip w-48 h-fit bg-dark rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+      >
+        {{ member.contact }}
+      </p>
+    </p>
+  </div>
 </template>
 
+<style lang="scss" scoped>
+.tool {
+  position: relative;
+
+  .tip {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:hover {
+    .tip {
+      opacity: 100;
+      pointer-events: all;
+    }
+  }
+}
+</style>
+
 <script lang="ts" setup>
-import type { GSMember } from "~/composables/useGSTypes";
-import { useMemberSort, usePrioritySort } from "~/composables/useHelp";
-// TODO: where contact
+import type {GSMember} from "~/composables/useGSTypes";
+import {useMemberSort} from "~/composables/useHelp";
 
 const props = defineProps<{
   size?: "sm" | "md" | "lg";
@@ -22,12 +65,6 @@ const props = defineProps<{
 
 const sortedMembers = computed(() => {
   return props.members.sort(useMemberSort());
-});
-
-const membersString = computed(() => {
-  return sortedMembers.value
-    .map((member) => member.name + (member.role ? ` (${member.role})` : ""))
-    .join(", ");
 });
 
 function getSize() {

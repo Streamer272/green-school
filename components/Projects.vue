@@ -46,7 +46,7 @@
 
         <div
           :data-open="currentProject === index"
-          class="flex flex-col m-4 gap-y-2 data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen overflow-hidden transition-all"
+          class="flex flex-col m-4 gap-y-2 data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen transition-all"
         >
           <p
             v-html="project.description"
