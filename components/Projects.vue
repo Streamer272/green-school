@@ -57,9 +57,7 @@
             class="w-full bg-gray h-[0.125rem] my-1"
           />
 
-          <p class="font-source font-semibold text-unim">
-            By {{ project.members.join(", ") }}
-          </p>
+          <MemberList :members="project.members" />
           <FileList
             dir="vertical"
             size="sm"

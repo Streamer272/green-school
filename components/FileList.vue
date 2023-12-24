@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { GSFile } from "~/composables/useFirestore";
+import type { GSFile } from "~/composables/useGSTypes";
 
 const props = defineProps<{
   dir?: "horizontal" | "vertical";
