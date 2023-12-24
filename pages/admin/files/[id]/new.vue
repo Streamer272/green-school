@@ -46,7 +46,6 @@ const id = useId();
 
 function selectFile(event: Event) {
   file.value = (event.target as HTMLInputElement).files?.item(0) ?? null;
-  console.log(file.value);
 }
 
 function submit(event: Event) {

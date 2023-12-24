@@ -39,7 +39,6 @@ export interface Account {
 
 export function useUser() {
   return useState<Account | undefined>("user", () => {
-    console.log("initing");
     return undefined;
   });
 }
