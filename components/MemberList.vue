@@ -2,7 +2,7 @@
   <p
     :data-size="getSize()"
     :data-color="getColor()"
-    class="font-source font-semibold data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+    class="font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
   >
     {{ prefix ?? "By" }} {{ membersString }}
   </p>
@@ -14,7 +14,7 @@ import type { GSMember } from "~/composables/useGSTypes";
 
 const props = defineProps<{
   size?: "sm" | "md" | "lg";
-  color?: "strong" | "weak";
+  color?: "limp" | "weak" | "strong";
   prefix?: string;
   members: GSMember[];
 }>();

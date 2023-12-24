@@ -60,7 +60,7 @@
           <div class="flex flex-col justify-start items-start basis-[50%]">
             <div class="flex items-center justify-start gap-x-3">
               <p class="font-source font-semibold text-3xl text-caucasian">
-                {{ getValue("name") }}
+                {{ theme.name }}
               </p>
             </div>
 
@@ -72,15 +72,17 @@
             </p>
 
             <p
-              v-html="getValue('description')"
+              v-html="theme.description"
               class="font-source font-semibold text-lg text-unim mt-6"
             />
+
+            <MemberList color="limp" :members="theme.members" class="mt-4" />
           </div>
 
           <!-- files -->
           <FileList
             dir="vertical"
-            :files="getFiles()"
+            :files="theme.files"
             size="lg"
             class="basis-[50%]"
           />
@@ -142,12 +144,26 @@
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
-import type { GSFile } from "~/composables/useFirestore";
+import type { Theme } from "~/composables/useFirestore";
 
 const animationDueChange = ref(false);
 const currentTheme = ref(-1);
 const themes = useState<Theme[] | undefined>("themes", () => undefined);
 const currentYear = new Date().getFullYear();
+
+const theme = computed(() => {
+  if (themes.value === undefined || currentTheme.value === -1)
+    return {
+      name: "",
+      description: "",
+      icon: "",
+      start: 0,
+      end: 0,
+      members: [],
+      files: [],
+    };
+  else return themes.value[currentTheme.value];
+});
 
 interface Year {
   year: number;
@@ -170,16 +186,6 @@ function changeTheme(index: number) {
 
     animationDueChange.value = false;
   }, 250);
-}
-
-function getValue(value: "name" | "description"): string {
-  if (currentTheme.value === -1 || themes.value === undefined) return "";
-  return themes.value[currentTheme.value][value];
-}
-
-function getFiles(): GSFile[] {
-  if (!themes.value || currentTheme.value === -1) return [];
-  return themes.value[currentTheme.value].files;
 }
 
 function isCurrentlyHappening(): boolean {

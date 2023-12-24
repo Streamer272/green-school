@@ -15,7 +15,6 @@
 // TODO: refactor blog index
 // TODO: add contact info for the green school lead team
 // TODO: figure out how to end projects
-// TODO: show members in themes
 // TODO: fix overflows
 // TODO: fix client firebase errors
 
