@@ -82,7 +82,12 @@
           </div>
 
           <!-- files -->
-          <FileList dir="vertical" :files="getFiles()" class="basis-[50%]" />
+          <FileList
+            dir="vertical"
+            :files="getFiles()"
+            size="lg"
+            class="basis-[50%]"
+          />
         </div>
       </Loading>
     </main>

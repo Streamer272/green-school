@@ -5,7 +5,7 @@
     class="w-full flex items-start data-[dir=vertical]:flex-col gap-x-1"
   >
     <div
-      v-for="(file, index) in files"
+      v-for="(file, index) in sortedFiles"
       class="flex items-center justify-center"
     >
       <p
@@ -42,6 +42,14 @@ const props = defineProps<{
   color?: "strong" | "weak";
   files: GSFile[];
 }>();
+
+const sortedFiles = computed(() => {
+  return props.files.sort((a, b) => {
+    if (a.priority && !b.priority) return -1;
+    else if (!a.priority && b.priority) return 1;
+    else return (a.priority ?? 0) - (b.priority ?? 0);
+  });
+});
 
 function getDir() {
   return props.dir ?? "horizontal";

@@ -16,8 +16,8 @@
 // TODO: add contact info for the green school lead team
 // TODO: figure out how to end projects
 // TODO: figure out how to structure members
-// TODO: make a consistent file list component (with implemented priority)
 // TODO: refactor meeting.present to be a string[]
+// TODO: make a member list component
 
 useAuthGuard(true);
 </script>
