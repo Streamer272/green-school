@@ -4,11 +4,14 @@
     :data-dir="getDir()"
     class="w-full flex items-start data-[dir=vertical]:flex-col gap-x-1"
   >
-    <div v-for="file in files" class="flex items-center justify-center">
+    <div
+      v-for="(file, index) in files"
+      class="flex items-center justify-center"
+    >
       <p
         :data-size="getSize()"
         :data-color="getColor()"
-        class="font-source font-semibold data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-xl"
+        class="font-source font-semibold data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
       >
         {{ file.name }} ({{ file.type }})
       </p>
@@ -21,6 +24,11 @@
           class="data-[size=sm]:w-6 data-[size=sm]:h-6 data-[size=md]:w-6 data-[size=md]:h-6"
         />
       </NuxtLink>
+
+      <div
+        v-if="index !== files.length - 1 && getDir() === 'horizontal'"
+        class="bg-unim h-6 w-px mx-2"
+      />
     </div>
   </div>
 </template>
@@ -30,7 +38,7 @@ import type { GSFile } from "~/composables/useFirestore";
 
 const props = defineProps<{
   dir?: "horizontal" | "vertical";
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   color?: "strong" | "weak";
   files: GSFile[];
 }>();

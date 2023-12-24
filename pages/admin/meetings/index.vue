@@ -23,28 +23,7 @@
               v-html="processText(meeting.notes)"
               class="font-source text-lg text-light"
             />
-            <div
-              v-if="meeting.files.length > 0"
-              class="w-full flex items-center justify-start gap-x-1 mt-2"
-            >
-              <div
-                v-for="(file, index) in meeting.files"
-                class="flex items-center justify-center"
-              >
-                <p class="font-source font-semibold text-lg text-light">
-                  {{ file.name }} ({{ file.type }})
-                </p>
-
-                <NuxtLink :to="file.link" class="ml-2">
-                  <img src="/icons/open.svg" alt="Open" />
-                </NuxtLink>
-
-                <div
-                  v-if="index !== meeting.files.length - 1"
-                  class="bg-unim h-6 w-px mx-2"
-                />
-              </div>
-            </div>
+            <FileList :files="meeting.files" />
 
             <div
               class="absolute top-2 right-2 flex items-center justify-center gap-x-2"

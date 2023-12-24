@@ -20,25 +20,7 @@
               </p>
             </div>
 
-            <div class="flex items-center justify-start">
-              <div
-                v-for="(file, index) in theme.files"
-                class="flex items-center justify-center"
-              >
-                <p class="font-source font-semibold text-lg text-light">
-                  {{ file.name }} ({{ file.type }})
-                </p>
-
-                <NuxtLink :to="file.link" class="ml-2">
-                  <img src="/icons/open.svg" alt="Open" />
-                </NuxtLink>
-
-                <div
-                  v-if="index !== theme.files.length - 1"
-                  class="bg-unim h-6 w-px mx-2"
-                />
-              </div>
-            </div>
+            <FileList :files="theme.files" />
 
             <p class="font-source font-semibold text-lg text-light">
               By {{ theme.members.join(", ") }}

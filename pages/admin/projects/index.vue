@@ -24,28 +24,7 @@
             <p class="font-source text-lg text-light mt-2">
               By {{ project.members.join(", ") }}
             </p>
-            <div
-              v-if="project.files.length > 0"
-              class="w-full flex items-center justify-start gap-x-1"
-            >
-              <div
-                v-for="(file, index) in project.files"
-                class="flex items-center justify-center"
-              >
-                <p class="font-source font-semibold text-lg text-light">
-                  {{ file.name }} ({{ file.type }})
-                </p>
-
-                <NuxtLink :to="file.link" class="ml-2">
-                  <img src="/icons/open.svg" alt="Open" />
-                </NuxtLink>
-
-                <div
-                  v-if="index !== project.files.length - 1"
-                  class="bg-unim h-6 w-px mx-2"
-                />
-              </div>
-            </div>
+            <FileList :files="project.files" />
 
             <div
               class="absolute top-2 right-2 flex items-center justify-center gap-x-2"
