@@ -62,10 +62,6 @@
               <p class="font-source font-semibold text-3xl text-caucasian">
                 {{ getValue("name") }}
               </p>
-
-              <NuxtLink :to="`/themes/${getValue('id')}`">
-                <img src="/icons/open.svg" alt="Open" />
-              </NuxtLink>
             </div>
 
             <p
@@ -176,7 +172,7 @@ function changeTheme(index: number) {
   }, 250);
 }
 
-function getValue(value: "name" | "description" | "id"): string {
+function getValue(value: "name" | "description"): string {
   if (currentTheme.value === -1 || themes.value === undefined) return "";
   return themes.value[currentTheme.value][value];
 }

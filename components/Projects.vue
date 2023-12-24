@@ -54,7 +54,7 @@
           />
           <div
             v-if="project.files.length > 0 || project.members.length > 0"
-            class="w-full bg-gray h-[0.125rem]"
+            class="w-full bg-gray h-[0.125rem] my-1"
           />
 
           <p class="font-source font-semibold text-unim">
