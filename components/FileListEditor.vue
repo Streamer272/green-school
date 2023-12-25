@@ -4,6 +4,7 @@
     class="w-full flex items-center justify-center gap-x-1"
   >
     <div
+      :key="file.link"
       v-for="(file, index) in files"
       class="flex items-center justify-center"
     >

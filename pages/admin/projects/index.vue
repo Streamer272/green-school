@@ -9,6 +9,7 @@
       >
         <Loading :property="projects">
           <div
+            :key="project.id"
             v-for="(project, index) in projects"
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >

@@ -20,6 +20,7 @@
     <!-- projects column -->
     <Loading :property="projects">
       <div
+        :key="project.id"
         v-for="(project, index) in projects"
         class="bg-despair rounded-[1.25rem] w-[23.125rem]"
       >

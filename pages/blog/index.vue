@@ -9,10 +9,12 @@
       <Loading :property="posts" :fill="true">
         <div class="flex justify-center items-start gap-x-4">
           <div
+            :key="`index-${index}`"
             v-for="index in 3"
             class="flex items-center justify-start flex-col gap-y-2"
           >
             <div
+              :key="article.id"
               v-for="article in getArticles(posts!!, index - 1)"
               class="rounded-3xl bg-hood text-light w-60 px-6 py-4 relative"
             >

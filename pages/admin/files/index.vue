@@ -9,6 +9,7 @@
       >
         <Loading :property="folders">
           <div
+            :key="folder"
             v-for="folder in folders"
             class="flex items-center justify-start w-[10vw]"
           >

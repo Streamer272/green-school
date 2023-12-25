@@ -7,6 +7,7 @@
       <div class="w-full h-full flex items-center justify-center flex-col">
         <Loading :property="themes">
           <div
+            :key="theme.id"
             v-for="(theme, index) in themes"
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >

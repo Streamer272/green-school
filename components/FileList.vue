@@ -5,6 +5,7 @@
     class="w-full flex items-start data-[dir=vertical]:flex-col gap-x-1"
   >
     <div
+      :key="file.link"
       v-for="(file, index) in sortedFiles"
       class="flex items-center justify-center"
     >

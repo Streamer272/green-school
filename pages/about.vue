@@ -19,6 +19,7 @@
         <!-- row wrapper -->
         <Loading :property="sortedFellas" :fill="true">
           <div
+            :key="fella.id"
             v-for="(fella, index) in sortedFellas"
             :data-odd="index % 2 === 1"
             class="flex items-center justify-start w-full data-[odd=true]:flex-row-reverse"

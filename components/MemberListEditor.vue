@@ -4,6 +4,7 @@
     class="w-full flex items-center justify-center gap-x-1"
   >
     <div
+      :key="member.name"
       v-for="(member, index) in members"
       class="flex items-center justify-center"
     >

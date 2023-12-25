@@ -9,6 +9,7 @@
       >
         <Loading :property="posts">
           <div
+            :key="post.id"
             v-for="(post, index) in posts"
             :data-hidden="post.hidden"
             class="flex items-start justify-start flex-col w-[40vw] relative data-[hidden=true]:opacity-75"

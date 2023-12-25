@@ -9,6 +9,7 @@
       >
         <Loading :property="fellas">
           <div
+            :key="fella.id"
             v-for="(fella, index) in fellas"
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >

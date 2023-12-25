@@ -9,6 +9,7 @@
       >
         <Loading :property="meetings">
           <div
+            :key="meeting.id"
             v-for="(meeting, index) in meetings"
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >

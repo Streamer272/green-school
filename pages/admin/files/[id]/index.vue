@@ -9,6 +9,7 @@
       >
         <Loading :property="files">
           <div
+            :key="file.fullPath"
             v-for="(file, index) in files"
             class="flex items-center justify-start w-[25vw]"
           >

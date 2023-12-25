@@ -12,6 +12,7 @@
           class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]"
         >
           <div
+            :key="theme.id"
             v-for="(theme, index) in themes"
             :class="`flex items-center justify-center ${getThemeWidthClass(
               theme,
@@ -37,6 +38,7 @@
             }rem`"
           >
             <div
+              :key="year.year"
               v-for="year in getYears()"
               :class="`ball ${year.big ? 'big' : 'small'}`"
             >
