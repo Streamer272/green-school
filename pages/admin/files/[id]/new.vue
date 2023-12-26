@@ -3,34 +3,35 @@
     <div class="w-full h-full flex items-start justify-start">
       <AdminSidebar current="files" />
 
-      <!-- content -->
-      <Loading :property="loading" :is-boolean="true" :fill="true">
-        <form
-          @submit="submit"
-          class="w-full h-full flex items-center justify-center flex-col gap-y-2"
-        >
-          <input
-            v-model="name"
-            placeholder="Name..."
-            class="rounded-full py-2 px-4 bg-light text-dark"
-          />
-
-          <input
-            @change="selectFile"
-            type="file"
-            placeholder="File..."
-            required
-            class="rounded-full py-2 px-4 bg-light text-dark"
-          />
-
-          <button
-            type="submit"
-            class="bg-light text-dark py-2 px-4 rounded-full"
+      <AdminContent>
+        <Loading :property="loading" :is-boolean="true" :fill="true">
+          <form
+            @submit="submit"
+            class="w-full h-full flex items-center justify-center flex-col gap-y-2"
           >
-            Submit
-          </button>
-        </form>
-      </Loading>
+            <input
+              v-model="name"
+              placeholder="Name..."
+              class="rounded-full py-2 px-4 bg-light text-dark"
+            />
+
+            <input
+              @change="selectFile"
+              type="file"
+              placeholder="File..."
+              required
+              class="rounded-full py-2 px-4 bg-light text-dark"
+            />
+
+            <button
+              type="submit"
+              class="bg-light text-dark py-2 px-4 rounded-full"
+            >
+              Submit
+            </button>
+          </form>
+        </Loading>
+      </AdminContent>
     </div>
   </Background>
 </template>

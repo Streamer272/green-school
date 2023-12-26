@@ -3,8 +3,7 @@
     <div class="w-full h-full flex items-start justify-start">
       <AdminSidebar current="timeline" />
 
-      <!-- content -->
-      <div class="w-full h-full flex items-center justify-center flex-col">
+      <AdminContent>
         <Loading :property="themes">
           <div
             :key="theme.id"
@@ -40,7 +39,7 @@
             />
           </div>
         </Loading>
-      </div>
+      </AdminContent>
 
       <NuxtLink to="/admin/timeline/new">
         <img
@@ -56,6 +55,7 @@
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
+import type { Theme } from "~/composables/useFirestore";
 
 const themes = ref<Theme[] | undefined>(undefined);
 

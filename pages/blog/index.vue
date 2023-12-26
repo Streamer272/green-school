@@ -1,40 +1,36 @@
 <template>
   <Background>
-    <div
-      class="flex flex-col justify-start items-center w-screen min-h-screen overflow-hidden"
-    >
-      <TitleRouter route="blog" />
-      <div class="w-full h-16" />
+    <TitleRouter route="blog" />
+    <div class="w-full h-16" />
 
-      <Loading :property="posts" :fill="true">
-        <div class="flex justify-center items-start gap-x-4">
+    <Loading :property="posts" :fill="true">
+      <div class="flex justify-center items-start gap-x-4">
+        <div
+          :key="`index-${index}`"
+          v-for="index in 3"
+          class="flex items-center justify-start flex-col gap-y-2"
+        >
           <div
-            :key="`index-${index}`"
-            v-for="index in 3"
-            class="flex items-center justify-start flex-col gap-y-2"
+            :key="article.id"
+            v-for="article in getArticles(posts!!, index - 1)"
+            class="rounded-3xl bg-hood text-light w-60 px-6 py-4 relative"
           >
-            <div
-              :key="article.id"
-              v-for="article in getArticles(posts!!, index - 1)"
-              class="rounded-3xl bg-hood text-light w-60 px-6 py-4 relative"
-            >
-              <p class="text-lg text-white font-source font-semibold">
-                {{ processText(article.title) }}
-              </p>
-              <p
-                v-html="processText(article.content)"
-                class="text-light font-source"
-              />
+            <p class="text-lg text-white font-source font-semibold">
+              {{ processText(article.title) }}
+            </p>
+            <p
+              v-html="processText(article.content)"
+              class="text-light font-source"
+            />
 
-              <NuxtLink
-                :to="`/blog/${article.id}`"
-                class="absolute top-0 left-0 w-full h-full"
-              />
-            </div>
+            <NuxtLink
+              :to="`/blog/${article.id}`"
+              class="absolute top-0 left-0 w-full h-full"
+            />
           </div>
         </div>
-      </Loading>
-    </div>
+      </div>
+    </Loading>
 
     <Info />
   </Background>

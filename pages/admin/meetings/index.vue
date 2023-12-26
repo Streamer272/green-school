@@ -3,10 +3,7 @@
     <div class="w-full h-full flex items-start justify-start">
       <AdminSidebar current="meetings" />
 
-      <!-- content -->
-      <div
-        class="w-full h-full flex items-center justify-center flex-col overflow-auto"
-      >
+      <AdminContent>
         <Loading :property="meetings">
           <div
             :key="meeting.id"
@@ -48,7 +45,7 @@
             />
           </div>
         </Loading>
-      </div>
+      </AdminContent>
 
       <NuxtLink to="/admin/meetings/new">
         <img

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-64 h-full flex items-center justify-center flex-col gap-y-2 flex-shrink-0"
+    class="w-64 h-full flex items-center justify-center flex-col gap-y-2 fixed top-0 left-0"
   >
     <NuxtLink to="/" class="font-source font-semibold text-2xl text-light">
       Go back home
@@ -74,6 +74,8 @@
       </p>
     </div>
   </div>
+
+  <div class="w-64 h-full flex-shrink-0" />
 </template>
 
 <script lang="ts" setup>

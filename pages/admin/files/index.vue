@@ -3,10 +3,7 @@
     <div class="w-full h-full flex items-start justify-start">
       <AdminSidebar current="files" />
 
-      <!-- content -->
-      <div
-        class="w-full h-full flex items-center justify-center flex-col overflow-auto"
-      >
+      <AdminContent>
         <Loading :property="folders">
           <div
             :key="folder"
@@ -21,7 +18,7 @@
             </NuxtLink>
           </div>
         </Loading>
-      </div>
+      </AdminContent>
     </div>
   </Background>
 </template>

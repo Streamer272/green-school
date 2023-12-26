@@ -4,9 +4,7 @@
       <AdminSidebar current="projects" />
 
       <!-- content -->
-      <div
-        class="w-full h-full flex items-center justify-center flex-col overflow-auto"
-      >
+      <AdminContent>
         <Loading :property="projects">
           <div
             :key="project.id"
@@ -43,7 +41,7 @@
             />
           </div>
         </Loading>
-      </div>
+      </AdminContent>
 
       <NuxtLink to="/admin/projects/new">
         <img

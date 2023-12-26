@@ -1,96 +1,90 @@
 <template>
   <Background>
-    <main
-      class="flex flex-col justify-start items-center w-screen min-h-screen overflow-hidden"
-    >
-      <TitleRouter route="home" />
-      <div class="w-full h-48" />
+    <TitleRouter route="home" />
+    <div class="w-full h-48" />
 
-      <!-- theme row -->
-      <Loading :property="themes">
+    <!-- theme row -->
+    <Loading :property="themes">
+      <div class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]">
         <div
-          class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]"
+          :key="theme.id"
+          v-for="(theme, index) in themes"
+          :class="`flex items-center justify-center ${getThemeWidthClass(
+            theme,
+          )}`"
+        >
+          <button
+            :data-current="index === currentTheme"
+            @click="changeTheme(index)"
+            class="flex items-center justify-between mx-2 px-6 py-4 w-full rounded-2xl font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+          >
+            {{ theme.name }}
+            <img :src="theme.icon" alt="Theme icon" />
+          </button>
+        </div>
+      </div>
+
+      <!-- timeline -->
+      <div class="ml-72 mt-8 w-full relative">
+        <div
+          class="h-1 bg-gray rounded-full relative timeline"
+          :style="`width: ${
+            (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
+          }rem`"
         >
           <div
-            :key="theme.id"
-            v-for="(theme, index) in themes"
-            :class="`flex items-center justify-center ${getThemeWidthClass(
-              theme,
-            )}`"
+            :key="year.year"
+            v-for="year in getYears()"
+            :class="`ball ${year.big ? 'big' : 'small'}`"
           >
-            <button
-              :data-current="index === currentTheme"
-              @click="changeTheme(index)"
-              class="flex items-center justify-between mx-2 px-6 py-4 w-full rounded-2xl font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
-            >
+            <p v-if="year.big" class="year">{{ year.year }}</p>
+          </div>
+        </div>
+
+        <div
+          class="w-full border-gray border-t-4 border-dashed rounded-full h-0 ml-[1.3rem] absolute top-0 future-timeline"
+          :style="`left: ${
+            (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
+          }rem`"
+        />
+      </div>
+
+      <!-- theme description -->
+      <div
+        :data-selected="currentTheme !== -1 && !animationDueChange"
+        class="flex w-[80vw] mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
+      >
+        <div class="flex flex-col justify-start items-start basis-[50%]">
+          <div class="flex items-center justify-start gap-x-3">
+            <p class="font-source font-semibold text-3xl text-caucasian">
               {{ theme.name }}
-              <img :src="theme.icon" alt="Theme icon" />
-            </button>
-          </div>
-        </div>
-
-        <!-- timeline -->
-        <div class="ml-72 mt-8 w-full relative">
-          <div
-            class="h-1 bg-gray rounded-full relative timeline"
-            :style="`width: ${
-              (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
-            }rem`"
-          >
-            <div
-              :key="year.year"
-              v-for="year in getYears()"
-              :class="`ball ${year.big ? 'big' : 'small'}`"
-            >
-              <p v-if="year.big" class="year">{{ year.year }}</p>
-            </div>
-          </div>
-
-          <div
-            class="w-full border-gray border-t-4 border-dashed rounded-full h-0 ml-[1.3rem] absolute top-0 future-timeline"
-            :style="`left: ${
-              (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
-            }rem`"
-          />
-        </div>
-
-        <!-- theme description -->
-        <div
-          :data-selected="currentTheme !== -1 && !animationDueChange"
-          class="flex w-[80vw] mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
-        >
-          <div class="flex flex-col justify-start items-start basis-[50%]">
-            <div class="flex items-center justify-start gap-x-3">
-              <p class="font-source font-semibold text-3xl text-caucasian">
-                {{ theme.name }}
-              </p>
-            </div>
-
-            <p
-              v-if="isCurrentlyHappening()"
-              class="font-source font-semibold text-lg text-disc"
-            >
-              Current goal
             </p>
-
-            <p
-              v-html="theme.description"
-              class="font-source font-semibold text-lg text-unim mt-6"
-            />
-
-            <MemberList color="limp" :members="theme.members" class="mt-4" />
           </div>
 
-          <!-- files -->
-          <FileList
-            dir="vertical"
-            :files="theme.files"
-            size="lg"
-            class="basis-[50%]"
+          <p
+            v-if="isCurrentlyHappening()"
+            class="font-source font-semibold text-lg text-disc"
+          >
+            Current goal
+          </p>
+
+          <p
+            v-html="theme.description"
+            class="font-source font-semibold text-lg text-unim mt-6"
           />
+
+          <MemberList color="limp" :members="theme.members" class="mt-4" />
         </div>
-      </Loading>
-    </main>
+
+        <!-- files -->
+        <FileList
+          dir="vertical"
+          :files="theme.files"
+          size="lg"
+          class="basis-[50%]"
+        />
+      </div>
+    </Loading>
 
     <Projects />
     <Info />

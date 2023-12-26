@@ -3,10 +3,7 @@
     <div class="w-full h-full flex items-start justify-start">
       <AdminSidebar current="blog" />
 
-      <!-- content -->
-      <div
-        class="w-full h-full flex items-center justify-center flex-col overflow-auto"
-      >
+      <AdminContent>
         <Loading :property="posts">
           <div
             :key="post.id"
@@ -50,7 +47,7 @@
             />
           </div>
         </Loading>
-      </div>
+      </AdminContent>
 
       <NuxtLink to="/admin/blog/new">
         <img

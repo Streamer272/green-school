@@ -7,7 +7,9 @@
     </div>
   </div>
 
-  <div class="w-screen h-screen">
+  <div
+    class="flex justify-start items-center flex-col w-screen min-h-screen overflow-auto"
+  >
     <slot />
   </div>
 </template>

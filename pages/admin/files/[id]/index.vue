@@ -3,10 +3,7 @@
     <div class="w-full h-full flex items-start justify-start">
       <AdminSidebar current="files" />
 
-      <!-- content -->
-      <div
-        class="w-full h-full flex items-center justify-center flex-col overflow-auto gap-y-1"
-      >
+      <AdminContent>
         <Loading :property="files">
           <div
             :key="file.fullPath"
@@ -30,7 +27,7 @@
             </button>
           </div>
         </Loading>
-      </div>
+      </AdminContent>
 
       <NuxtLink :to="`/admin/files/${id}/new`">
         <img
