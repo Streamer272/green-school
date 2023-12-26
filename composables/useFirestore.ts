@@ -34,6 +34,7 @@ export interface Project {
   name: string;
   description: string;
   start: GSDate;
+  end: GSDate;
   files: GSFile[];
   members: GSMember[];
 }

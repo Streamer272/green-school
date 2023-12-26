@@ -65,6 +65,7 @@ function submit(event: Event) {
     name: name.value,
     description: description.value,
     start: GSDate.to(start.value),
+    end: "",
     files: files.value,
     members: members.value,
   })

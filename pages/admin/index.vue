@@ -9,10 +9,9 @@
 </template>
 
 <script lang="ts" setup>
-// TODO: make meetings public
 // TODO: refactor blog index
-// TODO: figure out how to end projects
 // TODO: fix client firebase errors
+// TODO: add an archive
 
 useAuthGuard(true);
 </script>

@@ -47,7 +47,7 @@
 
         <div
           :data-open="currentProject === index"
-          class="flex flex-col m-4 gap-y-2 data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen transition-all"
+          class="flex flex-col m-4 gap-y-2 data-[open=false]:pointer-events-none data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen transition-all"
         >
           <p
             v-html="project.description"
@@ -72,7 +72,7 @@
 </template>
 
 <script lang="ts" setup>
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import { useProjects } from "~/composables/useStates";
 import type { Project } from "~/composables/useFirestore";
@@ -87,7 +87,9 @@ function changeCurrentProject(index: number) {
 }
 
 onMounted(() => {
-  getDocs(collection(useFirestore(), "projects")).then((snapshot) => {
+  getDocs(
+    query(collection(useFirestore(), "projects"), where("end", "==", "")),
+  ).then((snapshot) => {
     const array: Project[] = [];
     snapshot.forEach((item) => {
       array.push(item.data() as Project);

@@ -12,7 +12,8 @@
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >
             <p class="font-source font-bold text-xl text-light">
-              {{ project.name }} ({{ GSDate.pretty(project.start) }})
+              {{ project.name }} ({{ GSDate.pretty(project.start) }} -
+              {{ GSDate.prettyish(project.end, "?") }})
             </p>
 
             <p
