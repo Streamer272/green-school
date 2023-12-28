@@ -10,19 +10,24 @@
             v-for="(fella, index) in fellas"
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >
-            <p class="font-source font-semibold text-lg text-light">
-              {{ fella.name }} ({{ fella.role || "[role]" }},
-              {{ fella.priority || "[priority]" }})
-            </p>
-            <p class="font-source font-semibold text-lg text-light">
-              {{ fella.contact || "[contact]" }}
-            </p>
-            <img :src="fella.picture" alt="Picture" class="h-20" />
+            <div class="flex gap-x-2">
+              <img :src="fella.picture" alt="Picture" class="w-32" />
 
-            <p
-              v-html="processText(fella.lore)"
-              class="font-source text-lg text-unim"
-            />
+              <div class="flex items-start justify-start flex-col">
+                <p class="font-source font-semibold text-lg text-light">
+                  {{ fella.name }} ({{ fella.role || "[role]" }},
+                  {{ fella.priority || "[priority]" }})
+                </p>
+                <p class="font-source font-semibold text-lg text-light">
+                  {{ fella.contact || "[contact]" }}
+                </p>
+
+                <p
+                  v-html="processText(fella.lore)"
+                  class="font-source text-lg text-unim"
+                />
+              </div>
+            </div>
 
             <div
               class="absolute top-2 right-2 flex items-center justify-center gap-x-2"

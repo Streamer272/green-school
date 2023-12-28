@@ -11,18 +11,25 @@
             :data-hidden="post.hidden"
             class="flex items-start justify-start flex-col w-[40vw] relative data-[hidden=true]:opacity-75"
           >
-            <p class="font-source font-bold text-xl text-light">
-              {{ post.title }}
-            </p>
-            <MemberList :members="post.authors" size="lg" />
-            <p class="font-source font-semibold text-lg text-light">
-              {{ GSDate.pretty(post.date) }} ({{ post.status }})
-            </p>
+            <div class="flex gap-x-2">
+              <img :src="post.image" alt="Image" class="w-32" />
 
-            <p
-              v-html="processText(post.content)"
-              class="font-source text-lg text-light"
-            />
+              <div class="flex items-start justify-start flex-col">
+                <p class="font-source font-bold text-xl text-light">
+                  {{ post.title }}
+                </p>
+                <MemberList :members="post.authors" size="lg" />
+                <p class="font-source font-semibold text-lg text-light">
+                  {{ GSDate.pretty(post.date) }} ({{ post.status }})
+                </p>
+
+                <p
+                  v-html="processText(post.content)"
+                  class="font-source text-lg text-light"
+                />
+              </div>
+            </div>
+
             <div
               class="absolute top-2 right-2 flex items-center justify-center gap-x-2"
             >
@@ -66,7 +73,7 @@ import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import type { Post } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
-// TODO: add showing and editing image (and make it optional)
+// TODO: make image optional and fix stretching
 
 const posts = ref<Post[] | undefined>(undefined);
 
