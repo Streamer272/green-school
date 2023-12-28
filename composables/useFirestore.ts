@@ -42,6 +42,6 @@ export interface Project {
 
 export interface Fella extends GSMember {
   id: string;
-  picture: string;
-  lore: string;
+  picture?: string;
+  lore?: string;
 }
