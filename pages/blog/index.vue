@@ -62,16 +62,6 @@ import { useFirestore } from "~/composables/useFirebase";
 import type { Post } from "~/composables/useFirestore";
 
 const posts = useState<Post[] | undefined>("posts", () => undefined);
-// TODO: sort posts by date
-
-function getArticles(posts: Post[], index: number): Post[] {
-  const array: Post[] = [];
-  for (let i = index; i < posts.length; i += 3) {
-    array.push(posts[i]);
-  }
-
-  return array;
-}
 
 onMounted(() => {
   getDocs(
@@ -84,11 +74,7 @@ onMounted(() => {
         id: item.id,
       } as Post);
     });
-    array.sort((a, b) => {
-      const dateA = GSDate.as(a.date);
-      const dateB = GSDate.as(b.date);
-      return dateB.getTime() - dateA.getTime();
-    });
+    array.sort(GSDate.sort);
     posts.value = array;
   });
 });

@@ -91,11 +91,7 @@ function fetch() {
         id: item.id,
       } as Post);
     });
-    array.sort((a, b) => {
-      const dateA = GSDate.as(a.date);
-      const dateB = GSDate.as(b.date);
-      return dateB.getTime() - dateA.getTime();
-    });
+    array.sort(GSDate.sort);
     posts.value = array;
   });
 }

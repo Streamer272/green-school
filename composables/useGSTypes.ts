@@ -63,4 +63,9 @@ export class GSDate extends String {
     if (it === "") return or;
     else return GSDate.ugly(it);
   }
+
+  /* sorts array by date (latest will be on top) */
+  static sort(a: { date: string | GSDate }, b: { date: string | GSDate }) {
+    return GSDate.as(b.date).getTime() - GSDate.as(a.date).getTime();
+  }
 }

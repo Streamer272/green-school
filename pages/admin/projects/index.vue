@@ -81,11 +81,7 @@ function fetch() {
         id: item.id,
       } as Project);
     });
-    array.sort((a, b) => {
-      const dateA = GSDate.as(a.start);
-      const dateB = GSDate.as(b.start);
-      return dateB.getTime() - dateA.getTime();
-    });
+    array.sort((a, b) => GSDate.sort({ date: a.start }, { date: b.start }));
     projects.value = array;
   });
 }
