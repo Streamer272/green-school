@@ -63,7 +63,6 @@
 <script lang="ts" setup>
 import type { Fella } from "~/composables/useFirestore";
 import { collection, getDocs } from "@firebase/firestore";
-import { useMemberSort } from "~/composables/useHelp";
 
 const fellas = ref<Fella[] | undefined>(undefined);
 const sortedFellas = computed(() => {

@@ -38,7 +38,6 @@
 
 <script lang="ts" setup>
 import { ref as sref, uploadBytes } from "firebase/storage";
-import { useAuthGuard, useFireStorage } from "~/composables/useFirebase";
 
 const name = ref("");
 const file = ref<File | null>(null);

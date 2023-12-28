@@ -64,7 +64,6 @@
 
 <script lang="ts" setup>
 import { addDoc, collection } from "@firebase/firestore";
-import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
 
 const name = ref("");
 const role = ref("");

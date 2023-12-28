@@ -16,7 +16,6 @@
 
 <script lang="ts" setup>
 import Editor from "@tinymce/tinymce-vue";
-import { useTextEditor } from "~/composables/useStates";
 
 const text = useTextEditor();
 </script>

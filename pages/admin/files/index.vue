@@ -25,8 +25,6 @@
 
 <script lang="ts" setup>
 import { listAll, ref as sref } from "firebase/storage";
-import { useAuthGuard, useFireStorage } from "~/composables/useFirebase";
-
 const folders = ref<string[] | undefined>(undefined);
 
 onMounted(() => {

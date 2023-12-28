@@ -65,8 +65,6 @@
 <script lang="ts" setup>
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
-import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
-import { useFileList, useMemberList } from "~/composables/useStates";
 import type { Theme } from "~/composables/useFirestore";
 
 const id = useId();

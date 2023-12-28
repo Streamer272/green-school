@@ -66,7 +66,6 @@
 import type { Fella } from "~/composables/useFirestore";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
-import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
 
 const id = useId();
 const fella = ref<Fella | undefined>(undefined);

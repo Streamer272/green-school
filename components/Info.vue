@@ -39,7 +39,5 @@
 </template>
 
 <script lang="ts" setup>
-import { useInfo } from "~/composables/useStates";
-
 const open = useInfo();
 </script>

@@ -57,8 +57,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useMemberList } from "~/composables/useStates";
-
 const members = useMemberList();
 const name = ref("");
 const role = ref("");

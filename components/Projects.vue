@@ -73,8 +73,6 @@
 
 <script lang="ts" setup>
 import { collection, getDocs, query, where } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
-import { useProjects } from "~/composables/useStates";
 import type { Project } from "~/composables/useFirestore";
 
 const open = useProjects();

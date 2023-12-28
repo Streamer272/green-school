@@ -59,9 +59,7 @@
 <script lang="ts" setup>
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
 import type { Project } from "~/composables/useFirestore";
-import { GSDate } from "~/composables/useGSTypes";
 
 const id = useId();
 const project = ref<Project | undefined>(undefined);

@@ -62,7 +62,6 @@
 
 <script lang="ts" setup>
 import { addDoc, collection } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
 
 const name = ref("");
 const description = useTextEditor();

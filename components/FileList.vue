@@ -36,7 +36,6 @@
 
 <script lang="ts" setup>
 import type { GSFile } from "~/composables/useGSTypes";
-import { usePrioritySort } from "~/composables/useHelp";
 
 const props = defineProps<{
   dir?: "horizontal" | "vertical";

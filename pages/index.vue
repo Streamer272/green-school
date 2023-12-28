@@ -139,7 +139,6 @@
 
 <script lang="ts" setup>
 import { collection, getDocs } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
 import type { Theme } from "~/composables/useFirestore";
 
 const animationDueChange = ref(false);

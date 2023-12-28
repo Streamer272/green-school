@@ -65,7 +65,6 @@
 import type { Fella } from "~/composables/useFirestore";
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { doc } from "firebase/firestore";
-import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
 
 const fellas = ref<Fella[] | undefined>(undefined);
 

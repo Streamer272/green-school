@@ -60,8 +60,7 @@
 
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
-import { type Meeting } from "~/composables/useFirestore";
+import type { Meeting } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
 const meetings = ref<Meeting[] | undefined>(undefined);

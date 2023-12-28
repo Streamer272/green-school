@@ -71,7 +71,6 @@
 
 <script lang="ts" setup>
 import { collection } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import type { Post } from "~/composables/useFirestore";
 

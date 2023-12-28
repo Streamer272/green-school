@@ -67,8 +67,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useFileList } from "~/composables/useStates";
-
 const files = useFileList();
 const name = ref("");
 const type = ref("");

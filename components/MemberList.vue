@@ -58,7 +58,6 @@
 
 <script lang="ts" setup>
 import type {GSMember} from "~/composables/useGSTypes";
-import {useMemberSort} from "~/composables/useHelp";
 
 const props = defineProps<{
   size?: "sm" | "md" | "lg";

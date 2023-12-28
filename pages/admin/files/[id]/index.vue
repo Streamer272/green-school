@@ -48,7 +48,6 @@ import {
   ref as sref,
   type StorageReference,
 } from "firebase/storage";
-import { useAuthGuard } from "~/composables/useFirebase";
 
 const id = useId();
 const files = ref<StorageReference[] | undefined>(undefined);

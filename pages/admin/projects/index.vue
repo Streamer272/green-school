@@ -57,9 +57,8 @@
 
 <script lang="ts" setup>
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
-import { useFirestore } from "~/composables/useFirebase";
-import { type Project } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
+import type { Project } from "~/composables/useFirestore";
 
 const projects = ref<Project[] | undefined>(undefined);
 
