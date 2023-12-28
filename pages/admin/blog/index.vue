@@ -66,6 +66,8 @@ import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import type { Post } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
 
+// TODO: add showing and editing image (and make it optional)
+
 const posts = ref<Post[] | undefined>(undefined);
 
 function copyUrl(index: number) {
