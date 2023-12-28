@@ -64,6 +64,8 @@
 import type { Fella } from "~/composables/useFirestore";
 import { collection, getDocs } from "@firebase/firestore";
 
+// TODO: add optional image/description
+
 const fellas = ref<Fella[] | undefined>(undefined);
 const sortedFellas = computed(() => {
   if (!fellas.value) return undefined;
