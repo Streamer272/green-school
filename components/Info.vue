@@ -32,7 +32,7 @@
     </p>
     <div class="flex items-center justify-center ml-4">
       <p class="font-source font-semibold text-lg text-cece">
-        22.12.2023 18:33
+        28. 12. 2023 12:55
       </p>
     </div>
   </div>

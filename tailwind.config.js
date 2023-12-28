@@ -9,6 +9,7 @@ export default {
       cece: "#cccccc",
       unim: "#b3b3b3",
       disc: "#969696",
+      nice: "#696969",
       gray: "#555555",
       hood: "#393939",
       ghetto: "#292929",

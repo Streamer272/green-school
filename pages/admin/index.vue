@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-// TODO: refactor blog index
 // TODO: fix client firebase errors
 // TODO: add an archive
 // TODO: make a state for text editor

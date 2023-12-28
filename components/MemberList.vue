@@ -3,7 +3,8 @@
     <p
         :data-size="getSize()"
         :data-color="getColor()"
-        class="relative inline font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+        :data-bold="getBold()"
+        class="relative inline font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
       {{ prefix ?? "By" }}
     </p>
@@ -13,8 +14,9 @@
         v-for="(member, index) in sortedMembers"
         :data-size="getSize()"
         :data-color="getColor()"
+        :data-bold="getBold()"
         :data-has-contact="!!member.contact"
-        class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer ml-1 font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+        class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer ml-1 font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
       {{ member.name }}{{
         member.role ? ` (${member.role})` : ""
@@ -24,7 +26,7 @@
           v-if="member.contact"
           :data-size="getSize()"
           :data-color="getColor()"
-          class="tip cursor-auto w-48 h-fit bg-dark rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+          class="tip cursor-auto w-48 h-fit bg-dark rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
       >
         {{ member.contact }}
       </p>
@@ -62,6 +64,7 @@ const props = defineProps<{
   size?: "sm" | "md" | "lg";
   color?: "limp" | "weak" | "strong";
   prefix?: string;
+  bold?: boolean;
   members: GSMember[];
 }>();
 
@@ -75,5 +78,9 @@ function getSize() {
 
 function getColor() {
   return props.color ?? "strong";
+}
+
+function getBold() {
+  return props.bold ?? false;
 }
 </script>
