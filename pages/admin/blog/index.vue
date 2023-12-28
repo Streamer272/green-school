@@ -12,8 +12,9 @@
             class="flex items-start justify-start flex-col w-[40vw] relative data-[hidden=true]:opacity-75"
           >
             <p class="font-source font-bold text-xl text-light">
-              {{ post.title }} ({{ post.author }})
+              {{ post.title }}
             </p>
+            <MemberList :members="post.authors" size="lg" />
             <p class="font-source font-semibold text-lg text-light">
               {{ GSDate.pretty(post.date) }} ({{ post.status }})
             </p>

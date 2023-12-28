@@ -5,7 +5,7 @@
         :data-color="getColor()"
         class="relative inline font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
-      {{ prefix ?? "By" }}&nbsp;
+      {{ prefix ?? "By" }}
     </p>
 
     <p
@@ -14,11 +14,11 @@
         :data-size="getSize()"
         :data-color="getColor()"
         :data-has-contact="!!member.contact"
-        class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+        class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer ml-1 font-source font-semibold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
       {{ member.name }}{{
         member.role ? ` (${member.role})` : ""
-      }}{{ index !== members.length - 1 ? "," : "" }}&nbsp;
+      }}{{ index !== members.length - 1 ? "," : "" }}
 
       <p
           v-if="member.contact"

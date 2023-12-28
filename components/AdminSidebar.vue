@@ -13,7 +13,7 @@
       :data-current="current === 'blog'"
       class="font-source font-semibold text-2xl text-light data-[current=true]:underline"
     >
-      Blogs
+      Blog
     </NuxtLink>
 
     <NuxtLink

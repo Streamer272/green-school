@@ -13,7 +13,8 @@ export interface Post {
   title: string;
   content: string;
   date: GSDate;
-  author: string;
+  authors: GSMember[];
+  image: string;
   status: "private" | "public";
   hidden: boolean;
 }

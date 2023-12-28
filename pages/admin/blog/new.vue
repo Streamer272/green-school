@@ -17,15 +17,6 @@
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
 
-              <select
-                v-model="status"
-                required
-                class="rounded-full py-2 px-4 bg-light text-dark"
-              >
-                <option value="private">Private</option>
-                <option value="public">Public</option>
-              </select>
-
               <button
                 type="submit"
                 class="bg-light text-dark py-2 px-4 rounded-full"
@@ -43,12 +34,14 @@
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
 
-              <input
-                v-model="author"
-                placeholder="Author..."
+              <select
+                v-model="status"
                 required
                 class="rounded-full py-2 px-4 bg-light text-dark"
-              />
+              >
+                <option value="private">Private</option>
+                <option value="public">Public</option>
+              </select>
 
               <div class="flex items-center justify-center gap-x-2">
                 <input
@@ -67,6 +60,8 @@
               </div>
             </div>
 
+            <MemberListEditor />
+
             <div class="w-[60%]">
               <TextEditor v-model="content" />
             </div>
@@ -84,7 +79,7 @@ import { useFirestore } from "~/composables/useFirebase";
 const title = ref("");
 const content = ref("");
 const date = ref("");
-const author = ref("");
+const authors = useMemberList();
 const status = ref("");
 const hidden = ref(false);
 const loading = ref(false);
@@ -97,7 +92,7 @@ function submit(event: Event) {
     title: title.value,
     content: content.value,
     date: GSDate.to(date.value),
-    author: author.value,
+    authors: authors.value,
     status: status.value,
     hidden: hidden.value,
   })

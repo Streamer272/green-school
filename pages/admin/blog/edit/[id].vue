@@ -17,15 +17,6 @@
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
 
-              <select
-                v-model="status"
-                required
-                class="rounded-full py-2 px-4 bg-light text-dark"
-              >
-                <option value="private">Private</option>
-                <option value="public">Public</option>
-              </select>
-
               <button
                 type="submit"
                 class="bg-light text-dark py-2 px-4 rounded-full"
@@ -43,12 +34,14 @@
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
 
-              <input
-                v-model="author"
-                placeholder="Author..."
+              <select
+                v-model="status"
                 required
                 class="rounded-full py-2 px-4 bg-light text-dark"
-              />
+              >
+                <option value="private">Private</option>
+                <option value="public">Public</option>
+              </select>
 
               <div class="flex items-center justify-center gap-x-2">
                 <input
@@ -66,6 +59,8 @@
                 </label>
               </div>
             </div>
+
+            <MemberListEditor />
 
             <div class="w-[60%]">
               <TextEditor v-model="content" />
@@ -88,7 +83,7 @@ const post = ref<Post | undefined>(undefined);
 const title = ref("");
 const content = ref("");
 const date = ref("");
-const author = ref("");
+const authors = useMemberList();
 const status = ref("");
 const hidden = ref(false);
 
@@ -109,7 +104,7 @@ function fetch() {
       title.value = data.title;
       content.value = data.content;
       date.value = GSDate.ugly(data.date);
-      author.value = data.author;
+      authors.value = data.authors;
       status.value = data.status;
       hidden.value = data.hidden;
     })
@@ -124,7 +119,7 @@ function submit(event: Event) {
     title: title.value,
     content: content.value,
     date: date.value,
-    author: author.value,
+    authors: authors.value,
     status: status.value,
     hidden: hidden.value,
   })
