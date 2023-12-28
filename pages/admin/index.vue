@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 // TODO: fix client firebase errors
 // TODO: add an archive
-// TODO: make a state for text editor
+// TODO: remove useless imports
 
 useAuthGuard(true);
 </script>

@@ -48,10 +48,7 @@
 
             <MemberListEditor />
             <FileListEditor />
-
-            <div class="w-[60%]">
-              <TextEditor v-model="description" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -64,13 +61,12 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import type { Project } from "~/composables/useFirestore";
-import { useMemberList } from "~/composables/useStates";
 import { GSDate } from "~/composables/useGSTypes";
 
 const id = useId();
 const project = ref<Project | undefined>(undefined);
 const name = ref("");
-const description = ref("");
+const description = useTextEditor();
 const start = ref("");
 const end = ref("");
 const files = useFileList();

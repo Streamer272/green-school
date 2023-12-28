@@ -61,10 +61,7 @@
             </div>
 
             <MemberListEditor />
-
-            <div class="w-[60%]">
-              <TextEditor v-model="content" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -77,7 +74,7 @@ import { addDoc, collection } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 
 const title = ref("");
-const content = ref("");
+const content = useTextEditor();
 const date = ref("");
 const authors = useMemberList();
 const status = ref("");

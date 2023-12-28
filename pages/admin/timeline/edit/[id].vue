@@ -54,10 +54,7 @@
 
             <MemberListEditor />
             <FileListEditor />
-
-            <div class="w-[60%]">
-              <TextEditor v-model="description" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -75,7 +72,7 @@ import type { Theme } from "~/composables/useFirestore";
 const id = useId();
 const theme = ref<Theme | undefined>(undefined);
 const name = ref("");
-const description = ref("");
+const description = useTextEditor();
 const icon = ref("");
 const start = ref(0);
 const end = ref(0);

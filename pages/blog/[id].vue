@@ -8,8 +8,9 @@
         <p class="font-source font-bold text-2xl text-light">
           {{ post.title }}
         </p>
+        <MemberList :members="post.authors" size="lg" />
         <p class="font-source font-semibold text-xl text-light">
-          {{ post.author }} · {{ post.date }}
+          {{ GSDate.pretty(post.date) }}
         </p>
 
         <p v-html="post?.content" class="font-source text-lg text-light mt-2" />

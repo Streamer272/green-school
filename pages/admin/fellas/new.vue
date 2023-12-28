@@ -54,9 +54,7 @@
               />
             </div>
 
-            <div class="w-[60%]">
-              <TextEditor v-model="lore" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -73,7 +71,7 @@ const role = ref("");
 const contact = ref("");
 const priority = ref(0);
 const picture = ref("");
-const lore = ref("");
+const lore = useTextEditor();
 const loading = ref(false);
 
 function submit(event: Event) {

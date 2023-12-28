@@ -34,10 +34,7 @@
 
             <MemberListEditor />
             <FileListEditor />
-
-            <div class="w-[60%]">
-              <TextEditor v-model="description" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -47,11 +44,9 @@
 
 <script lang="ts" setup>
 import { addDoc, collection } from "@firebase/firestore";
-import { useAuthGuard, useFirestore } from "~/composables/useFirebase";
-import { useMemberList } from "~/composables/useStates";
 
 const name = ref("");
-const description = ref("");
+const description = useTextEditor();
 const start = ref("");
 const files = useFileList();
 const members = useMemberList();

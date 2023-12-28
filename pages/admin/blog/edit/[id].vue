@@ -61,10 +61,7 @@
             </div>
 
             <MemberListEditor />
-
-            <div class="w-[60%]">
-              <TextEditor v-model="content" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -81,7 +78,7 @@ import type { Post } from "~/composables/useFirestore";
 const id = useId();
 const post = ref<Post | undefined>(undefined);
 const title = ref("");
-const content = ref("");
+const content = useTextEditor();
 const date = ref("");
 const authors = useMemberList();
 const status = ref("");

@@ -62,6 +62,7 @@ import { useFirestore } from "~/composables/useFirebase";
 import type { Post } from "~/composables/useFirestore";
 
 const posts = useState<Post[] | undefined>("posts", () => undefined);
+// TODO: sort posts by date
 
 function getArticles(posts: Post[], index: number): Post[] {
   const array: Post[] = [];

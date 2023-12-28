@@ -33,10 +33,7 @@
             </div>
 
             <FileListEditor />
-
-            <div class="w-[60%]">
-              <TextEditor v-model="notes" />
-            </div>
+            <TextEditor />
           </form>
         </Loading>
       </AdminContent>
@@ -49,7 +46,7 @@ import { addDoc, collection } from "@firebase/firestore";
 
 const date = ref("");
 const present = ref("");
-const notes = ref("");
+const notes = useTextEditor();
 const files = useFileList();
 const loading = ref(false);
 
