@@ -12,7 +12,18 @@
             class="flex items-start justify-start flex-col w-[40vw] relative data-[hidden=true]:opacity-75"
           >
             <div class="flex gap-x-2">
-              <img :src="post.image" alt="Image" class="w-32" />
+              <img
+                v-if="post.image"
+                :src="post.image"
+                alt="Image"
+                class="w-32 rounded-xl"
+              />
+              <p
+                v-else
+                class="text-light font-source font-semibold text-lg w-32 h-full"
+              >
+                No image
+              </p>
 
               <div class="flex items-start justify-start flex-col">
                 <p class="font-source font-bold text-xl text-light">
@@ -72,8 +83,6 @@
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import type { Post } from "~/composables/useFirestore";
 import { doc } from "firebase/firestore";
-
-// TODO: make image optional and fix stretching
 
 const posts = ref<Post[] | undefined>(undefined);
 

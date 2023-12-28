@@ -11,7 +11,7 @@
             class="flex items-start justify-start flex-col w-[40vw] relative"
           >
             <div class="flex gap-x-2">
-              <img :src="fella.picture" alt="Picture" class="w-32" />
+              <img :src="fella.picture" alt="Picture" class="w-32 rounded-xl" />
 
               <div class="flex items-start justify-start flex-col">
                 <p class="font-source font-semibold text-lg text-light">

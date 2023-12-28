@@ -14,7 +14,7 @@ export interface Post {
   content: string;
   date: GSDate;
   authors: GSMember[];
-  image: string;
+  image?: string;
   status: "private" | "public";
   hidden: boolean;
 }

@@ -9,20 +9,10 @@
           v-for="post in posts"
           class="flex rounded-[1.25rem] w-[50rem] h-[20rem] relative"
         >
-          <!-- image -->
-          <div
-            class="flex items-center justify-center basis-[50%] bg-despair p-4 rounded-l-[1.25rem]"
-          >
-            <img
-              :src="post.image"
-              alt="Image"
-              class="w-full h-full rounded-l-2xl"
-            />
-          </div>
-
           <!-- text -->
           <div
-            class="flex items-start justify-start flex-col basis-[50%] bg-dark p-8 rounded-r-[1.25rem]"
+            :data-has-image="!!post.image"
+            class="flex items-start justify-start flex-col w-full bg-dark p-8 flex-grow rounded-l-[1.25rem] data-[has-image=false]:rounded-r-[1.25rem]"
           >
             <div class="flex justify-between items-start w-full">
               <p class="text-2xl text-light font-source font-bold">
@@ -43,6 +33,14 @@
 
             <MemberList :members="post.authors" size="sm" color="limp" bold />
           </div>
+
+          <!-- image -->
+          <img
+            v-if="post.image"
+            :src="post.image"
+            alt="Image"
+            class="h-full rounded-r-2xl object-contain bg-despair p-4 flex-shrink"
+          />
 
           <NuxtLink
             :to="`/blog/${post.id}`"
