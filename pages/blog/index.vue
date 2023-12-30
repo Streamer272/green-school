@@ -35,12 +35,16 @@
           </div>
 
           <!-- image -->
-          <img
-            v-if="post.image"
-            :src="post.image"
-            alt="Image"
-            class="h-full rounded-r-2xl object-contain bg-despair p-4 flex-shrink"
-          />
+          <div
+            class="h-full max-w-[20rem] rounded-r-2xl bg-despair p-4 flex-shrink-0"
+          >
+            <img
+              v-if="post.image"
+              :src="post.image"
+              alt="Image"
+              class="h-full w-full object-contain"
+            />
+          </div>
 
           <NuxtLink
             :to="`/blog/${post.id}`"

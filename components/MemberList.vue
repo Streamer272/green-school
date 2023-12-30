@@ -26,7 +26,7 @@
           v-if="member.contact"
           :data-size="getSize()"
           :data-color="getColor()"
-          class="tip cursor-auto w-48 h-fit bg-dark rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+          class="tip cursor-auto overflow-auto w-48 h-fit bg-dark rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
       >
         {{ member.contact }}
       </p>
@@ -45,12 +45,14 @@
     transform: translateX(-50%) translateY(100%);
     opacity: 0;
     pointer-events: none;
+    z-index: 0;
   }
 
   &:hover {
     .tip {
       opacity: 100;
       pointer-events: all;
+      z-index: 10;
     }
   }
 }
