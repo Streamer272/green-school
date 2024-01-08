@@ -17,12 +17,6 @@
                 required
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
-              <input
-                v-model="present"
-                placeholder="Present..."
-                required
-                class="rounded-full py-2 px-4 bg-light text-dark"
-              />
 
               <button
                 type="submit"
@@ -32,6 +26,7 @@
               </button>
             </div>
 
+            <MemberListEditor />
             <FileListEditor />
             <TextEditor />
           </form>
@@ -45,7 +40,7 @@
 import { addDoc, collection } from "@firebase/firestore";
 
 const date = ref("");
-const present = ref("");
+const present = useMemberList();
 const notes = useTextEditor();
 const files = useFileList();
 const loading = ref(false);

@@ -16,19 +16,16 @@
                 placeholder="Date..."
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
-              <input
-                v-model="present"
-                placeholder="Present..."
-                class="rounded-full py-2 px-4 bg-light text-dark"
-              />
+
               <button
                 type="submit"
-                class="bg-light text-dark py-2 px-4 mr-44 rounded-full"
+                class="bg-light text-dark py-2 px-4 rounded-full"
               >
                 Submit
               </button>
             </div>
 
+            <MemberListEditor />
             <FileListEditor />
             <TextEditor />
           </form>

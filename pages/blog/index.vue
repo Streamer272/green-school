@@ -66,7 +66,11 @@ const posts = useState<Post[] | undefined>("posts", () => undefined);
 
 onMounted(() => {
   getDocs(
-    query(collection(useFirestore(), "posts"), where("hidden", "==", false)),
+    query(
+      collection(useFirestore(), "posts"),
+      where("hidden", "==", false),
+      where("status", "==", "public"),
+    ),
   ).then((snapshot) => {
     const array: Post[] = [];
     snapshot.forEach((item) => {
