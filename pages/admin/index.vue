@@ -11,6 +11,7 @@
 <script lang="ts" setup>
 // TODO: fix client firebase errors
 // TODO: add an archive
+// TODO: add expandable processed text
 
 useAuthGuard(true);
 </script>
