@@ -126,17 +126,17 @@
           <div class="flex items-start justify-start flex-col">
             <p class="font-source font-semibold text-lg text-light">
               <span v-html="highlightText(item.name)" /> (<span
-                v-html="highlightedOr(item.role, '[role]')"
+                v-html="highlightOr(item.role, '[role]')"
               />, {{ item?.priority || "[priority]" }})
             </p>
             <p
-              v-html="highlightedOr(item?.contact, '[contact]')"
+              v-html="highlightOr(item?.contact, '[contact]')"
               class="font-source font-semibold text-lg text-light"
             />
 
             <Text
               v-if="item?.lore"
-              :text="highlightedOr(item?.lore, '')"
+              :text="highlightOr(item?.lore, '')"
               styles="small-description"
             />
           </div>
@@ -146,13 +146,13 @@
           <p class="font-source font-semibold text-lg text-light">
             Date: {{ GSDate.pretty(item.date) }}
           </p>
-          <MemberList prefix="Present: " :members="item.present" />
-
-          <p
-            v-html="processText(item.notes)"
-            class="font-source text-lg text-light"
+          <MemberList
+            prefix="Present: "
+            :members="highlightMembers(item.present)"
           />
-          <FileList :files="item.files" />
+
+          <Text :text="highlightText(item.notes)" styles="text" />
+          <FileList :files="highlightFiles(item.files)" />
         </div>
 
         <div v-else-if="item.type === 'post'">
@@ -235,7 +235,7 @@ import { useFirestore } from "~/composables/useFirebase";
 import type { Fella, Meeting, Post, Project } from "~/composables/useFirestore";
 import type { Theme } from "tinymce";
 import Fuse, { type FuseResult, type IFuseOptions } from "fuse.js";
-import type { Archived } from "~/composables/useGSTypes";
+import type { Archived, GSFile, GSMember } from "~/composables/useGSTypes";
 import { query as firequery } from "@firebase/firestore";
 
 // TODO: add highlighting queried text
@@ -319,9 +319,37 @@ function highlightText(text: string): string {
   return highlighted;
 }
 
-function highlightedOr(text: string | undefined, or: string): string {
+function highlightOr(text: string | undefined, or: string): string {
   if (typeof text !== "undefined") return highlightText(text);
   return or;
+}
+
+function highlightIf(text: string | undefined): string | undefined {
+  if (typeof text !== "undefined") return highlightText(text);
+  return undefined;
+}
+
+function highlightMembers(array: GSMember[]): GSMember[] {
+  return array.map((member) => {
+    return {
+      name: highlightText(member.name),
+      role: highlightIf(member.role),
+      contact: highlightIf(member.contact),
+      priority: member.priority,
+    };
+  });
+}
+
+function highlightFiles(array: GSFile[]): GSFile[] {
+  return array.map((file) => {
+    return {
+      name: highlightText(file.name),
+      type: highlightText(file.type),
+      link: file.link,
+      priority: file.priority,
+      date: file.date,
+    };
+  });
 }
 
 async function search(event: Event) {

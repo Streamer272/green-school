@@ -18,9 +18,8 @@
         :data-has-contact="!!member.contact"
         class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer ml-1 font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
-      {{ member.name }}{{
-        member.role ? ` (${member.role})` : ""
-      }}{{ index !== members.length - 1 ? "," : "" }}
+      <span v-html="member.name"/><span v-html="member.role ? ` (${member.role})` : ''"/>
+      {{ index !== members.length - 1 ? "," : "" }}
 
       <p
           v-if="member.contact"

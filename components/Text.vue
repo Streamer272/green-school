@@ -3,7 +3,7 @@
     <p
       v-html="text()"
       :class="`font-source ${styleClasses()}`"
-      class="inline-block transition-all"
+      class="inline-block transition-all w-full"
     />
 
     <div v-if="canToggle()" class="relative bg-gray h-px w-full">
@@ -29,7 +29,7 @@ const props = defineProps<{
   max: number | undefined;
   canToggle: boolean | undefined;
   open: boolean | undefined;
-  styles: "description" | "small-description" | undefined;
+  styles: "description" | "small-description" | "text" | undefined;
 }>();
 
 const open = ref(props.open ?? false);
@@ -53,6 +53,8 @@ function styleClasses() {
       return "font-semibold text-lg text-disc";
     case "small-description":
       return "font-semibold text-unim";
+    case "text":
+      return "font-semibold text-lg text-light";
     default:
       return "";
   }
