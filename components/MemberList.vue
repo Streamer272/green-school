@@ -1,34 +1,35 @@
 <template>
   <div>
     <p
-        :data-size="getSize()"
-        :data-color="getColor()"
-        :data-bold="getBold()"
-        class="relative inline font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+      :data-size="getSize()"
+      :data-color="getColor()"
+      :data-bold="getBold()"
+      class="relative inline font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
       {{ prefix ?? "By" }}
-    </p>
-
-    <p
+      <span
         :key="member.name"
         v-for="(member, index) in sortedMembers"
         :data-size="getSize()"
         :data-color="getColor()"
         :data-bold="getBold()"
         :data-has-contact="!!member.contact"
-        class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer ml-1 font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
-    >
-      <span v-html="member.name"/><span v-html="member.role ? ` (${member.role})` : ''"/>
-      {{ index !== members.length - 1 ? "," : "" }}
+        class="tool overflow-visible inline data-[has-contact=true]:cursor-pointer font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+      >
+        <span v-html="member.name" /><span
+          v-html="member.role ? ` (${member.role})` : ''"
+        />
+        {{ index !== members.length - 1 ? "," : "" }}
 
-      <p
+        <p
           v-if="member.contact"
           :data-size="getSize()"
           :data-color="getColor()"
-          class="tip cursor-auto overflow-auto w-48 h-fit bg-dark rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
-      >
-        {{ member.contact }}
-      </p>
+          class="tip cursor-auto overflow-auto w-48 h-fit bg-dark text-center rounded-2xl py-2 px-4 z-10 transition-opacity font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
+        >
+          {{ member.contact }}
+        </p>
+      </span>
     </p>
   </div>
 </template>
@@ -58,9 +59,7 @@
 </style>
 
 <script lang="ts" setup>
-import type {GSMember} from "~/composables/useGSTypes";
-
-// TODO: redo with spans
+import type { GSMember } from "~/composables/useGSTypes";
 
 const props = defineProps<{
   size?: "sm" | "md" | "lg";
