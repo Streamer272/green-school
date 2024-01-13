@@ -125,7 +125,7 @@
 
           <div class="flex items-start justify-start flex-col">
             <p class="font-source font-semibold text-lg text-light">
-              <span v-html="highlightText(item.name)" /> (<span
+              <span v-html="highlight(item.name)" /> (<span
                 v-html="highlightOr(item.role, '[role]')"
               />, {{ item?.priority || "[priority]" }})
             </p>
@@ -151,7 +151,7 @@
             :members="highlightMembers(item.present)"
           />
 
-          <Text :text="highlightText(item.notes)" styles="text" />
+          <Text :text="highlight(item.notes)" styles="text" />
           <FileList :files="highlightFiles(item.files)" />
         </div>
 
@@ -171,50 +171,51 @@
 
           <div class="flex items-start justify-start flex-col">
             <p class="font-source font-bold text-xl text-light">
-              {{ item.title }}
+              <span v-html="highlight(item.title)" />
             </p>
-            <MemberList :members="item.authors" size="lg" />
+            <MemberList :members="highlightMembers(item.authors)" size="lg" />
             <p class="font-source font-semibold text-lg text-light">
               {{ GSDate.pretty(item.date) }} ({{ item.status }})
             </p>
 
-            <p
-              v-html="processText(item.content)"
-              class="font-source text-lg text-light"
-            />
+            <Text :text="highlight(item.content)" styles="text" />
           </div>
         </div>
 
         <div v-else-if="item.type === 'project'">
           <p class="font-source font-bold text-xl text-light">
-            {{ item.name }} ({{ GSDate.pretty(item.start) }} -
-            {{ GSDate.prettyish(item.end, "?") }})
+            <span v-html="highlight(item.name)" /> (<span
+              v-html="GSDate.pretty(item.start)"
+            />
+            - <span v-html="GSDate.prettyish(item.end, '?')" />)
           </p>
 
-          <p
-            v-html="processText(item.description)"
-            class="font-source text-lg text-light"
-          />
+          <Text :text="highlight(item.description)" styles="text" />
 
-          <MemberList :members="item.members" />
-          <FileList :files="item.files" />
+          <MemberList :members="highlightMembers(item.members)" />
+          <FileList :files="highlightFiles(item.files)" />
         </div>
 
         <div v-else-if="item.type === 'theme'">
           <div class="flex items-center justify-center">
-            <p class="font-source font-bold text-xl text-light">
-              {{ item.name }}
-            </p>
+            <p
+              v-html="highlight(item.name)"
+              class="font-source font-bold text-xl text-light"
+            />
             <img :src="item.icon" alt="Theme icon" class="ml-2" />
             <p class="font-source font-semibold text-lg text-light ml-2">
-              ({{ item.start }} - {{ item.end }})
+              (<span v-html="highlight(item.start)" /> -
+              <span v-html="highlight(item.end)" />)
             </p>
           </div>
 
-          <FileList :files="item.files" />
-          <MemberList :members="item.members" />
+          <FileList :files="highlightFiles(item.files)" />
+          <MemberList :members="highlightMembers(item.members)" />
 
-          <p v-html="item.description" class="font-source text-lg text-light" />
+          <p
+            v-html="highlight(item.description)"
+            class="font-source text-lg text-light"
+          />
         </div>
       </div>
     </div>
@@ -237,8 +238,6 @@ import type { Theme } from "tinymce";
 import Fuse, { type FuseResult, type IFuseOptions } from "fuse.js";
 import type { Archived, GSFile, GSMember } from "~/composables/useGSTypes";
 import { query as firequery } from "@firebase/firestore";
-
-// TODO: add highlighting queried text
 
 const query = ref("");
 const searchFellas = ref(false);
@@ -293,7 +292,9 @@ function mapFound<T>(array: FuseResult<DocumentData>[], type: string) {
   );
 }
 
-function highlightText(text: string): string {
+function highlight(text: string | number): string {
+  if (typeof text === "number") text = text.toString();
+
   const regexp = new RegExp(query.value, "ig");
   let highlighted = text;
   let offset = 0;
@@ -320,19 +321,19 @@ function highlightText(text: string): string {
 }
 
 function highlightOr(text: string | undefined, or: string): string {
-  if (typeof text !== "undefined") return highlightText(text);
+  if (typeof text !== "undefined") return highlight(text);
   return or;
 }
 
 function highlightIf(text: string | undefined): string | undefined {
-  if (typeof text !== "undefined") return highlightText(text);
+  if (typeof text !== "undefined") return highlight(text);
   return undefined;
 }
 
 function highlightMembers(array: GSMember[]): GSMember[] {
   return array.map((member) => {
     return {
-      name: highlightText(member.name),
+      name: highlight(member.name),
       role: highlightIf(member.role),
       contact: highlightIf(member.contact),
       priority: member.priority,
@@ -343,8 +344,8 @@ function highlightMembers(array: GSMember[]): GSMember[] {
 function highlightFiles(array: GSFile[]): GSFile[] {
   return array.map((file) => {
     return {
-      name: highlightText(file.name),
-      type: highlightText(file.type),
+      name: highlight(file.name),
+      type: highlight(file.type),
       link: file.link,
       priority: file.priority,
       date: file.date,
