@@ -61,6 +61,8 @@
 <script lang="ts" setup>
 import type {GSMember} from "~/composables/useGSTypes";
 
+// TODO: redo with spans
+
 const props = defineProps<{
   size?: "sm" | "md" | "lg";
   color?: "limp" | "weak" | "strong";

@@ -3,7 +3,7 @@
     <TitleRouter route="archive" />
     <div class="w-full h-4" />
 
-    <div class="w-[60vw] flex items-start justify-start flex-col gap-y-2">
+    <div class="w-[60vw] flex items-start justify-start flex-col gap-y-2 mb-8">
       <form @submit="search" class="flex items-center justify-start gap-x-1">
         <input
           v-model="query"
@@ -17,6 +17,11 @@
         >
           Search
         </button>
+
+        <p v-if="found" class="ml-2 font-source font-semibold text-unim">
+          Found {{ found.length }}
+          {{ found.length === 1 ? "match" : "matches" }}
+        </p>
       </form>
 
       <div class="flex items-center justify-start gap-x-4">
@@ -120,16 +125,19 @@
 
           <div class="flex items-start justify-start flex-col">
             <p class="font-source font-semibold text-lg text-light">
-              {{ item.name }} ({{ item?.role || "[role]" }},
-              {{ item?.priority || "[priority]" }})
+              <span v-html="highlightText(item.name)" /> (<span
+                v-html="highlightedOr(item.role, '[role]')"
+              />, {{ item?.priority || "[priority]" }})
             </p>
-            <p class="font-source font-semibold text-lg text-light">
-              {{ item?.contact || "[contact]" }}
-            </p>
-
             <p
-              v-html="processText(item?.lore)"
-              class="font-source text-lg text-unim"
+              v-html="highlightedOr(item?.contact, '[contact]')"
+              class="font-source font-semibold text-lg text-light"
+            />
+
+            <Text
+              v-if="item?.lore"
+              :text="highlightedOr(item?.lore, '')"
+              styles="small-description"
             />
           </div>
         </div>
@@ -221,12 +229,14 @@ import {
   type DocumentData,
   getDocs,
   QuerySnapshot,
+  where,
 } from "@firebase/firestore";
 import { useFirestore } from "~/composables/useFirebase";
 import type { Fella, Meeting, Post, Project } from "~/composables/useFirestore";
 import type { Theme } from "tinymce";
-import Fuse from "fuse.js";
+import Fuse, { type FuseResult, type IFuseOptions } from "fuse.js";
 import type { Archived } from "~/composables/useGSTypes";
+import { query as firequery } from "@firebase/firestore";
 
 // TODO: add highlighting queried text
 
@@ -244,6 +254,13 @@ type AllArray =
   | Archived<Post>[]
   | Archived<Project>[]
   | Archived<Theme>[];
+
+const options: IFuseOptions<any> = {
+  includeMatches: true,
+  findAllMatches: true,
+  threshold: 0.2,
+  ignoreLocation: true,
+};
 
 function toggleAll() {
   searchFellas.value = !searchFellas.value;
@@ -265,8 +282,9 @@ async function fetch(when: boolean, path: string) {
   return when ? await getDocs(collection(useFirestore(), path)) : undefined;
 }
 
-function mapFound<T>(array: Array<DocumentData>, type: string) {
-  return array.map(
+function mapFound<T>(array: FuseResult<DocumentData>[], type: string) {
+  const processed = array.map((it) => it.item);
+  return processed.map(
     (it) =>
       ({
         ...it,
@@ -275,13 +293,50 @@ function mapFound<T>(array: Array<DocumentData>, type: string) {
   );
 }
 
+function highlightText(text: string): string {
+  const regexp = new RegExp(query.value, "ig");
+  let highlighted = text;
+  let offset = 0;
+
+  let matches = [];
+  for (const match of text.matchAll(regexp)) {
+    matches.push(match);
+  }
+
+  for (const match of matches) {
+    const found = match["0"];
+    const changed = `<mark>${found}</mark>`;
+
+    if (match.index === undefined) continue;
+    highlighted =
+      highlighted.slice(0, match.index + offset) +
+      changed +
+      highlighted.slice(match.index + offset + found.length);
+
+    offset += changed.length - found.length;
+  }
+
+  return highlighted;
+}
+
+function highlightedOr(text: string | undefined, or: string): string {
+  if (typeof text !== "undefined") return highlightText(text);
+  return or;
+}
+
 async function search(event: Event) {
   event.preventDefault();
 
   const fellasRaw = await fetch(searchFellas.value, "fellas");
   const meetingsRaw = await fetch(searchMeetings.value, "meetings");
-  // TODO: add query
-  const postsRaw = await fetch(searchPosts.value, "posts");
+  const postsRaw = searchPosts.value
+    ? await getDocs(
+        firequery(
+          collection(useFirestore(), "posts"),
+          where("status", "==", "public"),
+        ),
+      )
+    : undefined;
   const projectsRaw = await fetch(searchProjects.value, "projects");
   const themesRaw = await fetch(searchThemes.value, "themes");
 
@@ -292,11 +347,12 @@ async function search(event: Event) {
   const themes = transformRaw(themesRaw);
 
   const foundFellas = new Fuse(fellas, {
+    ...options,
     keys: ["name", "role", "contact", "lore"],
-  })
-    .search(query.value)
-    .map((it) => it.item);
+  }).search(query.value);
+
   const foundMeetings = new Fuse(meetings, {
+    ...options,
     keys: [
       "id",
       "date",
@@ -307,10 +363,10 @@ async function search(event: Event) {
       "files.name",
       "files.type",
     ],
-  })
-    .search(query.value)
-    .map((it) => it.item);
+  }).search(query.value);
+
   const foundPosts = new Fuse(posts, {
+    ...options,
     keys: [
       "id",
       "title",
@@ -320,10 +376,10 @@ async function search(event: Event) {
       "authors.role",
       "authors.contact",
     ],
-  })
-    .search(query.value)
-    .map((it) => it.item);
+  }).search(query.value);
+
   const foundProjects = new Fuse(projects, {
+    ...options,
     keys: [
       "id",
       "name",
@@ -336,10 +392,10 @@ async function search(event: Event) {
       "members.role",
       "members.contact",
     ],
-  })
-    .search(query.value)
-    .map((it) => it.item);
+  }).search(query.value);
+
   const foundThemes = new Fuse(themes, {
+    ...options,
     keys: [
       "id",
       "name",
@@ -352,9 +408,7 @@ async function search(event: Event) {
       "members.role",
       "members.contact",
     ],
-  })
-    .search(query.value)
-    .map((it) => it.item);
+  }).search(query.value);
 
   found.value = [
     ...mapFound<Archived<Fella>>(foundFellas, "fella"),

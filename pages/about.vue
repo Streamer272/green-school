@@ -75,7 +75,6 @@ import { collection, getDocs } from "@firebase/firestore";
 const fellas = ref<Fella[] | undefined>(undefined);
 const sortedFellas = computed(() => {
   if (!fellas.value) return undefined;
-  console.log(fellas.value);
   return fellas.value.sort(useMemberSort());
 });
 
