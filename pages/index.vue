@@ -68,10 +68,7 @@
             Current goal
           </p>
 
-          <p
-            v-html="theme.description"
-            class="font-source font-semibold text-lg text-unim mt-6"
-          />
+          <Text :text="theme.description" styles="description" class="mt-6" />
 
           <MemberList color="limp" :members="theme.members" class="mt-4" />
         </div>

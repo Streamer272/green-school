@@ -49,13 +49,11 @@
           :data-open="currentProject === index"
           class="flex flex-col m-4 gap-y-2 data-[open=false]:pointer-events-none data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen transition-all"
         >
-          <p
-            v-html="project.description"
-            class="font-source font-semibold text-unim"
-          />
-          <div
-            v-if="project.files.length > 0 || project.members.length > 0"
-            class="w-full bg-gray h-[0.125rem] my-1"
+          <Text
+            :text="project.description"
+            styles="description"
+            trim
+            can-toggle
           />
 
           <MemberList size="sm" color="weak" :members="project.members" />

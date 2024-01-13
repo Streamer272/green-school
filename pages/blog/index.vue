@@ -36,10 +36,10 @@
 
           <!-- image -->
           <div
+            v-if="post.image"
             class="h-full max-w-[20rem] rounded-r-2xl bg-despair p-4 flex-shrink-0"
           >
             <img
-              v-if="post.image"
               :src="post.image"
               alt="Image"
               class="h-full w-full object-contain"

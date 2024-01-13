@@ -42,9 +42,11 @@
                 {{ fella.name }}{{ fella.role ? ` - ${fella.role}` : "" }}
               </p>
 
-              <p v-if="fella.lore" class="font-source font-semibold text-unim">
-                {{ fella.lore }}
-              </p>
+              <Text
+                v-if="fella.lore"
+                :text="fella.lore"
+                styles="small-description"
+              />
 
               <div v-if="fella.lore && fella.picture" class="flex-grow" />
 
