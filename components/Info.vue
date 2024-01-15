@@ -10,25 +10,25 @@
     :data-open="open"
     class="flex items-start justify-start flex-col absolute top-[6.25rem] right-[1.5625rem] bg-dark w-[25rem] p-6 rounded-[1.875rem] data-[open=false]:-translate-y-8 data-[open=false]:translate-x-4 data-[open=false]:opacity-0 transition-all"
   >
-    <p class="font-source font-semibold text-xl text-light">Created by</p>
+    <p class="font-source font-semibold text-xl text-light">Vytvorili</p>
     <div class="flex items-center justify-center ml-4">
       <p class="font-source font-semibold text-lg text-cece">
-        Daniel Svitan &nbsp;
+        Daniel Svitaň &nbsp;
       </p>
-      <p class="text-disc">(code)</p>
+      <p class="text-disc">(kód)</p>
     </div>
     <div class="flex items-center justify-center ml-4">
       <p class="font-source font-semibold text-lg text-cece">
-        Richard Sepsi &nbsp;
+        Richard Sepši &nbsp;
       </p>
-      <p class="text-disc">(design)</p>
+      <p class="text-disc">(dizajn)</p>
     </div>
     <p class="font-source font-semibold text-lg text-disc ml-4">
-      for the green school
+      pre zelenú školu
     </p>
 
-    <p class="font-source font-semibold text-xl text-light mt-4">
-      Last updated
+    <p class="font-source font-semibold text-lg text-light mt-4">
+      Naposledy aktualizované
     </p>
     <div class="flex items-center justify-center ml-4">
       <p class="font-source font-semibold text-lg text-cece">

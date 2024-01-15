@@ -6,7 +6,7 @@
         :data-current="route === 'home'"
         class="text-unim font-bold font-source text-xl px-4 py-2 data-[current=true]:bg-ghetto rounded-2xl"
       >
-        Green School
+        Témy
       </NuxtLink>
 
       <NuxtLink
@@ -22,7 +22,7 @@
         :data-current="route === 'about'"
         class="text-unim font-bold font-source text-xl px-4 py-2 data-[current=true]:bg-ghetto rounded-2xl"
       >
-        About us
+        O nás
       </NuxtLink>
 
       <NuxtLink
@@ -30,7 +30,7 @@
         :data-current="route === 'archive'"
         class="text-unim font-bold font-source text-xl px-4 py-2 data-[current=true]:bg-ghetto rounded-2xl"
       >
-        Archive
+        Archív
       </NuxtLink>
     </div>
   </div>

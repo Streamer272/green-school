@@ -10,7 +10,7 @@
       class="data-[open=true]:rotate-90 transition w-8 h-8"
     />
 
-    Projects
+    Projekty
   </button>
 
   <div
