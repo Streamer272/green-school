@@ -8,7 +8,7 @@
   </div>
 
   <div
-    class="flex justify-start items-center flex-col w-screen min-h-screen overflow-auto"
+    class="flex justify-start items-center flex-col w-screen min-h-screen overflow-y-auto overflow-x-visible"
   >
     <slot />
   </div>
@@ -42,4 +42,3 @@
   background: linear-gradient(rgb(16, 16, 16, 0.6), rgb(16, 16, 16, 0.25));
 }
 </style>
-<script setup lang="ts"></script>
