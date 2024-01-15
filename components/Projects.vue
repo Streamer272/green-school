@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => (open = !open)"
-    class="flex items-center justify-center gap-x-6 absolute top-9 left-9 z-20 font-source font-semibold text-white text-xl"
+    class="flex items-center justify-center gap-x-6 absolute top-9 left-9 z-40 font-source font-semibold text-white text-xl"
   >
     <img
       :data-open="open"
@@ -15,7 +15,7 @@
 
   <div
     :data-open="open"
-    class="flex flex-col justify-start items-center absolute top-0 left-0 w-[28.125rem] h-full pt-[6.5625rem] pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-10 transition gap-y-4"
+    class="flex flex-col justify-start items-center absolute top-0 left-0 w-[28.125rem] h-full pt-[6.5625rem] pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-30 transition gap-y-4"
   >
     <!-- projects column -->
     <Loading :property="projects">

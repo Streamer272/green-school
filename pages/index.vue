@@ -5,7 +5,7 @@
 
     <!-- theme row -->
     <Loading :property="themes">
-      <div class="flex items-center justify-start w-full ml-72 pl-[0.6875rem]">
+      <div class="flex items-center justify-start w-screen pl-[9.6875rem]">
         <div
           :key="theme.id"
           v-for="(theme, index) in themes"
@@ -25,27 +25,29 @@
       </div>
 
       <!-- timeline -->
-      <div class="ml-72 mt-8 w-full relative">
+      <div class="flex pl-36 pt-8 w-screen">
+        <!-- current -->
         <div
-          class="h-1 bg-gray rounded-full relative timeline"
+          class="flex h-1 bg-gray rounded-full timeline"
           :style="`width: ${
             (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
           }rem`"
         >
+          <!-- years (big = with label, small = without label) -->
           <div
             :key="year.year"
             v-for="year in getYears()"
-            :class="`ball ${year.big ? 'big' : 'small'}`"
+            class="flex w-40 flex-shrink-0 z-20"
           >
-            <p v-if="year.big" class="year">{{ year.year }}</p>
+            <div :class="`ball ${year.big ? 'big' : 'small'}`">
+              <p v-if="year.big" class="year">{{ year.year }}</p>
+            </div>
           </div>
         </div>
 
+        <!-- future -->
         <div
-          class="w-full border-gray border-t-4 border-dashed rounded-full h-0 ml-[1.3rem] absolute top-0 future-timeline"
-          :style="`left: ${
-            (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
-          }rem`"
+          class="w-full border-gray border-t-4 border-dashed rounded-full h-0 z-10"
         />
       </div>
 
@@ -97,17 +99,16 @@
 
 .timeline {
   .ball {
-    position: absolute;
-    top: 0;
+    display: inline-block;
     transform: translateY(-50%);
-    left: 0;
     margin-top: 0.15rem;
+    border-radius: 100%;
+    flex-shrink: 0;
 
     &.big {
       width: 1.375rem;
       height: 1.375rem;
       background-color: #b3b3b3;
-      border-radius: 100%;
 
       .year {
         @apply font-source font-semibold text-light absolute top-9 left-0 text-xl;
@@ -119,17 +120,7 @@
       width: 1rem;
       height: 1rem;
       background-color: #909090;
-      border-radius: 100%;
     }
-
-    @for $i from 1 through 10 {
-      &:nth-of-type(#{$i}) {
-        left: calc(10rem * ($i - 1));
-      }
-    }
-  }
-
-  .future-timeline {
   }
 }
 </style>
