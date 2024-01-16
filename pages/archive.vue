@@ -178,7 +178,13 @@
               {{ GSDate.pretty(item.date) }} ({{ item.status }})
             </p>
 
-            <Text :text="highlight(item.content)" styles="text" />
+            <Text
+              :text="highlight(item.content)"
+              styles="text"
+              can-toggle
+              trim
+              :max="512"
+            />
           </div>
         </div>
 
