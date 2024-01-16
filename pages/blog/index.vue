@@ -14,19 +14,22 @@
             :data-has-image="!!post.image"
             class="flex items-start justify-start flex-col w-full bg-dark p-8 flex-grow rounded-l-[1.25rem] data-[has-image=false]:rounded-r-[1.25rem]"
           >
-            <div class="flex justify-between items-start w-full">
+            <div class="flex justify-between items-center w-full">
               <p class="text-2xl text-light font-source font-bold">
                 {{ processText(post.title) }}
               </p>
 
-              <p class="font-bold text-nice font-source my-1 flex-shrink-0">
+              <p class="font-bold text-nice font-source flex-shrink-0">
                 {{ GSDate.pretty(post.date) }}
               </p>
             </div>
 
-            <p
-              v-html="processText(post.content)"
-              class="text-unim font-source font-bold mt-4"
+            <Text
+              :text="post.content"
+              styles="description"
+              trim
+              :max="512"
+              class="mt-4"
             />
 
             <div class="flex-grow" />

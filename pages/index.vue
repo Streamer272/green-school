@@ -55,8 +55,35 @@
 
         <!-- blog -->
         <Loading :property="blog" fill>
-          <div v-for="post in blog">
-            <p class="text-light">{{ post.title }}</p>
+          <div class="flex gap-4 flex-wrap">
+            <div
+              v-for="post in blog"
+              class="flex flex-col rounded-[1.25rem] w-[30rem] h-[15rem] bg-dark p-4"
+            >
+              <!-- top row -->
+              <div class="w-full flex items-center justify-between">
+                <p class="font-source font-bold text-lg text-light">
+                  {{ post.title }}
+                </p>
+
+                <p class="font-bold text-nice font-source flex-shrink-0">
+                  {{ GSDate.pretty(post.date) }}
+                </p>
+              </div>
+
+              <div class="w-full overflow-hidden mt-2">
+                <Text
+                  :text="post.content"
+                  styles="description"
+                  trim
+                  :max="256"
+                />
+              </div>
+
+              <div class="flex-grow" />
+
+              <MemberList :members="post.authors" size="sm" color="limp" bold />
+            </div>
           </div>
         </Loading>
       </div>
@@ -106,7 +133,7 @@ onMounted(() => {
     query(
       collection(useFirestore(), "posts"),
       orderBy("date", "desc"),
-      limit(10),
+      limit(12),
     ),
   )
     .then((snapshot) => {
