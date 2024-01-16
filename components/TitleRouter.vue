@@ -6,6 +6,14 @@
         :data-current="route === 'home'"
         class="text-unim font-bold font-source text-xl px-4 py-2 data-[current=true]:bg-ghetto rounded-2xl"
       >
+        Domov
+      </NuxtLink>
+
+      <NuxtLink
+        to="/themes"
+        :data-current="route === 'themes'"
+        class="text-unim font-bold font-source text-xl px-4 py-2 data-[current=true]:bg-ghetto rounded-2xl"
+      >
         Témy
       </NuxtLink>
 
@@ -38,6 +46,6 @@
 
 <script lang="ts" setup>
 defineProps<{
-  route: "home" | "blog" | "about" | "archive";
+  route: "home" | "themes" | "blog" | "about" | "archive";
 }>();
 </script>
