@@ -1,61 +1,65 @@
 <template>
   <Background>
     <TitleRouter route="themes" />
-    <div class="w-full h-48" />
+    <div class="w-full h-28 md:h-48" />
 
     <!-- theme row -->
     <Loading :property="themes">
-      <div class="flex items-center justify-start w-screen pl-[9.6875rem]">
-        <!-- themes -->
-        <div
-          :key="theme.id"
-          v-for="(theme, index) in themes"
-          :class="`flex items-center justify-center ${getThemeWidthClass(
-            theme,
-          )}`"
-        >
-          <button
-            :data-current="index === currentTheme"
-            @click="changeTheme(index)"
-            class="flex items-center justify-between mx-2 px-6 py-4 w-full rounded-2xl font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
-          >
-            {{ theme.name }}
-            <img :src="theme.icon" alt="Theme icon" />
-          </button>
-        </div>
-      </div>
-
-      <!-- timeline -->
-      <div class="flex pl-36 pt-8 w-screen">
-        <!-- current -->
-        <div
-          class="flex h-1 bg-gray rounded-full timeline"
-          :style="`width: ${
-            (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
-          }rem`"
-        >
-          <!-- years (big = with label, small = without label) -->
+      <div
+        class="flex flex-col w-screen h-40 overflow-x-scroll md:overflow-x-scroll flex-shrink-0 ml-2 pl-8 md:pl-36 snap-mandatory snap-x"
+      >
+        <div class="flex items-center justify-start ml-[21px]">
+          <!-- themes -->
           <div
-            :key="year.year"
-            v-for="year in getYears()"
-            class="flex w-40 flex-shrink-0 z-20"
+            :key="theme.id"
+            v-for="(theme, index) in themes"
+            :class="`flex items-center justify-center flex-shrink-0 snap-start scroll-ml-10 ${getThemeWidthClass(
+              theme,
+            )}`"
           >
-            <div :class="`ball ${year.big ? 'big' : 'small'}`">
-              <p v-if="year.big" class="year">{{ year.year }}</p>
-            </div>
+            <button
+              :data-current="index === currentTheme"
+              @click="changeTheme(index)"
+              class="flex items-center justify-between mx-2 px-6 py-4 w-full rounded-2xl font-source font-bold text-[1.375rem] text-light text-left data-[current=true]:bg-hood data-[current=false]:bg-ghetto"
+            >
+              {{ theme.name }}
+              <img :src="theme.icon" alt="Theme icon" />
+            </button>
           </div>
         </div>
 
-        <!-- future -->
-        <div
-          class="w-full border-gray border-t-4 border-dashed rounded-full h-0 z-10"
-        />
+        <!-- timeline -->
+        <div class="flex mt-8">
+          <!-- current -->
+          <div
+            class="flex h-1 bg-gray rounded-full timeline"
+            :style="`width: ${
+              (getStartAndEndYears()[1] - getStartAndEndYears()[0]) * 10
+            }rem`"
+          >
+            <!-- years (big = with label, small = without label) -->
+            <div
+              :key="year.year"
+              v-for="year in getYears()"
+              class="flex w-40 flex-shrink-0 z-20"
+            >
+              <div :class="`ball ${year.big ? 'big' : 'small'}`">
+                <p v-if="year.big" class="year">{{ year.year }}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- future -->
+          <div
+            class="w-full border-gray border-t-4 border-dashed rounded-full h-0 z-10"
+          />
+        </div>
       </div>
 
       <!-- theme description -->
       <div
         :data-selected="currentTheme !== -1 && !animationDueChange"
-        class="flex w-[80vw] mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
+        class="flex flex-col md:flex-row gap-y-4 w-[90vw] md:w-[80vw] mt-4 md:mt-28 data-[selected=false]:opacity-0 data-[selected=true]:opacity-100 transition-all"
       >
         <div class="flex flex-col justify-start items-start basis-[50%]">
           <div class="flex items-center justify-start gap-x-3">

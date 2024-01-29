@@ -8,7 +8,7 @@
 
   <div
     :data-open="open"
-    class="flex items-start justify-start flex-col absolute top-[6.25rem] right-[1.5625rem] bg-dark w-[20rem] md:w-[25rem] p-6 mx-4 rounded-[1.875rem] data-[open=false]:-translate-y-8 data-[open=false]:translate-x-4 data-[open=false]:opacity-0 transition-all"
+    class="flex items-start justify-start flex-col absolute top-[6.25rem] right-[1.5625rem] bg-dark w-[20rem] md:w-[25rem] p-6 mx-4 rounded-[1.875rem] data-[open=false]:-translate-y-8 data-[open=false]:translate-x-4 data-[open=false]:opacity-0 data-[open=false]:invisible transition-all"
   >
     <p class="font-source font-semibold text-xl text-light">Vytvorili</p>
     <div class="flex items-center justify-center ml-4">
