@@ -113,7 +113,11 @@
         </div>
       </div>
 
-      <div v-for="item in found" class="relative bg-dark p-4 rounded-2xl">
+      <div
+        :key="item.id"
+        v-for="item in found"
+        class="relative bg-dark p-4 rounded-2xl"
+      >
         <div v-if="item.type === 'post'" class="absolute top-2 right-2">
           <NuxtLink :to="`/blog/${item.id}`">
             <img src="/icons/open.svg" alt="Open" />

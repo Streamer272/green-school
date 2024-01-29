@@ -5,9 +5,10 @@
 
     <Loading :property="posts" :fill="true">
       <div class="flex justify-center items-start flex-col gap-y-4">
-        <div
+        <NuxtLink
           :key="post.id"
           v-for="post in posts"
+          :to="`/blog/${post.id}`"
           class="flex rounded-[1.25rem] w-[90vw] md:w-[50rem] h-[20rem] relative"
         >
           <!-- text -->
@@ -49,12 +50,7 @@
               class="h-full w-full object-contain"
             />
           </div>
-
-          <NuxtLink
-            :to="`/blog/${post.id}`"
-            class="absolute top-0 left-0 w-full h-full"
-          />
-        </div>
+        </NuxtLink>
       </div>
     </Loading>
 

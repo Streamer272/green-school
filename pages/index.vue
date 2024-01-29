@@ -60,8 +60,10 @@
         <!-- blog -->
         <Loading :property="blog" fill>
           <div class="flex gap-4 flex-wrap">
-            <div
+            <NuxtLink
+              :key="post.id"
               v-for="post in blog"
+              :to="`/blog/${post.id}`"
               class="flex flex-col rounded-[1.25rem] w-[90vw] md:w-[30rem] h-[15rem] bg-dark p-4"
             >
               <!-- top row -->
@@ -87,7 +89,7 @@
               <div class="flex-grow" />
 
               <MemberList :members="post.authors" size="sm" color="limp" bold />
-            </div>
+            </NuxtLink>
           </div>
         </Loading>
       </div>
