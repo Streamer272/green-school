@@ -3,7 +3,7 @@
     class="flex items-center justify-start md:justify-center w-screen fixed md:static left-1/2 bottom-0 -translate-x-1/2 md:translate-x-0 z-40"
   >
     <div
-      class="flex bg-despair rounded-[1.25rem] gap-x-1 md:gap-x-2 p-2 mx-4 my-6 overflow-scroll"
+      class="flex bg-despair rounded-[1.25rem] gap-x-1 md:gap-x-2 p-2 mx-4 my-6 overflow-auto"
     >
       <NuxtLink
         to="/"

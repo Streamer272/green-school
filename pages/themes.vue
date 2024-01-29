@@ -6,7 +6,7 @@
     <!-- theme row -->
     <Loading :property="themes">
       <div
-        class="flex flex-col w-screen h-40 overflow-x-scroll md:overflow-x-scroll flex-shrink-0 ml-2 pl-8 md:pl-36 snap-mandatory snap-x"
+        class="flex flex-col w-screen h-44 overflow-x-auto flex-shrink-0 ml-2 pl-8 md:pl-36 snap-mandatory snap-x"
       >
         <div class="flex items-center justify-start ml-[21px]">
           <!-- themes -->

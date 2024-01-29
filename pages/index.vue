@@ -138,6 +138,8 @@ onMounted(() => {
   getDocs(
     query(
       collection(useFirestore(), "posts"),
+      where("status", "==", "public"),
+      where("hidden", "==", false),
       orderBy("date", "desc"),
       limit(12),
     ),
@@ -152,6 +154,6 @@ onMounted(() => {
       });
       blog.value = array;
     })
-    .catch(alert);
+    .catch(console.log);
 });
 </script>
