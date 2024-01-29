@@ -4,11 +4,13 @@
     <div class="w-full h-4" />
 
     <!-- about -->
-    <div class="flex items-start justify-start flex-col mx-72 w-[50vw] gap-y-4">
+    <div
+      class="flex items-start justify-start flex-col mx-72 w-[80vw] md:w-[50vw] gap-y-8 md:gap-y-4"
+    >
       <p
         class="font-source font-bold text-light text-3xl w-full text-center mb-4"
       >
-        Meet the Green School
+        Spoznaj kolégium
       </p>
 
       <!-- row wrapper -->
@@ -17,23 +19,23 @@
           :key="fella.id"
           v-for="(fella, index) in sortedFellas"
           :data-odd="index % 2 === 1"
-          class="flex items-center justify-start w-full data-[odd=true]:flex-row-reverse"
+          class="flex items-center justify-start w-full h-fit data-[odd=true]:flex-row-reverse"
         >
           <div
             :data-has-picture="!!fella.picture"
             :data-odd="index % 2 === 1"
-            class="flex items-start justify-center w-[30vw] data-[has-picture=false]:w-full h-80 gap-x-4 data-[odd=true]:flex-row-reverse"
+            class="flex items-center justify-center w-[75vw] md:w-[30vw] data-[has-picture=false]:w-full h-fit gap-x-4 data-[odd=true]:flex-row-reverse"
           >
             <img
               v-if="fella.picture"
               :src="fella.picture"
               alt="Picture"
-              class="h-full basis-[40%] rounded-2xl"
+              class="max-h-40 md:max-h-60 basis-[40%] rounded-2xl"
             />
 
             <div
               :data-centered="!fella.lore || !fella.picture"
-              class="flex items-start justify-start data-[centered=true]:justify-center flex-col basis-[60%] h-full py-2"
+              class="flex data-[centered=true]:justify-center flex-col basis-[60%] py-2"
             >
               <p
                 :data-has-lore="!!fella.lore"
@@ -59,8 +61,6 @@
             </div>
           </div>
         </div>
-
-        <div class="h-36" />
       </Loading>
     </div>
 
