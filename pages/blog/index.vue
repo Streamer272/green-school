@@ -1,13 +1,14 @@
 <template>
   <Background>
     <TitleRouter route="blog" />
+    <div class="w-full h-4" />
 
     <Loading :property="posts" :fill="true">
       <div class="flex justify-center items-start flex-col gap-y-4">
         <div
           :key="post.id"
           v-for="post in posts"
-          class="flex rounded-[1.25rem] w-[50rem] h-[20rem] relative"
+          class="flex rounded-[1.25rem] w-[90vw] md:w-[50rem] h-[20rem] relative"
         >
           <!-- text -->
           <div

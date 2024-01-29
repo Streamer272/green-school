@@ -16,6 +16,10 @@
         Daniel Svitaň &nbsp;
       </p>
       <p class="text-disc">(kód)</p>
+
+      <NuxtLink to="https://svitan.dev/" class="ml-2">
+        <img src="/icons/open.svg" alt="Open" />
+      </NuxtLink>
     </div>
     <div class="flex items-center justify-center ml-4">
       <p class="font-source font-semibold text-lg text-cece">

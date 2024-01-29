@@ -4,14 +4,18 @@
     <div class="w-full h-16" />
 
     <Loading :property="isEverythingLoading" is-boolean fill>
-      <div class="flex items-start justify-start flex-col w-[60vw]">
+      <div class="flex items-start justify-start flex-col w-[90vw] md:w-[60vw]">
         <!-- theme -->
         <Loading :property="theme" fill>
-          <div class="flex items-center justify-center w-full">
+          <div
+            class="flex items-center justify-center w-full flex-col md:flex-row"
+          >
             <!-- left -->
-            <div class="flex justify-center flex-col basis-1/2">
+            <div class="flex justify-center flex-col md:basis-1/2">
               <!-- custom width wrapper -->
-              <div class="flex items-center justify-center flex-col w-[70%]">
+              <div
+                class="flex items-center justify-center flex-col w-full md:w-[70%]"
+              >
                 <!-- card -->
                 <div
                   class="flex items-center justify-between w-full mx-2 px-6 py-4 rounded-2xl font-source font-bold text-[1.375rem] text-light text-left bg-ghetto"
@@ -45,7 +49,7 @@
             </div>
 
             <!-- right -->
-            <div class="basis-1/2">
+            <div class="md:basis-1/2">
               <Text :text="theme.description" styles="description" />
             </div>
           </div>
@@ -58,7 +62,7 @@
           <div class="flex gap-4 flex-wrap">
             <div
               v-for="post in blog"
-              class="flex flex-col rounded-[1.25rem] w-[30rem] h-[15rem] bg-dark p-4"
+              class="flex flex-col rounded-[1.25rem] w-[90vw] md:w-[30rem] h-[15rem] bg-dark p-4"
             >
               <!-- top row -->
               <div class="w-full flex items-center justify-between">
