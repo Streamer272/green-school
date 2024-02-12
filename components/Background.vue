@@ -8,7 +8,7 @@
   </div>
 
   <div
-    class="flex justify-start items-center flex-col w-screen min-h-screen pb-24 md:pb-0 overflow-y-auto overflow-x-hidden"
+    class="flex justify-start items-center flex-col w-screen min-h-screen pb-24 md:pb-12 overflow-y-auto overflow-x-hidden"
   >
     <slot />
   </div>

@@ -1,7 +1,24 @@
 <template>
   <Background>
     <TitleRouter route="themes" />
-    <div class="w-full h-28 md:h-48" />
+    <div class="w-full h-28 md:h-24" />
+
+    <div class="flex w-full">
+      <p
+        class="font-source font-bold text-unim text-lg text-left mb-12 w-full ml-10 md:w-[60rem] md:ml-40"
+      >
+        V projekte Zelená škola je viacero tém. Školy si vyberajú, ktorej sa
+        budú počas certifikačného obdobia (zvyčajne 2 roky) venovať. Keď
+        hodnotitelia zo Zelenej školy usúdia, že škola na tej téme poctivo
+        pracovala a už sa ukazujú aj výsledky jej práce, tak škola dostane
+        Certifikát Zelenej školy. Ale to, že škola dostane Certifikát Zelenej
+        školy za nejakú tému, neznamená, že už môže túto tému prestať riešiť.
+        Stále sa jej škola venuje ako "udržiavacej téme" (udržiava stav, ktorý
+        dosiahla, keď sa jej venovala naplno). Tu sú témy, ktoré sme už riešili
+        my a získali sme za ne aj Certifikát Zelenej školy (okrem témy Doprava a
+        ovzdušie, pretože na tej práve teraz pracujeme):
+      </p>
+    </div>
 
     <!-- theme row -->
     <Loading :property="themes">
