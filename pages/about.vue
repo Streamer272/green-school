@@ -8,10 +8,29 @@
       class="flex items-start justify-start flex-col mx-72 w-[80vw] md:w-[50vw] gap-y-8 md:gap-y-4"
     >
       <p
-        class="font-source font-bold text-light text-3xl w-full text-center mb-4"
+        class="font-source font-bold text-light text-3xl w-full text-center mb-2"
       >
         Spoznaj kolégium
       </p>
+
+      <div class="flex justify-center w-full">
+        <p
+          class="font-source font-bold text-unim text-lg text-center mb-4 w-[50rem]"
+        >
+          Sme KOLÉGIUM ZELENEJ ŠKOLY na
+          <NuxtLink to="https://skolasvr.edupage.org/" class="underline">
+            Spojenej škole sv. Rodiny
+          </NuxtLink>
+          . Naša škola je zapojená do medzinárodného projektu
+          <NuxtLink to="https://zelenaskola.sk/" class="underline">
+            Zelená škola
+          </NuxtLink>
+          a my ho na našej škole koordinujeme. Inak povedané: sme partia mladých
+          ľudí, ktorým osud našej planéty nie je ľahostajný, a preto sa snažia o
+          ekologizáciu školy, ktorú navštevujú. Našou koordinátorkou je pani
+          učiteľka Renáta Tóthová.
+        </p>
+      </div>
 
       <!-- row wrapper -->
       <Loading :property="sortedFellas" :fill="true">
