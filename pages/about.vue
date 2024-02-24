@@ -81,6 +81,26 @@
           </div>
         </div>
       </Loading>
+
+      <p
+        class="font-source font-bold text-light text-3xl w-full text-center mb-2 mt-8"
+      >
+        Kontaktuj nás
+      </p>
+
+      <div id="contact" class="flex justify-center w-full">
+        <p
+          class="font-source font-bold text-unim text-lg text-center mb-4 w-[50rem]"
+        >
+          Môžeš nám napísať na náš email:
+          <NuxtLink to="mailto:zelena.gercenka@svr.sk" class="underline">
+            zelena.gercenka@svr.sk
+          </NuxtLink>
+          <br />
+          Sú niake problémy so stránkou? Píš nášmu developérovi na +421 948 309
+          804
+        </p>
+      </div>
     </div>
 
     <Info />
