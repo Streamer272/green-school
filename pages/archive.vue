@@ -7,7 +7,7 @@
       <form @submit="search" class="flex items-center justify-start gap-x-1">
         <input
           v-model="query"
-          placeholder="Query..."
+          placeholder="Text..."
           class="rounded-l-full py-2 px-4 bg-dark text-light focus:outline-none border border-unim border-solid"
         />
 
@@ -15,12 +15,11 @@
           type="submit"
           class="rounded-r-full py-2 px-4 bg-dark text-light border border-unim border-solid"
         >
-          Search
+          Hladať
         </button>
 
         <p v-if="found" class="ml-2 font-source font-semibold text-unim">
-          Found {{ found.length }}
-          {{ found.length === 1 ? "match" : "matches" }}
+          Nájdených {{ found.length }} zhôd
         </p>
       </form>
 
@@ -29,7 +28,7 @@
           @click="toggleAll"
           class="font-source font-semibold text-light text-lg bg-none p-0 m-0"
         >
-          Search for
+          Hladať
         </button>
 
         <div class="flex items-center justify-start gap-x-1">
@@ -44,7 +43,7 @@
             for="search-fellas"
             class="font-source font-semibold text-lg text-light"
           >
-            Fellas
+            Členov
           </label>
         </div>
 
@@ -60,7 +59,7 @@
             for="search-meetings"
             class="font-source font-semibold text-lg text-light"
           >
-            Meetings
+            Stretnutia
           </label>
         </div>
 
@@ -76,7 +75,7 @@
             for="search-posts"
             class="font-source font-semibold text-lg text-light"
           >
-            Posts
+            Články
           </label>
         </div>
 
@@ -92,7 +91,7 @@
             for="search-projects"
             class="font-source font-semibold text-lg text-light"
           >
-            Projects
+            Projekty
           </label>
         </div>
 
@@ -108,7 +107,7 @@
             for="search-themes"
             class="font-source font-semibold text-lg text-light"
           >
-            Themes
+            Témy
           </label>
         </div>
       </div>

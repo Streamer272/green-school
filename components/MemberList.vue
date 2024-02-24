@@ -6,7 +6,7 @@
       :data-bold="getBold()"
       class="relative inline font-source font-semibold data-[bold=true]:font-bold data-[color=limp]:text-disc data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
     >
-      {{ prefix ?? "By" }}
+      {{ prefix ?? "Od" }}
       <span
         :key="member.name"
         v-for="(member, index) in sortedMembers"
