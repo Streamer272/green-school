@@ -97,7 +97,7 @@
             zelena.gercenka@svr.sk
           </NuxtLink>
           <br />
-          Sú niake problémy so stránkou? Píš nášmu developérovi na +421 948 309
+          Sú nejaké problémy so stránkou? Píš nášmu developerovi na +421 948 309
           804
         </p>
       </div>

@@ -21,7 +21,7 @@ initFirebase();
 initFireAuth();
 
 useHead({
-  title: "Green School",
+  title: "Zelená Škola",
   link: [
     {
       rel: "icon",
