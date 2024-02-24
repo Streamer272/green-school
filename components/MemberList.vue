@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="members.length > 0">
     <p
       :data-size="getSize()"
       :data-color="getColor()"

@@ -1,65 +1,23 @@
 <template>
   <Background>
     <TitleRouter route="home" />
-    <div class="w-full h-16" />
+    <div class="w-full h-8" />
 
-    <Loading :property="isEverythingLoading" is-boolean fill>
-      <div class="flex items-start justify-start flex-col w-[90vw] md:w-[60vw]">
-        <!-- theme -->
-        <Loading :property="theme" fill>
-          <div
-            class="flex items-center justify-center w-full flex-col md:flex-row"
-          >
-            <!-- left -->
-            <div class="flex justify-center flex-col md:basis-1/2">
-              <!-- custom width wrapper -->
-              <div
-                class="flex items-center justify-center flex-col w-full md:w-[70%]"
-              >
-                <!-- card -->
-                <div
-                  class="flex items-center justify-between w-full mx-2 px-6 py-4 rounded-2xl font-source font-bold text-[1.375rem] text-light text-left bg-ghetto"
-                >
-                  {{ theme.name }}
-                  <img :src="theme.icon" alt="Theme icon" />
-                </div>
+    <div class="flex items-start justify-start flex-col w-[90vw] md:w-[75vw]">
+      <div class="flex items-center justify-center flex-col w-full gap-y-1">
+        <p class="font-source font-semibold text-2xl text-light">
+          Vitajte na webe
+        </p>
 
-                <div class="flex justify-center flex-col py-2 px-4 w-full">
-                  <p
-                    class="font-source font-bold text-xl text-light w-full text-center"
-                  >
-                    {{ theme.start }} - {{ theme.end }}
-                  </p>
+        <p class="font-source font-semibold text-3xl text-light">
+          KOLÉGIA ZELENEJ ŠKOLY
+        </p>
+      </div>
 
-                  <div class="bg-gray w-full h-px m-2" />
-
-                  <FileList
-                    dir="vertical"
-                    :files="theme.files"
-                    size="lg"
-                    class="mt-2"
-                  />
-                  <MemberList
-                    color="limp"
-                    :members="theme.members"
-                    class="mt-2"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <!-- right -->
-            <div class="md:basis-1/2">
-              <Text :text="theme.description" styles="description" />
-            </div>
-          </div>
-        </Loading>
-
-        <div class="w-full h-8" />
-
-        <!-- blog -->
-        <Loading :property="blog" fill>
-          <div class="flex gap-4 flex-wrap">
+      <Loading :property="isAnythingLoading" is-boolean fill>
+        <div class="flex w-full gap-x-2 mt-12">
+          <!-- blog -->
+          <div class="flex flex-wrap basis-3/4 gap-4 justify-center">
             <NuxtLink
               :key="post.id"
               v-for="post in blog"
@@ -90,10 +48,50 @@
 
               <MemberList :members="post.authors" size="sm" color="limp" bold />
             </NuxtLink>
+
+            <button
+              v-if="blog.length === postCount"
+              @click="loadMore"
+              class="flex items-center justify-center w-full"
+            >
+              <p class="font-source font-semibold text-lg text-unim">
+                Načítať viac
+              </p>
+            </button>
           </div>
-        </Loading>
-      </div>
-    </Loading>
+
+          <!-- theme -->
+          <div class="basis-1/4">
+            <div
+              class="flex items-center justify-between w-full mx-2 px-6 py-4 rounded-2xl font-source font-bold text-[1.375rem] text-light text-left bg-ghetto"
+            >
+              {{ theme.name }}
+              <img :src="theme.icon" alt="Theme icon" />
+            </div>
+
+            <div class="flex justify-center flex-col py-2 px-4 w-full">
+              <p
+                class="font-source font-bold text-xl text-light w-full text-center"
+              >
+                {{ theme.start }} - {{ theme.end }}
+              </p>
+
+              <Text :text="theme.description" styles="description" />
+
+              <div class="bg-gray w-full h-px m-2" />
+
+              <FileList
+                dir="vertical"
+                :files="theme.files"
+                size="lg"
+                class="mt-2"
+              />
+              <MemberList color="limp" :members="theme.members" class="mt-2" />
+            </div>
+          </div>
+        </div>
+      </Loading>
+    </div>
 
     <Info />
   </Background>
@@ -112,9 +110,38 @@ import {
 
 const theme = ref<Theme | undefined>(undefined);
 const blog = ref<Post[] | undefined>(undefined);
-const isEverythingLoading = computed(() => {
+const postCount = ref(6);
+const isAnythingLoading = computed(() => {
   return theme.value === undefined && blog.value === undefined;
 });
+
+function fetchBlog() {
+  getDocs(
+    query(
+      collection(useFirestore(), "posts"),
+      where("status", "==", "public"),
+      where("hidden", "==", false),
+      orderBy("date", "desc"),
+      limit(postCount.value),
+    ),
+  )
+    .then((snapshot) => {
+      const array: Post[] = [];
+      snapshot.docs.forEach((it) => {
+        array.push({
+          ...it.data(),
+          id: it.id,
+        } as Post);
+      });
+      blog.value = array;
+    })
+    .catch(console.log);
+}
+
+function loadMore() {
+  postCount.value += 6;
+  fetchBlog();
+}
 
 onMounted(() => {
   const currentYear = new Date().getFullYear();
@@ -141,7 +168,7 @@ onMounted(() => {
       where("status", "==", "public"),
       where("hidden", "==", false),
       orderBy("date", "desc"),
-      limit(12),
+      limit(6),
     ),
   )
     .then((snapshot) => {

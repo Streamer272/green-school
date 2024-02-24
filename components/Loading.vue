@@ -18,6 +18,6 @@ const props = defineProps<{
 
 function check() {
   if (!props.isBoolean) return props.property === undefined;
-  else return props.property === true;
+  else return !!props.property;
 }
 </script>
