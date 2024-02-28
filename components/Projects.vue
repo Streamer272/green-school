@@ -15,7 +15,7 @@
 
   <div
     :data-open="open"
-    class="flex flex-col justify-start items-center absolute top-0 left-0 w-screen md:w-[28.125rem] h-full pt-[6.5625rem] pb-24 md:pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-30 transition gap-y-4 overflow-scroll"
+    class="flex flex-col justify-start items-center absolute top-0 left-0 w-screen md:w-[28.125rem] h-full pt-[6.5625rem] pb-24 md:pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-30 transition gap-y-4 overflow-auto"
   >
     <!-- projects column -->
     <Loading :property="projects">
