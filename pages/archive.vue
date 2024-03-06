@@ -424,6 +424,7 @@ async function search(event: Event) {
       "description",
       "start",
       "end",
+      "embed",
       "files.name",
       "files.type",
       "members.name",
