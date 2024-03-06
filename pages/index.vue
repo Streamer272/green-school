@@ -120,7 +120,7 @@ const theme = ref<Theme | undefined>(undefined);
 const blog = ref<Post[] | undefined>(undefined);
 const postCount = ref(6);
 const isAnythingLoading = computed(() => {
-  return theme.value === undefined && blog.value === undefined;
+  return theme.value === undefined || blog.value === undefined;
 });
 
 function fetchBlog() {
