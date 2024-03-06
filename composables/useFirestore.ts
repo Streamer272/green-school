@@ -26,6 +26,7 @@ export interface Theme {
   icon: string;
   start: number;
   end: number;
+  embed?: string;
   files: GSFile[];
   members: GSMember[];
 }

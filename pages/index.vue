@@ -15,7 +15,9 @@
       </div>
 
       <Loading :property="isAnythingLoading" is-boolean fill>
-        <div class="flex w-full gap-x-2 mt-12">
+        <div
+          class="flex flex-col-reverse md:flex-row w-full gap-y-4 gap-x-2 mt-12"
+        >
           <!-- blog -->
           <div class="flex flex-wrap basis-3/4 gap-4 justify-center">
             <NuxtLink
@@ -87,6 +89,12 @@
                 class="mt-2"
               />
               <MemberList color="limp" :members="theme.members" class="mt-2" />
+
+              <div
+                v-if="theme.embed"
+                v-html="theme.embed"
+                class="w-full overflow-auto mt-4 mb-2"
+              />
             </div>
           </div>
         </div>
