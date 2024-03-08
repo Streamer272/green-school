@@ -129,11 +129,11 @@
           <div class="flex items-start justify-start flex-col">
             <p class="font-source font-semibold text-lg text-light">
               <span v-html="highlight(item.name)" /> (<span
-                v-html="highlightOr(item.role, '[role]')"
-              />, {{ item?.priority || "[priority]" }})
+                v-html="highlightIf(item.role)"
+              />, {{ item?.priority }})
             </p>
             <p
-              v-html="highlightOr(item?.contact, '[contact]')"
+              v-html="highlightIf(item?.contact)"
               class="font-source font-semibold text-lg text-light"
             />
 
