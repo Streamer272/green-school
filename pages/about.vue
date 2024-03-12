@@ -5,7 +5,7 @@
 
     <!-- about -->
     <div
-      class="flex items-start justify-start flex-col mx-72 w-[80vw] md:w-[50vw] gap-y-8 md:gap-y-4"
+      class="flex items-start justify-start flex-col mx-72 w-[90vw] md:w-[70vw] lg:w-[60vw] xl:w-[50vw] gap-y-8 md:gap-y-4"
     >
       <p
         class="font-source font-bold text-light text-3xl w-full text-center mb-2"
@@ -43,7 +43,7 @@
           <div
             :data-has-picture="!!fella.picture"
             :data-odd="index % 2 === 1"
-            class="flex items-center justify-center w-[75vw] md:w-[30vw] data-[has-picture=false]:w-full h-fit gap-x-4 data-[odd=true]:flex-row-reverse"
+            class="flex items-center justify-center w-screen md:w-[50vw] lg:w-[40vw] xl:w-[30vw] data-[has-picture=false]:w-full h-fit gap-x-4 data-[odd=true]:flex-row-reverse"
           >
             <img
               v-if="fella.picture"
