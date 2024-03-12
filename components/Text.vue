@@ -44,7 +44,7 @@ function max() {
 }
 
 function canToggle() {
-  return props.canToggle ?? false;
+  return (props.canToggle ?? false) && text.length > max();
 }
 
 function styleClasses() {

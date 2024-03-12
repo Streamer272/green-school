@@ -27,21 +27,20 @@
         <div
           type="button"
           @click="changeCurrentProject(index)"
-          class="flex items-center justify-start gap-x-4 py-4 px-6 bg-dark rounded-[1.25rem] w-full cursor-pointer"
+          class="flex items-center justify-start gap-x-4 py-4 pl-6 pr-2 bg-dark rounded-[1.25rem] w-full cursor-pointer"
         >
-          <p class="font-source font-bold text-xl text-white">
+          <p class="font-source font-bold text-xl text-white flex-grow">
             {{ project.name }}
           </p>
-          <p class="font-source font-semibold text-lg text-disc">
+          <p class="font-source font-semibold text-lg text-disc flex-shrink-0">
             {{ GSDate.pretty(project.start) }}
           </p>
-          <div class="flex-grow" />
 
           <img
             :data-open="currentProject === index"
             src="/icons/arrow-right.svg"
             alt="Arrow right"
-            class="data-[open=true]:rotate-90 transition w-10 h-10"
+            class="data-[open=true]:rotate-90 transition w-10 h-10 flex-shrink-0"
           />
         </div>
 
