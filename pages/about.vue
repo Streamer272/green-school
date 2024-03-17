@@ -82,6 +82,18 @@
         </div>
       </Loading>
 
+      <div class="flex items-center justify-center w-full mt-8">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/8NgYYaGfddU?si=DN3fVqgPWR7rZieY"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        />
+      </div>
+
       <p
         class="font-source font-bold text-light text-3xl w-full text-center mb-2 mt-8"
       >
