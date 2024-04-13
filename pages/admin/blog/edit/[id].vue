@@ -48,6 +48,14 @@
                 required
                 class="rounded-full py-2 px-4 bg-light text-dark"
               />
+            </div>
+
+            <div class="w-full flex items-center justify-center gap-x-4">
+              <input
+                v-model="sLink"
+                placeholder="Short link"
+                class="rounded-full py-2 px-4 bg-light text-dark"
+              />
 
               <div class="flex items-center justify-center gap-x-2">
                 <input
@@ -89,6 +97,7 @@ const authors = useMemberList();
 const image = ref("");
 const status = ref("");
 const hidden = ref(false);
+const sLink = ref("");
 
 function fetch() {
   getDoc(doc(collection(useFirestore(), "posts"), id))
@@ -108,9 +117,10 @@ function fetch() {
       content.value = data.content;
       date.value = GSDate.ugly(data.date);
       authors.value = data.authors;
-      image.value = data.image;
+      image.value = data.image ?? "";
       status.value = data.status;
       hidden.value = data.hidden;
+      sLink.value = data.sLink ?? "";
     })
     .catch(alert);
 }
@@ -127,6 +137,7 @@ function submit(event: Event) {
     image: image.value,
     status: status.value,
     hidden: hidden.value,
+    sLink: sLink.value,
   })
     .then(fetch)
     .catch(alert);
