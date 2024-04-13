@@ -1,4 +1,5 @@
 import type { GSFile, GSMember } from "~/composables/useGSTypes";
+import type { Post } from "~/composables/useFirestore";
 
 export function useInfo() {
   return useState<boolean>("info", () => false);
@@ -18,4 +19,8 @@ export function useMemberList() {
 
 export function useTextEditor(defaultValue: string = "") {
   return useState<string>("textEditor", () => defaultValue);
+}
+
+export function usePost() {
+  return useState<Post | undefined>("post", () => undefined);
 }

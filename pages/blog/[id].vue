@@ -22,17 +22,31 @@
 </template>
 
 <script lang="ts" setup>
-import { doc, getDoc } from "firebase/firestore";
-import { collection } from "@firebase/firestore";
+import { doc, getDoc, or } from "firebase/firestore";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 import type { Post } from "~/composables/useFirestore";
+import { usePost } from "~/composables/useStates";
 
 const id = useId();
-const post = ref<Post | undefined>(undefined);
+const post = usePost();
 
 onMounted(() => {
-  getDoc(doc(collection(useFirestore(), "posts"), id))
+  if (post.value !== undefined && post.value.id === id && id) return;
+
+  getDocs(
+    query(
+      collection(useFirestore(), "posts"),
+      or(where("id", "==", id), where("sLink", "==", id)),
+    ),
+  )
     .then((snapshot) => {
-      const data = snapshot.data() as Post | undefined;
+      if (snapshot.docs.length !== 1) {
+        navigateTo("/blog");
+        return;
+      }
+
+      const doc = snapshot.docs[0];
+      const data = doc.data() as Post | undefined;
 
       if (!data) {
         navigateTo("/blog");
@@ -40,7 +54,7 @@ onMounted(() => {
       }
       post.value = {
         ...data,
-        id: snapshot.id,
+        id: doc.id,
       };
     })
     .catch(alert);

@@ -17,6 +17,7 @@ export interface Post {
   image?: string;
   status: "private" | "public";
   hidden: boolean;
+  sLink?: string;
 }
 
 export interface Theme {
