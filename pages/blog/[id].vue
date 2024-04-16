@@ -30,9 +30,7 @@ import { usePost } from "~/composables/useStates";
 const id = useId();
 const post = usePost();
 
-onMounted(() => {
-  if (post.value !== undefined && post.value.id === id && id) return;
-
+function searchBySLink() {
   getDocs(
     query(
       collection(useFirestore(), "posts"),
@@ -41,17 +39,44 @@ onMounted(() => {
   )
     .then((snapshot) => {
       if (snapshot.docs.length !== 1) {
-        navigateTo("/blog");
+        console.log(
+          `Found a sus amount of snapshots (${snapshot.docs.length})`,
+        );
+      }
+
+      for (const doc of snapshot.docs) {
+        const data = doc.data() as Post | undefined;
+
+        if (!data) {
+          navigateTo("/blog");
+          continue;
+        }
+
+        post.value = {
+          ...data,
+          id: doc.id,
+        };
         return;
       }
 
-      const doc = snapshot.docs[0];
+      console.log("Nothing found");
+      navigateTo("/blog");
+    })
+    .catch(alert);
+}
+
+onMounted(() => {
+  if (post.value !== undefined && post.value.id === id && id) return;
+
+  getDoc(doc(collection(useFirestore(), "posts"), id))
+    .then((doc) => {
       const data = doc.data() as Post | undefined;
 
       if (!data) {
-        navigateTo("/blog");
-        return;
+        console.log("Data not found, trying search by slink");
+        return searchBySLink();
       }
+
       post.value = {
         ...data,
         id: doc.id,
