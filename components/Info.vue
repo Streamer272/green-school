@@ -26,12 +26,9 @@
         />
       </NuxtLink>
 
-      <NuxtLink
-        to="https://www.facebook.com/zelenaskolagercenka"
-        class="w-6 h-6"
-      >
+      <NuxtLink to="https://www.facebook.com/zelena.gercenka" class="w-6 h-6">
         <img
-          src="https://www.facebook.com/images/fb_icon_325x325.png"
+          src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png"
           alt="Facebook"
         />
       </NuxtLink>
