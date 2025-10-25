@@ -16,14 +16,15 @@
               <div class="flex items-start justify-start flex-col">
                 <p class="font-source font-semibold text-lg text-light">
                   {{ fella.name }} ({{ fella.role || "[role]" }},
-                  {{ fella.priority || "[priority]" }})
+                  {{ fella.priority || "[priority]" }},
+                  {{ processEnd(fella.start) }} - {{ processEnd(fella.end) }})
                 </p>
                 <p class="font-source font-semibold text-lg text-light">
                   {{ fella.contact || "[contact]" }}
                 </p>
 
                 <p
-                  v-html="processText(fella.lore)"
+                  v-html="processText(fella.lore ?? '')"
                   class="font-source text-lg text-unim"
                 />
               </div>
@@ -48,7 +49,7 @@
             </div>
 
             <div
-              v-if="index !== fellas?.length - 1"
+              v-if="index !== (fellas ?? []).length - 1"
               class="bg-unim h-px w-full my-2"
             />
           </div>
@@ -70,6 +71,7 @@
 import type { Fella } from "~/composables/useFirestore";
 import { collection, deleteDoc, getDocs } from "@firebase/firestore";
 import { doc } from "firebase/firestore";
+import { processEnd } from "~/composables/useHelp";
 
 const fellas = ref<Fella[] | undefined>(undefined);
 
@@ -84,13 +86,15 @@ function deleteFella(fellaId: string) {
 
 function fetch() {
   getDocs(collection(useFirestore(), "fellas")).then((snapshot) => {
-    fellas.value = snapshot.docs.map(
-      (doc) =>
-        ({
-          id: doc.id,
-          ...doc.data(),
-        }) as Fella,
-    );
+    fellas.value = snapshot.docs
+      .map(
+        (doc) =>
+          ({
+            id: doc.id,
+            ...doc.data(),
+          }) as Fella,
+      )
+      .sort(useMemberSort());
   });
 }
 

@@ -31,3 +31,8 @@ export function useMemberSort() {
     else return a.name.localeCompare(b.name);
   };
 }
+
+export function processEnd(end: number): number {
+  const now = new Date();
+  return end || now.getFullYear();
+}

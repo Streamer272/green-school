@@ -70,7 +70,7 @@
       <p class="font-source font-semibold text-lg text-light text-center">
         If you are experiencing any issues or have any questions, contact your
         maintainer, who is currently registered to be Daniel Svitan, available
-        by phone at +421 948 309 804 or by WhatsApp at +1 (669) 294-9970.
+        by phone and Signal/Whatsapp at +421 948 309 804.
       </p>
     </div>
   </div>

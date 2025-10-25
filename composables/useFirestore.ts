@@ -46,4 +46,6 @@ export interface Fella extends GSMember {
   id: string;
   picture?: string;
   lore?: string;
+  start: number;
+  end: number;
 }

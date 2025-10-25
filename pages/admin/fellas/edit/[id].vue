@@ -54,6 +54,24 @@
               />
             </div>
 
+            <div class="w-full flex items-center justify-center gap-x-4">
+              <input
+                v-model="start"
+                type="number"
+                placeholder="Start..."
+                required
+                class="rounded-full py-2 px-4 bg-light text-dark w-80"
+              />
+
+              <input
+                v-model="end"
+                type="number"
+                placeholder="End..."
+                required
+                class="rounded-full py-2 px-4 bg-light text-dark w-80"
+              />
+            </div>
+
             <TextEditor />
           </form>
         </Loading>
@@ -72,8 +90,10 @@ const fella = ref<Fella | undefined>(undefined);
 const name = ref("");
 const role = ref("");
 const contact = ref("");
-const priority = ref(0);
 const picture = ref("");
+const priority = ref(0);
+const start = ref();
+const end = ref();
 const lore = useTextEditor();
 
 function fetch() {
@@ -94,8 +114,10 @@ function fetch() {
       role.value = data.role ?? "";
       contact.value = data.contact ?? "";
       priority.value = data.priority ?? 0;
-      picture.value = data.picture;
-      lore.value = data.lore;
+      picture.value = data.picture ?? "";
+      start.value = data.start ?? 0;
+      end.value = data.end ?? 0;
+      lore.value = data.lore ?? "";
     })
     .catch(alert);
 }
@@ -110,6 +132,8 @@ function submit(event: Event) {
     contact: contact.value || undefined,
     priority: priority.value || undefined,
     picture: picture.value,
+    start: start.value,
+    end: end.value,
     lore: lore.value,
   })
     .then(fetch)

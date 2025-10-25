@@ -19,12 +19,11 @@
         >
           Sme KOLÉGIUM ZELENEJ ŠKOLY na
           <NuxtLink to="https://skolasvr.edupage.org/" class="underline">
-            Spojenej škole sv. Rodiny
-          </NuxtLink>
-          . Naša škola je zapojená do medzinárodného projektu
+            Spojenej škole sv. Rodiny</NuxtLink
+          >. Naša škola je zapojená do medzinárodného projektu
           <NuxtLink to="https://zelenaskola.sk/" class="underline">
-            Zelená škola
-          </NuxtLink>
+            Zelená škola</NuxtLink
+          >
           a my ho na našej škole koordinujeme. Inak povedané: sme partia mladých
           ľudí, ktorým osud našej planéty nie je ľahostajný, a preto sa snažia o
           ekologizáciu školy, ktorú navštevujú. Našou koordinátorkou je pani
@@ -141,6 +140,8 @@ onMounted(() => {
         role: data.role,
         contact: data.contact,
         priority: data.priority,
+        start: data.start,
+        end: data.end,
       };
     });
   });

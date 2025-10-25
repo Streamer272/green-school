@@ -44,7 +44,7 @@
       </p>
       <p class="text-disc">(kód)</p>
 
-      <NuxtLink to="https://svitan.dev/" class="ml-2">
+      <NuxtLink to="https://svitan.dev/" target="_blank" class="ml-2">
         <img src="/icons/open.svg" alt="Open" />
       </NuxtLink>
     </div>
@@ -53,6 +53,10 @@
         Richard Sepši &nbsp;
       </p>
       <p class="text-disc">(dizajn)</p>
+
+      <NuxtLink to="https://sepsi.sk/" target="_blank" class="ml-2">
+        <img src="/icons/open.svg" alt="Open" />
+      </NuxtLink>
     </div>
     <p class="font-source font-semibold text-lg text-disc ml-4">
       pre zelenú školu
@@ -63,7 +67,7 @@
     </p>
     <div class="flex items-center justify-center ml-4">
       <p class="font-source font-semibold text-lg text-cece">
-        24. 2. 2024 09:58
+        25. 10. 2025 09:58
       </p>
     </div>
   </div>
