@@ -22,6 +22,7 @@
   "dependencies": {
     "@tinymce/tinymce-vue": "^5.1.1",
     "firebase": "10.5.2",
+    "fuse.js": "^7.0.0",
     "hotkeys-js": "^3.12.0"
   }
 }

@@ -17,6 +17,7 @@ export interface Post {
   image?: string;
   status: "private" | "public";
   hidden: boolean;
+  sLink?: string;
 }
 
 export interface Theme {
@@ -26,6 +27,7 @@ export interface Theme {
   icon: string;
   start: number;
   end: number;
+  embed?: string;
   files: GSFile[];
   members: GSMember[];
 }

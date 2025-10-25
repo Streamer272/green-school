@@ -1,7 +1,7 @@
 <template>
   <button
     @click="() => (open = !open)"
-    class="flex items-center justify-center gap-x-6 absolute top-9 left-9 z-20 font-source font-semibold text-white text-xl"
+    class="flex items-center justify-center gap-x-6 absolute top-9 left-9 z-40 font-source font-semibold text-white text-xl"
   >
     <img
       :data-open="open"
@@ -10,12 +10,12 @@
       class="data-[open=true]:rotate-90 transition w-8 h-8"
     />
 
-    Projects
+    Projekty
   </button>
 
   <div
     :data-open="open"
-    class="flex flex-col justify-start items-center absolute top-0 left-0 w-[28.125rem] h-full pt-[6.5625rem] pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-10 transition gap-y-4"
+    class="flex flex-col justify-start items-center absolute top-0 left-0 w-screen md:w-[28.125rem] h-full pt-[6.5625rem] pb-24 md:pb-2 bg-black custom-sidebar -translate-x-full data-[open=true]:translate-x-0 z-30 transition gap-y-4 overflow-auto"
   >
     <!-- projects column -->
     <Loading :property="projects">
@@ -27,21 +27,20 @@
         <div
           type="button"
           @click="changeCurrentProject(index)"
-          class="flex items-center justify-start gap-x-4 py-4 px-6 bg-dark rounded-[1.25rem] w-full cursor-pointer"
+          class="flex items-center justify-start gap-x-4 py-4 pl-6 pr-2 bg-dark rounded-[1.25rem] w-full cursor-pointer"
         >
-          <p class="font-source font-bold text-xl text-white">
+          <p class="font-source font-bold text-xl text-white flex-grow">
             {{ project.name }}
           </p>
-          <p class="font-source font-semibold text-lg text-disc">
+          <p class="font-source font-semibold text-lg text-disc flex-shrink-0">
             {{ GSDate.pretty(project.start) }}
           </p>
-          <div class="flex-grow" />
 
           <img
             :data-open="currentProject === index"
             src="/icons/arrow-right.svg"
             alt="Arrow right"
-            class="data-[open=true]:rotate-90 transition w-10 h-10"
+            class="data-[open=true]:rotate-90 transition w-10 h-10 flex-shrink-0"
           />
         </div>
 
@@ -49,13 +48,11 @@
           :data-open="currentProject === index"
           class="flex flex-col m-4 gap-y-2 data-[open=false]:pointer-events-none data-[open=false]:opacity-0 data-[open=false]:my-0 data-[open=false]:max-h-px max-h-screen transition-all"
         >
-          <p
-            v-html="project.description"
-            class="font-source font-semibold text-unim"
-          />
-          <div
-            v-if="project.files.length > 0 || project.members.length > 0"
-            class="w-full bg-gray h-[0.125rem] my-1"
+          <Text
+            :text="project.description"
+            styles="description"
+            trim
+            can-toggle
           />
 
           <MemberList size="sm" color="weak" :members="project.members" />

@@ -14,7 +14,7 @@
         :data-color="getColor()"
         class="font-source font-semibold data-[color=weak]:text-unim data-[color=strong]:text-light data-[size=md]:text-lg data-[size=lg]:text-xl"
       >
-        {{ file.name }} ({{ file.type }})
+        <span v-html="file.name" /> (<span v-html="file.type" />)
       </p>
 
       <NuxtLink :to="file.link" class="ml-2">

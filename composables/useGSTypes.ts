@@ -69,3 +69,7 @@ export class GSDate extends String {
     return GSDate.as(b.date).getTime() - GSDate.as(a.date).getTime();
   }
 }
+
+export type Archived<T extends {}> = T & {
+  type: "fella" | "meeting" | "post" | "project" | "theme";
+};

@@ -22,7 +22,7 @@ service cloud.firestore {
     }
 
     match /posts/{docId} {
-      allow read: if request.resource.data.status != "private" || (request.auth != null && isAdmin(request));
+      allow read: if resource.data.status == "public" || (request.auth != null && isAdmin(request));
       allow write: if request.auth != null && isAdmin(request);
     }
 

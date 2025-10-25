@@ -52,6 +52,12 @@
               />
             </div>
 
+            <input
+              v-model="embed"
+              placeholder="Embed..."
+              class="rounded-full py-2 px-4 bg-light text-dark w-[40rem]"
+            />
+
             <MemberListEditor />
             <FileListEditor />
             <TextEditor />
@@ -74,6 +80,7 @@ const description = useTextEditor();
 const icon = ref("");
 const start = ref(0);
 const end = ref(0);
+const embed = ref<string | undefined>();
 const files = useFileList();
 const members = useMemberList();
 
@@ -96,6 +103,7 @@ function fetch() {
       icon.value = data.icon;
       start.value = data.start;
       end.value = data.end;
+      embed.value = data.embed;
       files.value = data.files;
       members.value = data.members;
     })
@@ -112,6 +120,7 @@ function submit(event: Event) {
     icon: icon.value,
     start: start.value,
     end: end.value,
+    embed: embed.value,
     files: files.value,
     members: members.value,
   })
