@@ -15,7 +15,7 @@
 
       <div class="flex justify-center w-full">
         <p
-          class="font-source font-bold text-unim text-lg text-center mb-4 w-[50rem]"
+          class="font-source font-bold text-unim text-lg text-center w-[50rem]"
         >
           Sme KOLÉGIUM ZELENEJ ŠKOLY na
           <NuxtLink to="https://skolasvr.edupage.org/" class="underline">
@@ -31,11 +31,33 @@
         </p>
       </div>
 
+      <div class="flex justify-center w-full mb-4">
+        <p class="font-source font-bold text-unim text-lg text-center mx-2">
+          Vyber roky:
+        </p>
+
+        <input
+          v-model="filterStart"
+          type="number"
+          placeholder="Od"
+          class="rounded-full py-1 px-2 bg-dark text-light focus:outline-none w-40 border border-unim border-solid"
+        />
+
+        <span class="font-source font-bold text-unim text-lg mx-2">-</span>
+
+        <input
+          v-model="filterEnd"
+          type="number"
+          placeholder="Do"
+          class="rounded-full py-1 px-2 bg-dark text-light focus:outline-none w-40 border border-unim border-solid"
+        />
+      </div>
+
       <!-- row wrapper -->
-      <Loading :property="sortedFellas" :fill="true">
+      <Loading :property="filteredFellas" :fill="true">
         <div
           :key="fella.id"
-          v-for="(fella, index) in sortedFellas"
+          v-for="(fella, index) in filteredFellas"
           :data-odd="index % 2 === 1"
           class="flex items-center justify-start w-full h-fit data-[odd=true]:flex-row-reverse"
         >
@@ -60,6 +82,8 @@
                 class="font-source font-bold text-xl text-light data-[has-lore=false]:mx-4"
               >
                 {{ fella.name }}{{ fella.role ? ` - ${fella.role}` : "" }}
+                <br />
+                {{ processEnd(fella.start) }} - {{ processEnd(fella.end) }}
               </p>
 
               <Text
@@ -122,28 +146,46 @@
 import type { Fella } from "~/composables/useFirestore";
 import { collection, getDocs } from "@firebase/firestore";
 
+const now = new Date();
+let schoolYearStart, schoolYearEnd;
+// before august
+if (now.getMonth() < 7) {
+  schoolYearStart = now.getFullYear() - 1;
+  schoolYearEnd = now.getFullYear();
+} else {
+  schoolYearStart = now.getFullYear();
+  schoolYearEnd = now.getFullYear() + 1;
+}
+
+const filterStart = ref(schoolYearStart);
+const filterEnd = ref(schoolYearEnd);
 const fellas = ref<Fella[] | undefined>(undefined);
-const sortedFellas = computed(() => {
-  if (!fellas.value) return undefined;
-  return fellas.value.sort(useMemberSort());
+const filteredFellas = computed(() => {
+  return fellas.value?.filter((fella) => {
+    if (filterStart.value && fella.end < filterStart.value) return false;
+    else if (filterEnd.value && fella.start > filterEnd.value) return false;
+    return true;
+  });
 });
 
 onMounted(() => {
   getDocs(collection(useFirestore(), "fellas")).then((snapshot) => {
-    fellas.value = snapshot.docs.map((doc) => {
-      const data = doc.data();
-      return {
-        id: doc.id,
-        name: data.name,
-        picture: data.picture,
-        lore: data.lore,
-        role: data.role,
-        contact: data.contact,
-        priority: data.priority,
-        start: data.start,
-        end: data.end,
-      };
-    });
+    fellas.value = snapshot.docs
+      .map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          name: data.name,
+          picture: data.picture,
+          lore: data.lore,
+          role: data.role,
+          contact: data.contact,
+          priority: data.priority,
+          start: data.start,
+          end: data.end,
+        };
+      })
+      .sort(useMemberSort());
   });
 });
 </script>

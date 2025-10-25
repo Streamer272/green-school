@@ -130,7 +130,8 @@
             <p class="font-source font-semibold text-lg text-light">
               <span v-html="highlight(item.name)" /> (<span
                 v-html="highlightIf(item.role)"
-              />, {{ item?.priority }})
+              />, {{ item?.priority }}, {{ processEnd(item.start) }} -
+              {{ processEnd(item.end) }})
             </p>
             <p
               v-html="highlightIf(item?.contact)"
@@ -386,7 +387,7 @@ async function search(event: Event) {
 
   const foundFellas = new Fuse(fellas, {
     ...options,
-    keys: ["name", "role", "contact", "lore"],
+    keys: ["name", "role", "contact", "lore", "start", "end"],
   }).search(query.value);
 
   const foundMeetings = new Fuse(meetings, {
